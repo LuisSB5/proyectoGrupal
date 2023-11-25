@@ -13,14 +13,20 @@ import javax.swing.border.BevelBorder;
 import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import java.awt.Font;
 
 public class PrincipalVisualCli extends JFrame {
 
 	private JPanel contentPane;
-	private Dimension dim;
-
+	//private Dimension dim;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,13 +47,66 @@ public class PrincipalVisualCli extends JFrame {
 	 * Create the frame.
 	 */
 	public PrincipalVisualCli() {
+		//dim= getToolkit().getScreenSize();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setBackground(new Color(0, 204, 204));
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalVisualCli.class.getResource("/imagenes/imgIC1.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalVisualCli.class.getResource("/imagen/imgIC2.png")));
 		setResizable(true);
 		setTitle("\u00A1Welcome!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		setSize(screenSize.width, screenSize.height - 50);
+		setLocationRelativeTo(null);
 		
-		setBounds(100, 100, 600, 393);
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		menuBar.setBackground(new Color(240, 240, 240));
+		setJMenuBar(menuBar);
+		
+		JMenu mnDoctor = new JMenu("Doctor");
+		mnDoctor.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnDoct.png")));
+		mnDoctor.setForeground(new Color(0, 153, 255));
+		mnDoctor.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnDoctor);
+		
+		JMenu mnPaciente = new JMenu("Paciente");
+		mnPaciente.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnPa.png")));
+		mnPaciente.setForeground(new Color(0, 153, 255));
+		mnPaciente.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnPaciente);
+		
+		JMenu mnVacunas = new JMenu("Vacunas");
+		mnVacunas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVa.png")));
+		mnVacunas.setForeground(new Color(0, 153, 255));
+		mnVacunas.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnVacunas);
+		
+		JMenu mnPatologias = new JMenu("Patolog\u00EDas");
+		mnPatologias.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnEnf.png")));
+		mnPatologias.setForeground(new Color(0, 153, 255));
+		mnPatologias.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnPatologias);
+		
+		JMenu mnUsuarios = new JMenu(" Usuarios");
+		mnUsuarios.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnUsu.png")));
+		mnUsuarios.setForeground(new Color(0, 153, 255));
+		mnUsuarios.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnUsuarios);
+		
+		JMenu mnViviendas = new JMenu(" Viviendas aso.");
+		mnViviendas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVi.png")));
+		mnViviendas.setForeground(new Color(0, 153, 255));
+		mnViviendas.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnViviendas);
+		
+		JMenu mnSobreNosotros = new JMenu("Sobre Nosotros");
+		mnSobreNosotros.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnNo.png")));
+		mnSobreNosotros.setForeground(new Color(0, 153, 255));
+		mnSobreNosotros.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnSobreNosotros);
+		
+		
+		//setBounds(100, 100, 600, 393);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -59,9 +118,14 @@ public class PrincipalVisualCli extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabelFondoIMG = new JLabel("");
-		lblNewLabelFondoIMG.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagenes/ImgFondoCli.png")));
-		panel.add(lblNewLabelFondoIMG, BorderLayout.CENTER);
+		 ImageIcon imageIcon = new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/ImgFondoCli.png"));
+	        Image image = imageIcon.getImage().getScaledInstance(screenSize.width, screenSize.height - 50, Image.SCALE_SMOOTH);
+
+	        ImageIcon scaledImageIcon = new ImageIcon(image);
+
+	        JLabel lblNewLabelFondoIMG = new JLabel("");
+	        lblNewLabelFondoIMG.setIcon(scaledImageIcon);
+	        panel.add(lblNewLabelFondoIMG, BorderLayout.NORTH);
 	}
 
 }
