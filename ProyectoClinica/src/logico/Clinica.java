@@ -10,9 +10,29 @@ public class Clinica {
 	private ArrayList<Persona>misPersonas;
 	private ArrayList<HistoriaClinica>misHistoriales;
 	private ArrayList<Cita>misCitas;
-	private  ArrayList<Viviendas>misViviendas;
+	private  ArrayList<Vivienda>misViviendas;
 	
+	private static Clinica clinica=null;
 	
+	private Clinica() {
+		super();
+		misEnfermedades = new ArrayList<Enfermedad>();
+		misVacunas = new ArrayList<Vacuna>();
+		misConsultas = new ArrayList<Consulta>();
+		misPersonas = new ArrayList<Persona>();
+		misHistoriales = new ArrayList<HistoriaClinica>();
+		misCitas = new ArrayList<Cita>();
+		
+	}
+	
+	public static Clinica getInstance() {
+		
+		if (clinica==null)
+			clinica = new Clinica();
+		return clinica;
+		
+	}
+
 
 	public ArrayList<Enfermedad> getMisEnfermedades() {
 		return misEnfermedades;
@@ -62,14 +82,91 @@ public class Clinica {
 		this.misCitas = misCitas;
 	}
 
-	public ArrayList<Viviendas> getMisViviendas() {
+	public ArrayList<Vivienda> getMisViviendas() {
 		return misViviendas;
 	}
 
-	public void setMisViviendas(ArrayList<Viviendas> misViviendas) {
+	public void setMisViviendas(ArrayList<Vivienda> misViviendas) {
 		this.misViviendas = misViviendas;
 	}
+	public void agregarPersona(Persona persona) {
+        misPersonas.add(persona);
+    }
 	
+	public void agregarVacuna(Vacuna vacuna) {
+        misVacunas.add(vacuna);
+    }
 	
+	public void agregarEnfermedad(Enfermedad enfermedad) {
+        misEnfermedades.add(enfermedad);
+    }
+	public void agregarCita (Cita cita) {
+        misCitas.add(cita);
+    }
+	public void agregarConsulta(Consulta consulta) {
+        misConsultas.add(consulta);
+    }
+	public void agregarVivienda(Vivienda vivienda) {
+        misViviendas.add(vivienda);
+    }
+	
+	public void agregarHistoriaClinico(HistoriaClinica historial) {
+        misHistoriales.add(historial);
+    }
+	
+
+	public Persona buscarPersonaByCodigo(String codigoPersona) {
+		Persona aux = null;
+		boolean encontrado = false;
+		int i=0;
+		while (!encontrado && i<misPersonas.size()) {
+			if(misPersonas.get(i).getCodigo().equalsIgnoreCase(codigoPersona)){
+				aux = misPersonas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		
+		return aux;
+	}
+	
+	public Doctor buscarDoctorByUser(String codigo) {
+	    Doctor aux = null;
+	    boolean encontrado = false;
+	    int i = 0;
+	    
+	    while (!encontrado && i < misPersonas.size()) {
+	        if (misPersonas.get(i) instanceof Doctor) {
+	            Doctor doctor = (Doctor) misPersonas.get(i);
+	            if (doctor.getCodigo().equals(codigo)) {
+	                aux = doctor;
+	                encontrado = true;
+	            }
+	        }
+	        i++;
+	    }
+	    
+	    return aux;
+	}
+	
+	public void eliminarPersona(logico.Persona selected) {
+		misPersonas.remove(selected);
+	}
+	
+	public Cita buscarCitaByCode(String Code) {
+		Cita aux = null;
+		boolean encontrado = false;
+		int i=0;
+		while (!encontrado && i<misCitas.size()) {
+			if(misCitas.get(i).getCodCita().equalsIgnoreCase(Code)){
+				aux = misCitas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return aux;
+	}
+	
+
 	
 }

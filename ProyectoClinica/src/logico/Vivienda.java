@@ -1,13 +1,13 @@
 package logico;
 
-public class Viviendas {
+public class Vivienda {
 	
 	private String direccion;
     private int numeroHab;
 	private Persona propietario;
 	
 	
-	public Viviendas(String direccion, int numeroHab, Persona propietario) {
+	public Vivienda(String direccion, int numeroHab, Persona propietario) {
 		super();
 		this.direccion = direccion;
 		this.numeroHab = numeroHab;
