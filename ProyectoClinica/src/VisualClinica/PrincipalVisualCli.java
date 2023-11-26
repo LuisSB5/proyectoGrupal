@@ -21,6 +21,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PrincipalVisualCli extends JFrame {
 
@@ -74,6 +76,17 @@ public class PrincipalVisualCli extends JFrame {
 		mnPaciente.setForeground(new Color(0, 153, 255));
 		mnPaciente.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
 		menuBar.add(mnPaciente);
+		
+		JMenuItem mntmPacienteListado = new JMenuItem("Listado");
+		mntmPacienteListado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		mnPaciente.add(mntmPacienteListado);
+		
+		JMenuItem mntmPacienteRegistrar = new JMenuItem("Registrar");
+		mnPaciente.add(mntmPacienteRegistrar);
 		
 		JMenu mnVacunas = new JMenu("Vacunas");
 		mnVacunas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVa.png")));

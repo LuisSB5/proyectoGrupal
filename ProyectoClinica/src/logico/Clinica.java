@@ -167,6 +167,17 @@ public class Clinica {
 		return aux;
 	}
 	
+	public int getCantConsultas() {
+		int total = 0;
+		int i = 0;
+		while(i<misConsultas.size()) {
+			total++;
+			i++;
+		}
+		return total;
+	}
+	
+	
 
 	
 }
