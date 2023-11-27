@@ -167,6 +167,37 @@ public class Clinica {
 		return aux;
 	}
 	
+	public Consulta buscarConsultByCode(String code) {
+		
+		Consulta consult = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(!encontrado && i<misConsultas.size()) {
+			if(misConsultas.get(i).getCodeConsulta().equalsIgnoreCase(code)) {
+				consult = misConsultas.get(i);
+				encontrado = true;
+			}
+		}
+		
+		return consult;
+	}
+	
+	public int getCantPersonasVivienda(String direccion) {
+		int i = 0;
+		int totalPersonas = 0;
+		boolean encontrado = false;
+		Vivienda vivienda = null;
+		while(!encontrado && i<misViviendas.size()) {
+			if(misViviendas.get(i).getDireccion().equalsIgnoreCase(direccion)) {
+				vivienda = misViviendas.get(i);
+				encontrado = true;
+			}
+			i++;
+		}
+		return totalPersonas;
+		
+	}
+	
 	public int getCantConsultas() {
 		int total = 0;
 		int i = 0;
