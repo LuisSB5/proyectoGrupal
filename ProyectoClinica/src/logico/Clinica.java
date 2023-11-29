@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Clinica {
 
 	private ArrayList<Enfermedad>misEnfermedades;
-    private  ArrayList<Vacuna>misVacunas;
+    private ArrayList<Vacuna>misVacunas;
 	private ArrayList<Consulta>misConsultas;
 	private ArrayList<Persona>misPersonas;
 	private ArrayList<HistoriaClinica>misHistoriales;
 	private ArrayList<Cita>misCitas;
-	private  ArrayList<Vivienda>misViviendas;
+	private ArrayList<Vivienda>misViviendas;
+	private ArrayList<User>misUsers;
+	private static User loginUser;
 	
 	private static Clinica clinica=null;
 	
@@ -22,7 +24,7 @@ public class Clinica {
 		misPersonas = new ArrayList<Persona>();
 		misHistoriales = new ArrayList<HistoriaClinica>();
 		misCitas = new ArrayList<Cita>();
-		
+		misUsers = new ArrayList<User>();
 	}
 	
 	public static Clinica getInstance() {
@@ -89,6 +91,31 @@ public class Clinica {
 	public void setMisViviendas(ArrayList<Vivienda> misViviendas) {
 		this.misViviendas = misViviendas;
 	}
+	
+	public ArrayList<User> getMisUsers() {
+		return misUsers;
+	}
+
+	public void setMisUsers(ArrayList<User> misUsers) {
+		this.misUsers = misUsers;
+	}
+
+	public static User getLoginUser() {
+		return loginUser;
+	}
+
+	public static void setLoginUser(User loginUser) {
+		Clinica.loginUser = loginUser;
+	}
+
+	public static Clinica getClinica() {
+		return clinica;
+	}
+
+	public static void setClinica(Clinica clinica) {
+		Clinica.clinica = clinica;
+	}
+
 	public void agregarPersona(Persona persona) {
         misPersonas.add(persona);
     }
@@ -113,7 +140,10 @@ public class Clinica {
 	public void agregarHistoriaClinico(HistoriaClinica historial) {
         misHistoriales.add(historial);
     }
-	
+
+	public void regUser(User user) {
+		misUsers.add(user);
+	}
 
 	public Persona buscarPersonaByCodigo(String codigoPersona) {
 		Persona aux = null;
@@ -206,6 +236,17 @@ public class Clinica {
 			i++;
 		}
 		return total;
+	}
+	
+	public boolean confirmLogin(String text, String text2) {
+		boolean login = false;
+		for (User user : misUsers) {
+			if(user.getUsername().equals(text) && user.getPassword().equals(text2)){
+				loginUser = user;
+				login = true;
+			}
+		}
+		return login;
 	}
 	
 	

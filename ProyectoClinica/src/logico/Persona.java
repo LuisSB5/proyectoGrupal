@@ -4,8 +4,8 @@ public class Persona {
 	
 	  private String cedula;
 	  private String nombre;
-	//private String direccion;
-	  private  String codigo;
+	  private String direccion;
+	  private String codigo;
 	  private String telefono;
 	  private char sexo;
 	  private String correoElectronico;
@@ -19,6 +19,7 @@ public class Persona {
 		this.telefono = telefono;
 		this.sexo = sexo;
 		this.correoElectronico = correoElectronico;
+
 	}
 	public String getCedula() {
 		return cedula;
@@ -56,6 +57,13 @@ public class Persona {
 	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 	  
 	  
 
