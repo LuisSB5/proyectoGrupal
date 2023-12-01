@@ -3,9 +3,6 @@ package logico;
 import java.util.ArrayList;
 
 public class Paciente extends Persona{
-	
-	
-
 
 	private String SeguroMedico;
 	private HistoriaClinica hist;
@@ -78,7 +75,5 @@ public class Paciente extends Persona{
 	public void setMisConsultas(ArrayList<Consulta> misConsultas) {
 		this.misConsultas = misConsultas;
 	}
-	
-
 	
 }
