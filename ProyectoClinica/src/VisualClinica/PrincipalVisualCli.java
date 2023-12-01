@@ -112,11 +112,17 @@ public class PrincipalVisualCli extends JFrame {
 		mnViviendas.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
 		menuBar.add(mnViviendas);
 		
-		JMenu mnSobreNosotros = new JMenu("Sobre Nosotros");
-		mnSobreNosotros.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnNo.png")));
+		JMenu mnSobreNosotros = new JMenu("Administrador");
+		mnSobreNosotros.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/ICNadmi.svg.png")));
 		mnSobreNosotros.setForeground(new Color(0, 153, 255));
 		mnSobreNosotros.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
 		menuBar.add(mnSobreNosotros);
+		
+		JMenu AboutUs = new JMenu("Help");
+		AboutUs.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/ICNHelp.png")));
+		AboutUs.setForeground(new Color(0, 153, 255));
+		AboutUs.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(AboutUs);
 		
 		
 		//setBounds(100, 100, 600, 393);
