@@ -62,7 +62,7 @@ public class PrincipalVisualCli extends JFrame {
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		menuBar.setBackground(new Color(240, 240, 240));
+		menuBar.setBackground(new Color(255, 255, 255));
 		setJMenuBar(menuBar);
 		
 		JMenu mnDoctor = new JMenu("Doctor");
@@ -137,14 +137,14 @@ public class PrincipalVisualCli extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		 ImageIcon imageIcon = new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/ImgFondoCli.png"));
-	        Image image = imageIcon.getImage().getScaledInstance(screenSize.width, screenSize.height - 50, Image.SCALE_SMOOTH);
+		ImageIcon imageIcon = new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/4k.jpg"));
+		Image image = imageIcon.getImage().getScaledInstance(screenSize.width, screenSize.height - 50, Image.SCALE_SMOOTH);
 
-	        ImageIcon scaledImageIcon = new ImageIcon(image);
+		ImageIcon scaledImageIcon = new ImageIcon(image);
 
-	        JLabel lblNewLabelFondoIMG = new JLabel("");
-	        lblNewLabelFondoIMG.setIcon(scaledImageIcon);
-	        panel.add(lblNewLabelFondoIMG, BorderLayout.NORTH);
+		JLabel lblNewLabelFondoIMG = new JLabel("");
+		lblNewLabelFondoIMG.setIcon(scaledImageIcon);
+		panel.add(lblNewLabelFondoIMG, BorderLayout.NORTH);
+
 	}
-
 }
