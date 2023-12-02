@@ -74,6 +74,10 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(mnDoctor);
 		
 		JMenuItem menuItem = new JMenuItem("Reg.Doctor");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		menuItem.setForeground(new Color(51, 102, 204));
 		menuItem.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnDoctor.add(menuItem);
@@ -165,12 +169,6 @@ public class PrincipalVisualCli extends JFrame {
 		mntmListarPatologas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPatologias.add(mntmListarPatologas);
 		
-		JMenu mnUsuarios = new JMenu(" Usuarios");
-		mnUsuarios.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnUsu.png")));
-		mnUsuarios.setForeground(new Color(0, 153, 255));
-		mnUsuarios.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
-		menuBar.add(mnUsuarios);
-		
 		JMenu mnViviendas = new JMenu(" Viviendas aso.");
 		mnViviendas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVi.png")));
 		mnViviendas.setForeground(new Color(0, 153, 255));
@@ -194,6 +192,10 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(mnSobreNosotros);
 		
 		JMenuItem mntmRegadmi = new JMenuItem("Reg.Admi");
+		mntmRegadmi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		mntmRegadmi.setForeground(new Color(51, 102, 204));
 		mntmRegadmi.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnSobreNosotros.add(mntmRegadmi);
