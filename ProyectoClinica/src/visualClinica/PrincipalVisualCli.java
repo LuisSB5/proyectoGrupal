@@ -86,6 +86,19 @@ public class PrincipalVisualCli extends JFrame {
 		menuItem.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnDoctor.add(menuItem);
 		
+		JMenuItem mntmListarCitas = new JMenuItem("Listar Citas");
+		mntmListarCitas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarCitas list= new ListarCitas();
+				list.setModal(true);
+				list.setVisible(true);
+				
+			}
+		});
+		mntmListarCitas.setForeground(new Color(51, 102, 204));
+		mntmListarCitas.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnDoctor.add(mntmListarCitas);
+		
 		JMenu mnPaciente = new JMenu("Paciente");
 		mnPaciente.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnPa.png")));
 		mnPaciente.setForeground(new Color(0, 153, 255));
@@ -111,6 +124,11 @@ public class PrincipalVisualCli extends JFrame {
 		mntmRegpaciente.setForeground(new Color(51, 102, 204));
 		mntmRegpaciente.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegpaciente);
+		
+		JMenuItem menuItem_1 = new JMenuItem("Nueva Consulta");
+		menuItem_1.setForeground(new Color(51, 102, 204));
+		menuItem_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnPaciente.add(menuItem_1);
 		
 		JMenu mnVacunas = new JMenu("Vacunas");
 		mnVacunas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVa.png")));
