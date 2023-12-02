@@ -197,34 +197,14 @@ public class RegDoctor extends JDialog {
 			panel_1.add(txtPasswordC);
 			
 			JLabel lblNewLabel_10 = new JLabel("");
-			lblNewLabel_10.setIcon(new ImageIcon(RegDoctor.class.getResource("/imagen/decoDoc.png")));
-			lblNewLabel_10.setBounds(-11, 237, 275, 16);
+			lblNewLabel_10.setIcon(new ImageIcon(RegDoctor.class.getResource("/imagen/dec2.png")));
+			lblNewLabel_10.setBounds(-31, 230, 528, 16);
 			panel.add(lblNewLabel_10);
-			
-			JLabel label_1 = new JLabel("");
-			label_1.setIcon(new ImageIcon(RegDoctor.class.getResource("/imagen/decoDoc.png")));
-			label_1.setBounds(136, 237, 485, 16);
-			panel.add(label_1);
 			
 			JLabel label = new JLabel("");
 			label.setIcon(new ImageIcon(RegDoctor.class.getResource("/imagen/decoDoc.png")));
 			label.setBounds(500, 220, -3, 16);
 			panel.add(label);
-			
-			JLabel label_2 = new JLabel("");
-			label_2.setIcon(new ImageIcon(RegDoctor.class.getResource("/imagen/decoDoc.png")));
-			label_2.setBounds(276, 237, 485, 16);
-			panel.add(label_2);
-			
-			JLabel label_3 = new JLabel("");
-			label_3.setIcon(new ImageIcon(RegDoctor.class.getResource("/imagen/decoDoc.png")));
-			label_3.setBounds(-270, 220, 420, 16);
-			panel.add(label_3);
-			
-			JLabel label_4 = new JLabel("");
-			label_4.setIcon(new ImageIcon(RegDoctor.class.getResource("/imagen/decoDoc.png")));
-			label_4.setBounds(318, 220, 420, 16);
-			panel.add(label_4);
 		}
 		{
 			JPanel buttonPane = new JPanel();
