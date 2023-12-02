@@ -1,4 +1,4 @@
-package VisualClinica;
+package visualClinica;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import javax.swing.border.BevelBorder;
 import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
+
+
 import java.awt.FlowLayout;
 import java.awt.Image;
 
@@ -99,11 +101,25 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(mnVacunas);
 		
 		JMenuItem mntmRegVacunas = new JMenuItem("Reg.Vacunas");
+		mntmRegVacunas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegVacuna regVa= new RegVacuna();
+				regVa.setModal(true);
+				regVa.setVisible(true);
+			}
+		});
 		mntmRegVacunas.setForeground(new Color(51, 102, 204));
 		mntmRegVacunas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnVacunas.add(mntmRegVacunas);
 		
 		JMenuItem mntmListarVacunas = new JMenuItem("Listar Vacunas");
+		mntmListarVacunas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarVacuna listaVa= new ListarVacuna();
+				listaVa.setModal(true);
+				listaVa.setVisible(true);
+			}
+		});
 		mntmListarVacunas.setForeground(new Color(51, 102, 204));
 		mntmListarVacunas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnVacunas.add(mntmListarVacunas);
@@ -115,11 +131,26 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(mnPatologias);
 		
 		JMenuItem mntmRegpatologas = new JMenuItem("Reg.Patolog\u00EDas");
+		mntmRegpatologas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegPatologia regPat= new RegPatologia();
+				regPat.setModal(true);
+				regPat.setVisible(true);
+
+			}
+		});
 		mntmRegpatologas.setForeground(new Color(51, 102, 204));
 		mntmRegpatologas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPatologias.add(mntmRegpatologas);
 		
 		JMenuItem mntmListarPatologas = new JMenuItem("Listar Patolog\u00EDas");
+		mntmListarPatologas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarPatologia listarPat= new ListarPatologia();
+				listarPat.setModal(true);
+				listarPat.setVisible(true);
+			}
+		});
 		mntmListarPatologas.setForeground(new Color(51, 102, 204));
 		mntmListarPatologas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPatologias.add(mntmListarPatologas);
@@ -193,7 +224,7 @@ public class PrincipalVisualCli extends JFrame {
 
 		JLabel lblNewLabelFondoIMG = new JLabel("");
 		lblNewLabelFondoIMG.setIcon(scaledImageIcon);
-		panel.add(lblNewLabelFondoIMG, BorderLayout.NORTH);
+		panel.add(lblNewLabelFondoIMG, BorderLayout.CENTER);
 
 	}
 }
