@@ -76,6 +76,10 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem menuItem = new JMenuItem("Reg.Doctor");
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				RegDoctor regCo= new RegDoctor();
+				regCo.setModal(true);
+				regCo.setVisible(true);
+				
 			}
 		});
 		menuItem.setForeground(new Color(51, 102, 204));
@@ -194,6 +198,9 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem mntmRegadmi = new JMenuItem("Reg.Admi");
 		mntmRegadmi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				RegAdmin regAdmin= new RegAdmin();
+				regAdmin.setModal(true);
+				regAdmin.setVisible(true);
 			}
 		});
 		mntmRegadmi.setForeground(new Color(51, 102, 204));
