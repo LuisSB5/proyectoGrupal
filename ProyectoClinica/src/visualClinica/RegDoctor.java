@@ -1,4 +1,4 @@
-package VisualClinica;
+package visualClinica;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
