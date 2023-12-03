@@ -6,19 +6,19 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.Toolkit;
+import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.border.BevelBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ListarCitasxID extends JDialog {
+public class ListarConsultaxID extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -30,7 +30,7 @@ public class ListarCitasxID extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			ListarCitasxID dialog = new ListarCitasxID();
+			ListarConsultaxID dialog = new ListarConsultaxID();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -41,19 +41,21 @@ public class ListarCitasxID extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListarCitasxID() {
-		setTitle("Citas");
+	public ListarConsultaxID() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarConsultaxID.class.getResource("/imagen/ICNHelp.png")));
+		setTitle("Cosultas");
 		setBackground(SystemColor.text);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarCitasxID.class.getResource("/imagen/icnListarCitas.png")));
-		setResizable(false);
-		setBounds(100, 100, 386, 321);
+		setBounds(100, 100, 523, 349);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		contentPanel.setBackground(SystemColor.text);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		setLocationRelativeTo(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBackground(SystemColor.text);
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(new BorderLayout(0, 0));
 			{
@@ -61,8 +63,8 @@ public class ListarCitasxID extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String [] header = {"Paciente","Día", "Status"};
 					table = new JTable();
+					String [] header = {"Código","Fecha", "Enfermedad","Diagnóstico"};
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 					model.setColumnIdentifiers(header);
@@ -74,28 +76,34 @@ public class ListarCitasxID extends JDialog {
 		setLocationRelativeTo(null);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			buttonPane.setBackground(SystemColor.control);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("modificar");
-				okButton.setBackground(SystemColor.text);
-				okButton.setForeground(new Color(0, 153, 204));
+				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						
+					}
+				});
+				okButton.setForeground(new Color(0, 153, 255));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				okButton.setBackground(SystemColor.text);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setBackground(SystemColor.text);
+				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				cancelButton.setForeground(new Color(0, 153, 204));
+				cancelButton.setForeground(new Color(0, 153, 255));
 				cancelButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				cancelButton.setBackground(SystemColor.text);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

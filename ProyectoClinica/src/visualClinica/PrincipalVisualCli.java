@@ -106,6 +106,13 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(mnPaciente);
 		
 		JMenuItem mntmRegvacunas = new JMenuItem("Generar Cita");
+		mntmRegvacunas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GenerarCita cita= new GenerarCita();
+				cita.setModal(true);
+				cita.setVisible(true);
+			}
+		});
 		mntmRegvacunas.setForeground(new Color(51, 102, 204));
 		mntmRegvacunas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegvacunas);
@@ -115,12 +122,19 @@ public class PrincipalVisualCli extends JFrame {
 		mntmRegvacunas_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegvacunas_1);
 		
-		JMenuItem mntmMostrarCitas = new JMenuItem("Mostrar Citas");
+		JMenuItem mntmMostrarCitas = new JMenuItem("Mostrar Consultas ant");
 		mntmMostrarCitas.setForeground(new Color(51, 102, 204));
 		mntmMostrarCitas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmMostrarCitas);
 		
 		JMenuItem mntmRegpaciente = new JMenuItem("Reg.Paciente");
+		mntmRegpaciente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegPaciente paciente= new RegPaciente();
+				paciente.setModal(true);
+				paciente.setVisible(true);
+			}
+		});
 		mntmRegpaciente.setForeground(new Color(51, 102, 204));
 		mntmRegpaciente.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegpaciente);
