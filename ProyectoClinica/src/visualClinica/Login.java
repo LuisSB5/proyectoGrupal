@@ -49,12 +49,6 @@ public class Login extends JDialog {
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
-			{
-				JLabel lblNewLabelFondoLogin = new JLabel("Login");
-				lblNewLabelFondoLogin.setBounds(0, 0, 395, 417);
-				lblNewLabelFondoLogin.setIcon(new ImageIcon(Login.class.getResource("/imagen/Imagen18.jpg")));
-				panel.add(lblNewLabelFondoLogin);
-			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -85,5 +79,4 @@ public class Login extends JDialog {
 			}
 		}
 	}
-
 }
