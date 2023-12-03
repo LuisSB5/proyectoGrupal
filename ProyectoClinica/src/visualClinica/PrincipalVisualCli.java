@@ -118,6 +118,14 @@ public class PrincipalVisualCli extends JFrame {
 		mnPaciente.add(mntmRegvacunas);
 		
 		JMenuItem mntmRegvacunas_1 = new JMenuItem("Buscar Historial");
+		mntmRegvacunas_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 ListarHistorialxID historial= new ListarHistorialxID();
+				historial.setModal(true);
+				historial.setVisible(true);
+			}
+			
+		});
 		mntmRegvacunas_1.setForeground(new Color(51, 102, 204));
 		mntmRegvacunas_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegvacunas_1);
