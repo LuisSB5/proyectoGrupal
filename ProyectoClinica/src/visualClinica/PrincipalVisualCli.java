@@ -256,6 +256,13 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(mnUsuarios);
 		
 		JMenuItem mntmListarUsuarios = new JMenuItem("Listar Usuarios");
+		mntmListarUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarPersonas persona= new ListarPersonas();
+				persona.setModal(true);
+				persona.setVisible(true);
+			}
+		});
 		mntmListarUsuarios.setForeground(new Color(51, 102, 204));
 		mntmListarUsuarios.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnUsuarios.add(mntmListarUsuarios);
