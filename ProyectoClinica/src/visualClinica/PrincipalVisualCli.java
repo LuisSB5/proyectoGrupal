@@ -292,6 +292,12 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(AboutUs);
 		
 		JMenuItem mntmcmoFuncionaEl = new JMenuItem("\u00BFC\u00F3mo Funciona el programa?");
+		mntmcmoFuncionaEl.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TextHelp help= new TextHelp();
+				 help.setVisible(true);
+			}
+		});
 		mntmcmoFuncionaEl.setForeground(new Color(51, 102, 204));
 		mntmcmoFuncionaEl.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		AboutUs.add(mntmcmoFuncionaEl);
