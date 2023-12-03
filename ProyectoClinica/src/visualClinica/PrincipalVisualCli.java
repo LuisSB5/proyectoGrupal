@@ -249,6 +249,17 @@ public class PrincipalVisualCli extends JFrame {
 		mntmListarViviendas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnViviendas.add(mntmListarViviendas);
 		
+		JMenu mnUsuarios = new JMenu("Usuarios");
+		mnUsuarios.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnUsu.png")));
+		mnUsuarios.setForeground(new Color(0, 153, 255));
+		mnUsuarios.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
+		menuBar.add(mnUsuarios);
+		
+		JMenuItem mntmListarUsuarios = new JMenuItem("Listar Usuarios");
+		mntmListarUsuarios.setForeground(new Color(51, 102, 204));
+		mntmListarUsuarios.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnUsuarios.add(mntmListarUsuarios);
+		
 		JMenu mnSobreNosotros = new JMenu("Administrador");
 		mnSobreNosotros.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/ICNadmi.svg.png")));
 		mnSobreNosotros.setForeground(new Color(0, 153, 255));
