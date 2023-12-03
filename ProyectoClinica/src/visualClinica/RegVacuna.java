@@ -145,10 +145,17 @@ public class RegVacuna extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Vacuna vac = new Vacuna(txtCode.getText().toString(), txtNombre.getText().toString(), txtDescrip.getText().toString(), new Integer (spnCantDisp.getValue().toString()), txtEnfermedad.getText().toString());
-						Clinica.getInstance().agregarVacuna(vac);
-						JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
-						dispose();
+						try {
+							Vacuna vac = new Vacuna(txtCode.getText().toString(), txtNombre.getText().toString(), txtDescrip.getText().toString(), new Integer (spnCantDisp.getValue().toString()), txtEnfermedad.getText().toString());
+							Clinica.getInstance().agregarVacuna(vac);
+							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						} catch (NumberFormatException ex) {
+					        JOptionPane.showMessageDialog(null, "Error en el formato de número", "Error", JOptionPane.ERROR_MESSAGE);
+					    } catch (Exception ex) {
+					        ex.printStackTrace();
+					        JOptionPane.showMessageDialog(null, "Ha ocurrido un error. Por favor, inténtelo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+					    }
 					}
 				});
 				okButton.setBackground(SystemColor.text);

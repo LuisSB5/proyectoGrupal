@@ -158,10 +158,15 @@ public class RegPatologia extends JDialog {
 				okButton.setFont(new Font("Segoe UI Black", Font.BOLD, 13));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Enfermedad enf = new Enfermedad(txtCodigoPatologia.getText().toString(), txtNombrePatologia.getText().toString(), txtPatologiaEstatus.getText().toString(), txtSintomas.getText().toString(), txtTratamiento.getText().toString());
-						Clinica.getInstance().agregarEnfermedad(enf);
-						JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
-						dispose();
+						try {
+							Enfermedad enf = new Enfermedad(txtCodigoPatologia.getText().toString(), txtNombrePatologia.getText().toString(), txtPatologiaEstatus.getText().toString(), txtSintomas.getText().toString(), txtTratamiento.getText().toString());
+							Clinica.getInstance().agregarEnfermedad(enf);
+							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+					 	}catch (Exception ex) {
+					        ex.printStackTrace(); // o loguear el error
+					        JOptionPane.showMessageDialog(null, "Ha ocurrido un error. Por favor, verifica tus datos e intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+					    }
 					}
 				});
 				okButton.setActionCommand("OK");

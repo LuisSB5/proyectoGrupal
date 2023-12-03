@@ -196,22 +196,27 @@ public class RegSecretaria extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(checkUser() == true) {
-							if(checkPasswords()==true) {
-								Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxDoc.getSelectedItem().toString());
-								Clinica.getInstance().agregarPersona(persona);
-								User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Doctor", persona);
-								Clinica.getInstance().regUser(user);
-								JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
-								dispose();
+						try{
+							if(checkUser() == true) {
+								if(checkPasswords()==true) {
+									Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxDoc.getSelectedItem().toString());
+									Clinica.getInstance().agregarPersona(persona);
+									User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Doctor", persona);
+									Clinica.getInstance().regUser(user);
+									JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+									dispose();
+								}
+								else {
+									JOptionPane.showMessageDialog(null, "Las Contraseñas tienen que ser igual");
+								}
 							}
 							else {
-								JOptionPane.showMessageDialog(null, "Las Contraseñas tienen que ser igual");
+								JOptionPane.showMessageDialog(null, "Debe digitar su usuario y contraseña");
 							}
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "Debe digitar su usuario y contraseña");
-						}
+					 	} catch (Exception ex) {
+					        ex.printStackTrace();
+					        JOptionPane.showMessageDialog(null, "Ha ocurrido un error. Por favor, inténtelo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+					    }
 					}
 					}
 				);

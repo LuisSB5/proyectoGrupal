@@ -124,15 +124,20 @@ public class RegAdmin extends JDialog {
 				JButton regButton = new JButton("Registrar");
 				regButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(checkPasswords()==true) {
-							User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(),"Admin",null);
-							Clinica.getInstance().regUser(user);
-							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
-							dispose();
-						}
-						else {
+						try {
+							if(checkPasswords()==true) {
+								User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(),"Admin",null);
+								Clinica.getInstance().regUser(user);
+								JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+								dispose();
+							}
+							else {
 							JOptionPane.showMessageDialog(null, "Las Contraseñas tienen que ser igual");
-						}
+							}
+						}catch (Exception ex) {
+							ex.printStackTrace(); // o loguear el error
+							JOptionPane.showMessageDialog(null, "Ha ocurrido un error. Por favor, verifica tus datos e intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+				    	}
 					}
 				});
 				regButton.setBackground(Color.WHITE);
