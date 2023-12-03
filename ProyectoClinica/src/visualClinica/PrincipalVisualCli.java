@@ -147,6 +147,13 @@ public class PrincipalVisualCli extends JFrame {
 		mnPaciente.add(mntmRegpaciente);
 		
 		JMenuItem menuItem_1 = new JMenuItem("Nueva Consulta");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GenerarConsulta consulta= new GenerarConsulta();
+				consulta.setModal(true);
+				consulta.setVisible(true);
+			}
+		});
 		menuItem_1.setForeground(new Color(51, 102, 204));
 		menuItem_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(menuItem_1);
