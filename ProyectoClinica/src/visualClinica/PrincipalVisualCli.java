@@ -123,6 +123,13 @@ public class PrincipalVisualCli extends JFrame {
 		mnPaciente.add(mntmRegvacunas_1);
 		
 		JMenuItem mntmMostrarCitas = new JMenuItem("Mostrar Consultas ant");
+		mntmMostrarCitas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarConsulta consulta= new ListarConsulta();
+				consulta.setModal(true);
+			    consulta.setVisible(true);
+			}
+		});
 		mntmMostrarCitas.setForeground(new Color(51, 102, 204));
 		mntmMostrarCitas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmMostrarCitas);
