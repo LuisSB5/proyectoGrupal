@@ -14,8 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
+
+import logico.Clinica;
+import logico.Enfermedad;
+
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -73,6 +78,7 @@ public class RegPatologia extends JDialog {
 			txtCodigoPatologia.setBackground(SystemColor.menu);
 			txtCodigoPatologia.setBounds(83, 38, 96, 22);
 			panelFondoGeneral.add(txtCodigoPatologia);
+			txtCodigoPatologia.setText("ENF-"+Clinica.getGeneradorCodigoPatologia());
 			txtCodigoPatologia.setColumns(10);
 			{
 				JLabel lblNombre = new JLabel("Nombre:");
@@ -152,6 +158,10 @@ public class RegPatologia extends JDialog {
 				okButton.setFont(new Font("Segoe UI Black", Font.BOLD, 13));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Enfermedad enf = new Enfermedad(txtCodigoPatologia.getText().toString(), txtNombrePatologia.getText().toString(), txtPatologiaEstatus.getText().toString(), txtSintomas.getText().toString(), txtTratamiento.getText().toString());
+						Clinica.getInstance().agregarEnfermedad(enf);
+						JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");

@@ -6,10 +6,10 @@ public class Vacuna {
 	private  String nombre;
 	private String descripcion;
 	private int cantDisponible;
-	private Enfermedad enfermedad;
+	private String enfermedad;
 	
 	
-	public Vacuna(String codVacuna, String nombre, String descripcion, int cantDisponible, Enfermedad enfermedad) {
+	public Vacuna(String codVacuna, String nombre, String descripcion, int cantDisponible, String enfermedad) {
 		super();
 		this.codVacuna = codVacuna;
 		this.nombre = nombre;
@@ -59,12 +59,12 @@ public class Vacuna {
 	}
 
 
-	public Enfermedad getEnfermedad() {
+	public String getEnfermedad() {
 		return enfermedad;
 	}
 
 
-	public void setEnfermedad(Enfermedad enfermedad) {
+	public void setEnfermedad(String enfermedad) {
 		this.enfermedad = enfermedad;
 	}
 	

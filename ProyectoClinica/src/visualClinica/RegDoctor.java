@@ -8,7 +8,14 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Clinica;
+import logico.Doctor;
+import logico.Persona;
+import logico.User;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
@@ -34,6 +41,8 @@ public class RegDoctor extends JDialog {
 	private JTextField txtPassword;
 	private JTextField txtPasswordC;
 	private JTextField txtDireccion;
+	private JComboBox cbxSexo;
+	private JComboBox cbxEspecialidad;
 
 	/**
 	 * Launch the application.
@@ -140,7 +149,7 @@ public class RegDoctor extends JDialog {
 				lblNewLabel_6.setBounds(231, 104, 81, 16);
 				panel_general.add(lblNewLabel_6);
 				
-				JComboBox cbxSexo = new JComboBox();
+				cbxSexo = new JComboBox();
 				cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "M", "F"}));
 				cbxSexo.setBounds(78, 101, 138, 22);
 				panel_general.add(cbxSexo);
@@ -150,7 +159,7 @@ public class RegDoctor extends JDialog {
 				txtDireccion.setBounds(319, 101, 166, 22);
 				panel_general.add(txtDireccion);
 				
-				JComboBox cbxEspecialidad = new JComboBox();
+				cbxEspecialidad = new JComboBox();
 				cbxEspecialidad.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Cardiolog\u00EDa", "Neurocirug\u00EDa", "Endocrinolog\u00EDa", "Medicina laboral", "Gastroenterolog\u00EDa", "Ginecolog\u00EDa y obstetricia", "Hematolog\u00EDa", "Oncolog\u00EDa"}));
 				cbxEspecialidad.setBounds(319, 66, 166, 22);
 				panel_general.add(cbxEspecialidad);
@@ -213,6 +222,33 @@ public class RegDoctor extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton regButton = new JButton("Registrar");
+				regButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(checkUser() == true) {
+							if(checkPasswords()==true) {
+								try {
+									Persona persona = new Doctor (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxEspecialidad.getSelectedItem().toString());
+									Clinica.getInstance().agregarPersona(persona);
+									User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Doctor", persona);
+									Clinica.getInstance().regUser(user);
+									JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+									dispose();
+								}
+								catch (Exception ex) {
+									// Manejar excepciones generales
+									ex.printStackTrace(); // o loguear el error
+									JOptionPane.showMessageDialog(null, "Ha ocurrido un error. Por favor, verifica tus datos e intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+								}
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Las Contraseñas tienen que ser igual");
+							}
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Debe digitar su usuario y contraseña");
+						}
+					}
+				});
 				regButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				regButton.setForeground(new Color(51, 153, 204));
 				regButton.setActionCommand("OK");
@@ -231,6 +267,24 @@ public class RegDoctor extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+	}
+	
+	private boolean checkPasswords() {
+		if(txtPassword.getText().toString().equalsIgnoreCase(txtPasswordC.getText().toString())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private boolean checkUser() {
+		if(txtUser.getText().toString().equals("")||txtPassword.getText().toString().equals("")||txtPasswordC.getText().toString().equals("")) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 }

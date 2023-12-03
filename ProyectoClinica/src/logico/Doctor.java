@@ -5,8 +5,8 @@ public class Doctor extends Persona {
 	
 	private String especialidadMedica;
 	
-	public Doctor(String cedula, String nombre, String codigo, String telefono, char sexo, String correoElectronico, String especialidadMedica) {
-		super(cedula, nombre, codigo, telefono, sexo, correoElectronico);
+	public Doctor(String cedula, String nombre, String direccion, String telefono, char sexo, String correoElectronico, String especialidadMedica) {
+		super(cedula, nombre, direccion, telefono, sexo, correoElectronico);
 		this.especialidadMedica = especialidadMedica;
 	}
 

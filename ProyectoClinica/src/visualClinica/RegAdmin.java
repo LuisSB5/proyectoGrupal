@@ -8,7 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Clinica;
+import logico.User;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -24,8 +29,8 @@ public class RegAdmin extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUser;
-	private JTextField txtPass;
-	private JTextField txtPassC;
+	private JTextField txtPassword;
+	private JTextField txtPasswordC;
 
 	/**
 	 * Launch the application.
@@ -74,16 +79,16 @@ public class RegAdmin extends JDialog {
 					txtUser.setColumns(10);
 				}
 				{
-					txtPass = new JTextField();
-					txtPass.setBounds(25, 251, 136, 22);
-					panel_1.add(txtPass);
-					txtPass.setColumns(10);
+					txtPassword = new JTextField();
+					txtPassword.setBounds(25, 251, 136, 22);
+					panel_1.add(txtPassword);
+					txtPassword.setColumns(10);
 				}
 				{
-					txtPassC = new JTextField();
-					txtPassC.setColumns(10);
-					txtPassC.setBounds(199, 251, 143, 22);
-					panel_1.add(txtPassC);
+					txtPasswordC = new JTextField();
+					txtPasswordC.setColumns(10);
+					txtPasswordC.setBounds(199, 251, 143, 22);
+					panel_1.add(txtPasswordC);
 				}
 				
 				JLabel lblUsuario = new JLabel("Usuario:");
@@ -117,6 +122,19 @@ public class RegAdmin extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton regButton = new JButton("Registrar");
+				regButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(checkPasswords()==true) {
+							User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(),"Admin",null);
+							Clinica.getInstance().regUser(user);
+							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Las Contraseñas tienen que ser igual");
+						}
+					}
+				});
 				regButton.setBackground(Color.WHITE);
 				regButton.setForeground(new Color(0, 102, 204));
 				regButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
@@ -137,6 +155,14 @@ public class RegAdmin extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+	}
+	private boolean checkPasswords() {
+		if(txtPassword.getText().toString().equalsIgnoreCase(txtPasswordC.getText().toString())) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

@@ -12,9 +12,9 @@ public class Secretaria extends Persona{
 		this.doctorAsignado = doctorAsignado;
 	}
 
-	public Secretaria(String cedula, String nombre, String codigo, String telefono, char sexo, String correoElectronico,
+	public Secretaria(String cedula, String nombre, String direccion, String telefono, char sexo, String correoElectronico,
 			String doctorAsignado) {
-		super(cedula, nombre, codigo, telefono, sexo, correoElectronico);
+		super(cedula, nombre, direccion, telefono, sexo, correoElectronico);
 		this.doctorAsignado = doctorAsignado;
 	}
 }

@@ -8,7 +8,15 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Clinica;
+import logico.Doctor;
+import logico.Persona;
+import logico.Secretaria;
+import logico.User;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.SystemColor;
@@ -30,6 +38,9 @@ public class RegSecretaria extends JDialog {
 	private JTextField txtUser;
 	private JTextField txtPassword;
 	private JTextField txtPasswordC;
+	private JComboBox cbxSexo;
+	private JComboBox cbxDoc;
+	private JTextField txtCorreo;
 
 	/**
 	 * Launch the application.
@@ -52,7 +63,7 @@ public class RegSecretaria extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegSecretaria.class.getResource("/imagen/regSecre.png")));
 		setResizable(false);
 		setBackground(SystemColor.text);
-		setBounds(100, 100, 534, 477);
+		setBounds(100, 100, 534, 475);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -67,7 +78,7 @@ public class RegSecretaria extends JDialog {
 			JPanel panel_general = new JPanel();
 			panel_general.setBackground(new Color(216, 191, 216));
 			panel_general.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_general.setBounds(12, 13, 492, 225);
+			panel_general.setBounds(12, 13, 492, 219);
 			panel.add(panel_general);
 			panel_general.setLayout(null);
 			
@@ -106,7 +117,7 @@ public class RegSecretaria extends JDialog {
 			lblNewLabel_3.setBounds(258, 65, 56, 16);
 			panel_general.add(lblNewLabel_3);
 			
-			JComboBox cbxSexo = new JComboBox();
+			cbxSexo = new JComboBox();
 			cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "F", "M"}));
 			cbxSexo.setBounds(316, 64, 164, 19);
 			panel_general.add(cbxSexo);
@@ -117,23 +128,33 @@ public class RegSecretaria extends JDialog {
 			panel_general.add(lblNewLabel_4);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBounds(12, 110, 468, 22);
+			txtDireccion.setBounds(12, 110, 211, 22);
 			panel_general.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
 			JLabel lblNewLabel_5 = new JLabel("Doctor a asignar:");
 			lblNewLabel_5.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-			lblNewLabel_5.setBounds(189, 145, 117, 16);
+			lblNewLabel_5.setBounds(197, 145, 117, 16);
 			panel_general.add(lblNewLabel_5);
 			
-			JComboBox cbxDoc = new JComboBox();
-			cbxDoc.setBounds(149, 169, 201, 22);
+			cbxDoc = new JComboBox();
+			cbxDoc.setBounds(145, 174, 201, 22);
 			panel_general.add(cbxDoc);
+			
+			JLabel lblCorreo = new JLabel("Correo Electronico:");
+			lblCorreo.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			lblCorreo.setBounds(258, 94, 201, 16);
+			panel_general.add(lblCorreo);
+			
+			txtCorreo = new JTextField();
+			txtCorreo.setColumns(10);
+			txtCorreo.setBounds(258, 110, 222, 22);
+			panel_general.add(txtCorreo);
 			
 			JPanel panel_Usuario = new JPanel();
 			panel_Usuario.setBackground(new Color(216, 191, 216));
 			panel_Usuario.setBorder(new TitledBorder(null, "Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_Usuario.setBounds(12, 253, 492, 133);
+			panel_Usuario.setBounds(12, 245, 492, 133);
 			panel.add(panel_Usuario);
 			panel_Usuario.setLayout(null);
 			
@@ -173,6 +194,27 @@ public class RegSecretaria extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(checkUser() == true) {
+							if(checkPasswords()==true) {
+								Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxDoc.getSelectedItem().toString());
+								Clinica.getInstance().agregarPersona(persona);
+								User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Doctor", persona);
+								Clinica.getInstance().regUser(user);
+								JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+								dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Las Contraseñas tienen que ser igual");
+							}
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Debe digitar su usuario y contraseña");
+						}
+					}
+					}
+				);
 				okButton.setBackground(SystemColor.text);
 				okButton.setForeground(new Color(218, 112, 214));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
@@ -193,6 +235,23 @@ public class RegSecretaria extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+	}
+	private boolean checkPasswords() {
+		if(txtPassword.getText().toString().equalsIgnoreCase(txtPasswordC.getText().toString())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private boolean checkUser() {
+		if(txtUser.getText().toString().equals("")||txtPassword.getText().toString().equals("")||txtPasswordC.getText().toString().equals("")) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 }

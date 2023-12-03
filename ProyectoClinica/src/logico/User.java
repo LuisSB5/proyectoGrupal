@@ -1,6 +1,6 @@
 package logico;
 
-public class User extends Persona{
+public class User{
 
 	private String username;
 	private String password;
@@ -31,13 +31,12 @@ public class User extends Persona{
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	public User(String cedula, String nombre, String codigo, String telefono, char sexo, String correoElectronico, String username, String password, String tipo, Persona persona) {
-		super(cedula, nombre, codigo, telefono, sexo, correoElectronico);
+	public User(String username, String password, String tipo, Persona persona) {
+		super();
 		this.username = username;
 		this.password = password;
 		this.tipo = tipo;
 		this.persona = persona;
 	}
-	
 	
 }

@@ -15,7 +15,12 @@ import java.awt.Toolkit;
 import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Clinica;
+import logico.Vacuna;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JSpinner;
@@ -28,6 +33,7 @@ public class RegVacuna extends JDialog {
 	private JTextField txtNombre;
 	private JTextField txtDescrip;
 	private JTextField txtEnfermedad;
+	private JSpinner spnCantDisp;
 
 	/**
 	 * Launch the application.
@@ -87,6 +93,7 @@ public class RegVacuna extends JDialog {
 				txtCode.setEditable(false);
 				txtCode.setBounds(127, 35, 77, 22);
 				panel.add(txtCode);
+				txtCode.setText("VAC-"+Clinica.getGeneradorCodigoVacuna());
 				txtCode.setColumns(10);
 			}
 			{
@@ -109,7 +116,7 @@ public class RegVacuna extends JDialog {
 				panel.add(lblCantdisponible);
 			}
 			
-			JSpinner spnCantDisp = new JSpinner();
+			spnCantDisp = new JSpinner();
 			spnCantDisp.setBounds(140, 222, 185, 22);
 			panel.add(spnCantDisp);
 			
@@ -136,6 +143,14 @@ public class RegVacuna extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Vacuna vac = new Vacuna(txtCode.getText().toString(), txtNombre.getText().toString(), txtDescrip.getText().toString(), new Integer (spnCantDisp.getValue().toString()), txtEnfermedad.getText().toString());
+						Clinica.getInstance().agregarVacuna(vac);
+						JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
+					}
+				});
 				okButton.setBackground(SystemColor.text);
 				okButton.setForeground(new Color(0, 102, 204));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));

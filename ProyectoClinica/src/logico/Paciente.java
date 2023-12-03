@@ -12,8 +12,8 @@ public class Paciente extends Persona{
 	private ArrayList<Consulta>misConsultas;
 	
 	
-	public Paciente(String cedula, String nombre, String codigo, String telefono, char sexo, String correoElectronico) {
-		super(cedula, nombre, codigo, telefono, sexo, correoElectronico);
+	public Paciente(String cedula, String nombre, String direccion, String telefono, char sexo, String correoElectronico) {
+		super(cedula, nombre, direccion, telefono, sexo, correoElectronico);
 		// TODO Auto-generated constructor stub
 	}
 

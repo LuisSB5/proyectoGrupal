@@ -13,6 +13,8 @@ public class Clinica {
 	private ArrayList<Vivienda>misViviendas;
 	private ArrayList<User>misUsers;
 	private static User loginUser;
+	private static int codPatologia;
+	private static int codVacuna;
 	
 	private static Clinica clinica=null;
 	
@@ -116,6 +118,31 @@ public class Clinica {
 		Clinica.clinica = clinica;
 	}
 
+	public static int getCodPatologia() {
+		return codPatologia;
+	}
+
+	public static void setCodPatologia(int codPatologia) {
+		Clinica.codPatologia = codPatologia;
+	}
+	public static int getCodVacuna() {
+		return codVacuna;
+	}
+
+	public static void setCodVacuna(int codVacuna) {
+		Clinica.codVacuna = codVacuna;
+	}
+
+	
+	
+	public static int getGeneradorCodigoPatologia() {
+		return codPatologia++;
+	}
+	
+	public static int getGeneradorCodigoVacuna() {
+		return codVacuna++;
+	}
+	
 	public void agregarPersona(Persona persona) {
         misPersonas.add(persona);
     }
@@ -145,6 +172,7 @@ public class Clinica {
 		misUsers.add(user);
 	}
 
+	/*
 	public Persona buscarPersonaByCodigo(String codigoPersona) {
 		Persona aux = null;
 		boolean encontrado = false;
@@ -178,6 +206,7 @@ public class Clinica {
 	    
 	    return aux;
 	}
+	*/
 	
 	public void eliminarPersona(logico.Persona selected) {
 		misPersonas.remove(selected);
