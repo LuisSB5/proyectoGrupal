@@ -1,6 +1,7 @@
 package logico;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Paciente extends Persona{
 
@@ -9,18 +10,35 @@ public class Paciente extends Persona{
 	private int peso;
 	private int altura;
 	private  String tipoDeSangre;
+	private Date fechaNacim;
 	private ArrayList<Consulta>misConsultas;
-	
-	
-	public Paciente(String cedula, String nombre, String direccion, String telefono, char sexo, String correoElectronico) {
+
+	public Paciente(String cedula, String nombre, String direccion, String telefono, char sexo,
+			String correoElectronico, String seguroMedico, HistoriaClinica hist, int peso, int altura,
+			String tipoDeSangre, Date fechaNacim, ArrayList<Consulta> misConsultas) {
 		super(cedula, nombre, direccion, telefono, sexo, correoElectronico);
-		// TODO Auto-generated constructor stub
+		SeguroMedico = seguroMedico;
+		this.hist = hist;
+		this.peso = peso;
+		this.altura = altura;
+		this.tipoDeSangre = tipoDeSangre;
+		this.fechaNacim = fechaNacim;
+		this.misConsultas = misConsultas;
 	}
+
 
 	public String getSeguroMedico() {
 		return SeguroMedico;
 	}
 
+
+	public Date getFechaNacim() {
+		return fechaNacim;
+	}
+
+	public void setFechaNacim(Date fechaNacim) {
+		this.fechaNacim = fechaNacim;
+	}
 
 	public void setSeguroMedico(String seguroMedico) {
 		SeguroMedico = seguroMedico;
