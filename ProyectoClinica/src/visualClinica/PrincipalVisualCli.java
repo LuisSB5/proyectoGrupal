@@ -226,11 +226,25 @@ public class PrincipalVisualCli extends JFrame {
 		menuBar.add(mnViviendas);
 		
 		JMenuItem mntmRegviviendas = new JMenuItem("Reg.Viviendas");
+		mntmRegviviendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegVivienda vivienda= new RegVivienda();
+				vivienda.setModal(true);
+				vivienda.setVisible(true);
+			}
+		});
 		mntmRegviviendas.setForeground(new Color(51, 102, 204));
 		mntmRegviviendas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnViviendas.add(mntmRegviviendas);
 		
 		JMenuItem mntmListarViviendas = new JMenuItem("Listar Viviendas");
+		mntmListarViviendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarVivienda listarvivienda= new ListarVivienda();
+				listarvivienda.setModal(true);
+				listarvivienda.setVisible(true);
+			}
+		});
 		mntmListarViviendas.setForeground(new Color(51, 102, 204));
 		mntmListarViviendas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnViviendas.add(mntmListarViviendas);
