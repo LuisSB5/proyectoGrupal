@@ -1,7 +1,13 @@
 package logico;
 
-public class Vivienda {
+import java.io.Serializable;
+
+public class Vivienda implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7303780482375372300L;
 	private String nombre;
 	private String direccion;
     private int numeroHab;

@@ -1,7 +1,13 @@
 package logico;
 
-public class Secretaria extends Persona{
+import java.io.Serializable;
 
+public class Secretaria extends Persona implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6462184455284142704L;
 	private String doctorAsignado;
 
 	public String getDoctorAsignado() {

@@ -1,10 +1,15 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Paciente extends Persona{
+public class Paciente extends Persona implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3306698431925793358L;
 	private String SeguroMedico;
 	private HistoriaClinica hist;
 	private int peso;

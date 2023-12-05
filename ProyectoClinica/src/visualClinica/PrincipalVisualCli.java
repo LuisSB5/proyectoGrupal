@@ -13,6 +13,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 
+import logico.Clinica;
 
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -24,33 +25,42 @@ import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 
 public class PrincipalVisualCli extends JFrame {
 
 	private JPanel contentPane;
 	//private Dimension dim;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PrincipalVisualCli frame = new PrincipalVisualCli();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public PrincipalVisualCli() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				FileOutputStream empresa2;
+				ObjectOutputStream empresaWrite;
+				try {
+					empresa2 = new  FileOutputStream("clinicaPOO.dat");
+					empresaWrite = new ObjectOutputStream(empresa2);
+					empresaWrite.writeObject(Clinica.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
 		//dim= getToolkit().getScreenSize();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setBackground(new Color(0, 204, 204));

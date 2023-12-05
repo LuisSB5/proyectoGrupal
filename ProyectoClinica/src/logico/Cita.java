@@ -1,10 +1,15 @@
 package logico;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class Cita {
+public class Cita implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3570706958928703217L;
 	private String codCita;
 	private  Date fecha;
 	private Paciente paciente;

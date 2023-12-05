@@ -1,7 +1,13 @@
 package logico;
 
-public class Vacuna {
+import java.io.Serializable;
 
+public class Vacuna implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5824133997724623245L;
 	private String codVacuna;
 	private  String nombre;
 	private String descripcion;

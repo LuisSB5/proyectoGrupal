@@ -1,7 +1,13 @@
 package logico;
 
-public class Enfermedad {
+import java.io.Serializable;
+
+public class Enfermedad implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8881685758536126047L;
 	private String CodEnfermedad;
 	private String Nombre;
 	private String Status;

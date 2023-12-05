@@ -126,7 +126,7 @@ public class RegAdmin extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							if(checkPasswords()==true) {
-								User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(),"Admin",null);
+								User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(),"Administrador",null);
 								Clinica.getInstance().regUser(user);
 								JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 								dispose();

@@ -1,7 +1,13 @@
 package logico;
 
-public class User{
+import java.io.Serializable;
 
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8187152831518070851L;
 	private String username;
 	private String password;
 	private String tipo;
