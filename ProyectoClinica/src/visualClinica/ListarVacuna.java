@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Clinica;
+import logico.Enfermedad;
+import logico.Vacuna;
+
 import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
@@ -107,6 +111,20 @@ public class ListarVacuna extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadVacunas();
+	}
+	
+	private void loadVacunas () {
+		model.setRowCount(0);
+		   
+		   row= new Object[model.getColumnCount()];
+		   for (Vacuna vac: Clinica.getInstance().getMisVacunas()) {
+			   row[0]=vac.getCodVacuna();
+			   row[1]=vac.getNombre();
+			   row[2]=vac.getCantDisponible();
+			   row[3]=vac.getEnfermedad();
+			   model.addRow(row);
+		   }
 	}
 
 }

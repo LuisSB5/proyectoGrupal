@@ -15,6 +15,10 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Clinica;
+import logico.Enfermedad;
+import logico.Persona;
+
 import java.awt.Toolkit;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
@@ -109,5 +113,20 @@ public class ListarPatologia extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadPatologias();
 	}
+	
+	
+	private void loadPatologias () {
+		model.setRowCount(0);
+		   
+		   row= new Object[model.getColumnCount()];
+		   for (Enfermedad enf: Clinica.getInstance().getMisEnfermedades()) {
+			   row[0]=enf.getCodEnfermedad();
+			   row[1]=enf.getNombre();
+			   row[2]=enf.getStatus();
+			   model.addRow(row);
+		   }
+	}
+	
 }
