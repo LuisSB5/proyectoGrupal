@@ -16,15 +16,13 @@ public class HistoriaClinica implements Serializable{
 	private ArrayList<Enfermedad>misEnfermedades;
 	
 	
-	
-	public HistoriaClinica(String codigo, String cedPaciente, ArrayList<Vacuna> misVacunas,
-			ArrayList<Consulta> misConsultas, ArrayList<Enfermedad> misEnfermedades) {
+	public HistoriaClinica(String cedPaciente) {
 		super();
-		this.codigo = codigo;
+		this.codigo = "HIST-" + Clinica.getInstance().getGeneradorCodigoHistorial();
 		this.cedPaciente = cedPaciente;
-		this.misVacunas = misVacunas;
-		this.misConsultas = misConsultas;
-		this.misEnfermedades = misEnfermedades;
+		misVacunas = new ArrayList<Vacuna>();
+		misConsultas = new ArrayList<Consulta>();
+		misEnfermedades = new ArrayList<Enfermedad>();
 	}
 	public String getCodigo() {
 		return codigo;

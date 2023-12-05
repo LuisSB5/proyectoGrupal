@@ -138,6 +138,7 @@ public class RegSecretaria extends JDialog {
 			panel_general.add(lblNewLabel_5);
 			
 			cbxDoc = new JComboBox();
+			cbxDoc.setModel(new DefaultComboBoxModel(new String[] {"<Registros>"}));
 			cbxDoc.setBounds(145, 174, 201, 22);
 			panel_general.add(cbxDoc);
 			
@@ -241,7 +242,29 @@ public class RegSecretaria extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadDoctoresToComboBox();
 	}
+	
+	private void loadDoctoresToComboBox() {
+		cbxDoc.removeAllItems();
+		String aux = null;
+		for(Persona persona : Clinica.getInstance().getMisPersonas()) {
+			if(persona instanceof Doctor) {
+				if(persona.getSexo()=='F') {
+					aux = "Dra. "+persona.getNombre();
+				   }
+				   else {
+					   aux = "Dr. "+persona.getNombre();
+				   }
+				cbxDoc.addItem(aux);
+			}
+		}
+		
+		cbxDoc.insertItemAt("<Registros>", 0);
+		cbxDoc.setSelectedIndex(0);
+	}
+	
+	
 	private boolean checkPasswords() {
 		if(txtPassword.getText().toString().equalsIgnoreCase(txtPasswordC.getText().toString())) {
 			return true;

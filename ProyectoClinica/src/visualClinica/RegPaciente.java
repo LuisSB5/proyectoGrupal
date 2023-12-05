@@ -7,31 +7,48 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logico.Clinica;
+import logico.HistoriaClinica;
+import logico.Paciente;
+import logico.Persona;
+
 import java.awt.Toolkit;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JSpinner.DateEditor;
 
 public class RegPaciente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
-	private JTextField txtFecha;
+	private JTextField txtCedula;
 	private JTextField txtNombre;
-	private JTextField txtPeso;
-	private JTextField txtAltura;
 	private JTextField txtSeguro;
-	private JTextField textField;
+	private JTextField txtCorreo;
 	private JTextField txtTelefono;
-	private JTextField textField_1;
+	private JTextField txtDireccion;
+	private JSpinner spnFecha;
+	private JComboBox cbxSexo;
+	private JSpinner spnPeso;
+	private JSpinner spnAltura;
+	private JComboBox cbxTipoSangre;
 
 	/**
 	 * Launch the application.
@@ -53,7 +70,7 @@ public class RegPaciente extends JDialog {
 		setResizable(false);
 		setTitle("Registrar paciente");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegPaciente.class.getResource("/imagen/MnPa.png")));
-		setBounds(100, 100, 442, 437);
+		setBounds(100, 100, 560, 543);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,18 +82,17 @@ public class RegPaciente extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("C\u00F3digo:");
+				JLabel lblNewLabel = new JLabel("C\u00E9dula: ");
 				lblNewLabel.setForeground(new Color(0, 153, 255));
 				lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblNewLabel.setBounds(12, 26, 56, 16);
 				panel.add(lblNewLabel);
 			}
 			{
-				txtCodigo = new JTextField();
-				txtCodigo.setEditable(false);
-				txtCodigo.setBounds(80, 26, 85, 22);
-				panel.add(txtCodigo);
-				txtCodigo.setColumns(10);
+				txtCedula = new JTextField();
+				txtCedula.setBounds(80, 26, 85, 22);
+				panel.add(txtCedula);
+				txtCedula.setColumns(10);
 			}
 			{
 				JLabel lblFecha = new JLabel("Fecha de nacimiento:");
@@ -84,12 +100,6 @@ public class RegPaciente extends JDialog {
 				lblFecha.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblFecha.setBounds(12, 122, 131, 16);
 				panel.add(lblFecha);
-			}
-			{
-				txtFecha = new JTextField();
-				txtFecha.setBounds(147, 119, 142, 22);
-				panel.add(txtFecha);
-				txtFecha.setColumns(10);
 			}
 			{
 				JLabel lblNombre = new JLabel("Nombre:");
@@ -112,23 +122,11 @@ public class RegPaciente extends JDialog {
 				panel.add(lblNombre_1);
 			}
 			{
-				txtPeso = new JTextField();
-				txtPeso.setColumns(10);
-				txtPeso.setBounds(80, 170, 85, 22);
-				panel.add(txtPeso);
-			}
-			{
 				JLabel lblAltura = new JLabel("Altura:");
 				lblAltura.setForeground(new Color(0, 153, 255));
 				lblAltura.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblAltura.setBounds(12, 232, 56, 16);
 				panel.add(lblAltura);
-			}
-			{
-				txtAltura = new JTextField();
-				txtAltura.setColumns(10);
-				txtAltura.setBounds(80, 229, 85, 22);
-				panel.add(txtAltura);
 			}
 			{
 				JLabel lblTipoDeSangre = new JLabel("Tipo de sangre:");
@@ -138,7 +136,7 @@ public class RegPaciente extends JDialog {
 				panel.add(lblTipoDeSangre);
 			}
 			{
-				JComboBox cbxTipoSangre = new JComboBox();
+				cbxTipoSangre = new JComboBox();
 				cbxTipoSangre.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "A+\t", "A-\t", "B+\t", "B-\t", "AB+\t", "AB-", "O+\t", "O-"}));
 				cbxTipoSangre.setBounds(297, 170, 117, 22);
 				panel.add(cbxTipoSangre);
@@ -164,10 +162,10 @@ public class RegPaciente extends JDialog {
 				panel.add(lblCorreo);
 			}
 			{
-				textField = new JTextField();
-				textField.setColumns(10);
-				textField.setBounds(80, 286, 85, 22);
-				panel.add(textField);
+				txtCorreo = new JTextField();
+				txtCorreo.setColumns(10);
+				txtCorreo.setBounds(72, 286, 85, 22);
+				panel.add(txtCorreo);
 			}
 			{
 				JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
@@ -185,7 +183,7 @@ public class RegPaciente extends JDialog {
 			{
 				JLabel lblNewLabel_1 = new JLabel("");
 				lblNewLabel_1.setIcon(new ImageIcon(RegPaciente.class.getResource("/imagen/icnRegPac.png")));
-				lblNewLabel_1.setBounds(324, 48, 90, 90);
+				lblNewLabel_1.setBounds(424, 23, 90, 90);
 				panel.add(lblNewLabel_1);
 			}
 			{
@@ -196,10 +194,52 @@ public class RegPaciente extends JDialog {
 				panel.add(lblDireccin);
 			}
 			{
-				textField_1 = new JTextField();
-				textField_1.setColumns(10);
-				textField_1.setBounds(187, 44, 113, 51);
-				panel.add(textField_1);
+				txtDireccion = new JTextField();
+				txtDireccion.setColumns(10);
+				txtDireccion.setBounds(286, 23, 113, 22);
+				panel.add(txtDireccion);
+			}
+			
+			JSpinner spnFecha = new JSpinner();
+			spnFecha.setModel(new SpinnerDateModel(new Date(1701662400000L), null, null, Calendar.DAY_OF_YEAR));
+
+	        // Configurar el formato del editor para mostrar solo la fecha (día, mes y año)
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	        DateEditor dateEditor = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
+	        spnFecha.setEditor(dateEditor);
+			spnFecha.setBounds(151, 119, 121, 22);
+			panel.add(spnFecha);
+			{
+				spnPeso = new JSpinner();
+				spnPeso.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+				spnPeso.setBounds(82, 170, 65, 22);
+				panel.add(spnPeso);
+			}
+			
+			spnAltura = new JSpinner();
+			spnAltura.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+			spnAltura.setBounds(82, 229, 65, 22);
+			panel.add(spnAltura);
+			
+			JLabel lblNewLabel_2 = new JLabel("Lb.");
+			lblNewLabel_2.setBounds(151, 173, 56, 16);
+			panel.add(lblNewLabel_2);
+			
+			JLabel lblCm = new JLabel("Cm.");
+			lblCm.setBounds(151, 232, 56, 16);
+			panel.add(lblCm);
+			{
+				JLabel lblSexo = new JLabel("Sexo:");
+				lblSexo.setForeground(new Color(0, 153, 255));
+				lblSexo.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				lblSexo.setBounds(215, 73, 85, 16);
+				panel.add(lblSexo);
+			}
+			{
+				cbxSexo = new JComboBox();
+				cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "F", "M"}));
+				cbxSexo.setBounds(286, 70, 113, 22);
+				panel.add(cbxSexo);
 			}
 		}
 		setLocationRelativeTo(null);
@@ -209,12 +249,21 @@ public class RegPaciente extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Registrar");
-				okButton.setForeground(new Color(0, 153, 255));
-				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						HistoriaClinica hist = new HistoriaClinica (txtCedula.getText().toString());
+						Persona persona = new Paciente(txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), txtSeguro.getText().toString(), hist, new Integer(spnPeso.getValue().toString()), new Integer(spnAltura.getValue().toString()), cbxTipoSangre.getSelectedItem().toString(),((Date) spnFecha.getValue()), null);
+						Clinica.getInstance().agregarPersona(persona);
+						JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
+					}
+				});
+				btnRegistrar.setForeground(new Color(0, 153, 255));
+				btnRegistrar.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
@@ -230,5 +279,5 @@ public class RegPaciente extends JDialog {
 			}
 		}
 	}
-
 }
+

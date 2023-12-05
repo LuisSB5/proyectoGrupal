@@ -11,7 +11,10 @@ import javax.swing.table.DefaultTableModel;
 
 
 import logico.Clinica;
+import logico.Doctor;
+import logico.Paciente;
 import logico.Persona;
+import logico.Secretaria;
 
 import java.awt.SystemColor;
 import java.awt.Toolkit;
@@ -69,7 +72,7 @@ public class ListarPersonas extends JDialog {
 
 					model = new DefaultTableModel();
 					table = new JTable();
-					String [] header = {"Nombre","Cedula", "Contacto"};
+					String [] header = {"Nombre","Cedula", "Contacto", "Posicion"};
 					table.setForeground(new Color(0, 0, 0));
 					table.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 					model.setColumnIdentifiers(header);
@@ -114,9 +117,30 @@ public class ListarPersonas extends JDialog {
 			   row[0]=persona.getNombre();
 			   row[1]=persona.getCedula();
 			   row[2]=persona.getTelefono();
+			   
+			   if(persona instanceof Paciente) {
+				   row[3] = "Paciente";
+			   }
+			   if(persona instanceof Doctor) {
+				   if(persona.getSexo()=='F') {
+					   row[3] = "Doctora";
+				   }
+				   else {
+					   row[3] = "Doctor";
+				   }
+			   }
+			   if(persona instanceof Secretaria) {
+				   if(persona.getSexo()=='F') {
+					   row[3] = "Secretaria";
+				   }
+				   else {
+					   row[3] = "Secretario";
+				   }
+			   }
+			   
 			   model.addRow(row);
 		
-	}
+		   }
 
 	}
 
