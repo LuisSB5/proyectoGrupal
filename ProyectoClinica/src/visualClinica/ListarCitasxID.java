@@ -8,6 +8,10 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Cita;
+import logico.Clinica;
+import logico.Consulta;
+
 import java.awt.Toolkit;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -61,7 +65,7 @@ public class ListarCitasxID extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String [] header = {"Paciente","Día", "Status"};
+					String [] header = {"Paciente","Dï¿½a", "Status"};
 					table = new JTable();
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -100,6 +104,21 @@ public class ListarCitasxID extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadCitas();
+	}
+
+	private void loadCitas() {
+		// TODO Auto-generated method stub
+		model.setRowCount(0);	   
+		   row = new Object[model.getColumnCount()];
+		   for (Cita cit: Clinica.getInstance().getMisCitas()) {
+			   row[0]=cit.getCodCita();
+			   row[1]=cit.getFecha();
+			   row[2]=cit.getPaciente();
+			   row[3]=cit.getDoctor();
+			   row[4]=cit.getHora();
+			   model.addRow(row);
+		   }
 	}
 
 }

@@ -13,6 +13,11 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import logico.Clinica;
+import logico.Consulta;
+import logico.Vacuna;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -64,7 +69,7 @@ public class ListarConsultaxID extends JDialog {
 				{
 					model = new DefaultTableModel();
 					table = new JTable();
-					String [] header = {"Código","Fecha", "Enfermedad","Diagnóstico"};
+					String [] header = {"Cï¿½digo","Fecha", "Enfermedad","Diagnï¿½stico"};
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 					model.setColumnIdentifiers(header);
@@ -108,6 +113,23 @@ public class ListarConsultaxID extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadConsultas();
 	}
+	private void loadConsultas () {
+		model.setRowCount(0);	   
+		   row = new Object[model.getColumnCount()];
+		   for (Consulta consul: Clinica.getInstance().getMisConsultas()) {
+			   row[0]=consul.getCodeConsulta();
+			   row[1]=consul.getFechaConsulta();
+			   row[2]=consul.getDiagnostico();
+			   row[3]=consul.getEnfermedad();
+			   row[4]=consul.getPaciente();
+			   row[5]=consul.getDoctor();
+			   row[6]=consul.getVacuna();
+			   row[7]=consul.getStatus();
+			   model.addRow(row);
+		   }
+	}
+
 
 }
