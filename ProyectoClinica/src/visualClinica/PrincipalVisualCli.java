@@ -99,6 +99,47 @@ public class PrincipalVisualCli extends JFrame {
 		mntmListarCitas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnDoctor.add(mntmListarCitas);
 		
+		JMenuItem mntmBuscarHistorialPaciente = new JMenuItem("Buscar Historial Paciente");
+		mntmBuscarHistorialPaciente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 ListarHistorialxID historial= new ListarHistorialxID();
+					historial.setModal(true);
+					historial.setVisible(true);
+			}
+		});
+		mntmBuscarHistorialPaciente.setForeground(new Color(51, 102, 204));
+		mntmBuscarHistorialPaciente.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnDoctor.add(mntmBuscarHistorialPaciente);
+		
+		JMenuItem menuItem = new JMenuItem("Nueva Consulta");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Clinica.getLoginUser().getTipo().equalsIgnoreCase("Doctor") ) {
+					Doctor doc = Clinica.getInstance().buscarDoctorByCedula(Clinica.getLoginUser().getPersona().getCedula());
+					GenerarConsulta consulta= new GenerarConsulta(doc);
+					consulta.setModal(true);
+					consulta.setVisible(true);
+				}
+			
+			}
+		});
+		menuItem.setForeground(new Color(51, 102, 204));
+		menuItem.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnDoctor.add(menuItem);
+		
+		JMenuItem menuItem_1 = new JMenuItem("Mostrar Consultas ant");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarConsulta consulta= new ListarConsulta();
+				consulta.setModal(true);
+			    consulta.setVisible(true);
+
+			}
+		});
+		menuItem_1.setForeground(new Color(51, 102, 204));
+		menuItem_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnDoctor.add(menuItem_1);
+		
 		JMenu mnPaciente = new JMenu("Paciente");
 		mnPaciente.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnPa.png")));
 		mnPaciente.setForeground(new Color(0, 153, 255));
@@ -117,32 +158,7 @@ public class PrincipalVisualCli extends JFrame {
 		mntmRegvacunas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegvacunas);
 		
-		JMenuItem mntmRegvacunas_1 = new JMenuItem("Buscar Historial");
-		mntmRegvacunas_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 ListarHistorialxID historial= new ListarHistorialxID();
-				historial.setModal(true);
-				historial.setVisible(true);
-			}
-			
-		});
-		mntmRegvacunas_1.setForeground(new Color(51, 102, 204));
-		mntmRegvacunas_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnPaciente.add(mntmRegvacunas_1);
-		
-		JMenuItem mntmMostrarCitas = new JMenuItem("Mostrar Consultas ant");
-		mntmMostrarCitas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ListarConsulta consulta= new ListarConsulta();
-				consulta.setModal(true);
-			    consulta.setVisible(true);
-			}
-		});
-		mntmMostrarCitas.setForeground(new Color(51, 102, 204));
-		mntmMostrarCitas.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnPaciente.add(mntmMostrarCitas);
-		
-		JMenuItem mntmRegpaciente = new JMenuItem("Reg.Paciente");
+		JMenuItem mntmRegpaciente = new JMenuItem("Reg. Paciente");
 		mntmRegpaciente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegPaciente paciente= new RegPaciente();
@@ -153,21 +169,6 @@ public class PrincipalVisualCli extends JFrame {
 		mntmRegpaciente.setForeground(new Color(51, 102, 204));
 		mntmRegpaciente.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegpaciente);
-		
-		JMenuItem menuItem_1 = new JMenuItem("Nueva Consulta");
-		menuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(Clinica.getLoginUser().getTipo().equalsIgnoreCase("Doctor") ) {
-					Doctor doc = Clinica.getInstance().buscarDoctorByCedula(Clinica.getLoginUser().getPersona().getCedula());
-					GenerarConsulta consulta= new GenerarConsulta(doc);
-					consulta.setModal(true);
-					consulta.setVisible(true);
-				}
-			}
-		});
-		menuItem_1.setForeground(new Color(51, 102, 204));
-		menuItem_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnPaciente.add(menuItem_1);
 		
 		JMenu mnVacunas = new JMenu("Vacunas");
 		mnVacunas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVa.png")));
