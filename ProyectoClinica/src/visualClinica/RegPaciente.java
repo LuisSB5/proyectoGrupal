@@ -46,11 +46,11 @@ public class RegPaciente extends JDialog {
 	private JTextField txtCorreo;
 	private JTextField txtTelefono;
 	private JTextField txtDireccion;
-	private JSpinner spnFecha;
 	private JComboBox cbxSexo;
 	private JSpinner spnPeso;
 	private JSpinner spnAltura;
 	private JComboBox cbxTipoSangre;
+	private JSpinner spnFecha;
 
 	/**
 	 * Launch the application.
@@ -131,13 +131,13 @@ public class RegPaciente extends JDialog {
 				panel.add(txtCorreo);
 			}
 			
-			JSpinner spnFecha = new JSpinner();
+			spnFecha = new JSpinner();
 			spnFecha.setModel(new SpinnerDateModel(new Date(1701662400000L), null, null, Calendar.DAY_OF_YEAR));
 
 	        // Configurar el formato del editor para mostrar solo la fecha (día, mes y año)
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	        DateEditor dateEditor = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
-	        spnFecha.setEditor(dateEditor);
+	        DateEditor de_spnFecha = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
+	        spnFecha.setEditor(de_spnFecha);
 			spnFecha.setBounds(174, 211, 150, 22);
 			panel.add(spnFecha);
 			{
@@ -275,11 +275,18 @@ public class RegPaciente extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						HistoriaClinica hist = new HistoriaClinica (txtCedula.getText().toString());
-						Persona persona = new Paciente(txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), txtSeguro.getText().toString(), hist, new Integer(spnPeso.getValue().toString()), new Integer(spnAltura.getValue().toString()), cbxTipoSangre.getSelectedItem().toString(),((Date) spnFecha.getValue()), null);
-						Clinica.getInstance().agregarPersona(persona);
-						JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
-						dispose();
+						try {
+							Date fechaNacimiento = (Date) spnFecha.getValue();
+							HistoriaClinica hist = new HistoriaClinica (txtCedula.getText().toString());
+							Persona persona = new Paciente(txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), txtSeguro.getText().toString(), hist, new Integer(spnPeso.getValue().toString()), new Integer(spnAltura.getValue().toString()), cbxTipoSangre.getSelectedItem().toString(),fechaNacimiento);
+							Clinica.getInstance().agregarPersona(persona);
+							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						    // Tu código actual aquí
+						} catch (NullPointerException ex) {
+						    ex.printStackTrace(); // Imprime la traza de la excepción
+						    JOptionPane.showMessageDialog(null, "Se ha producido un error. Consulta la consola para obtener más detalles.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				});
 				btnRegistrar.setForeground(new Color(0, 153, 255));

@@ -16,11 +16,10 @@ public class Paciente extends Persona implements Serializable{
 	private int altura;
 	private  String tipoDeSangre;
 	private Date fechaNacim;
-	private ArrayList<Consulta>misConsultas;
 
 	public Paciente(String cedula, String nombre, String direccion, String telefono, char sexo,
 			String correoElectronico, String seguroMedico, HistoriaClinica hist, int peso, int altura,
-			String tipoDeSangre, Date fechaNacim, ArrayList<Consulta> misConsultas) {
+			String tipoDeSangre, Date fechaNacim) {
 		super(cedula, nombre, direccion, telefono, sexo, correoElectronico);
 		SeguroMedico = seguroMedico;
 		this.hist = hist;
@@ -28,7 +27,6 @@ public class Paciente extends Persona implements Serializable{
 		this.altura = altura;
 		this.tipoDeSangre = tipoDeSangre;
 		this.fechaNacim = fechaNacim;
-		this.misConsultas = misConsultas;
 	}
 
 
@@ -89,14 +87,4 @@ public class Paciente extends Persona implements Serializable{
 		this.tipoDeSangre = tipoDeSangre;
 	}
 
-
-	public ArrayList<Consulta> getMisConsultas() {
-		return misConsultas;
-	}
-
-
-	public void setMisConsultas(ArrayList<Consulta> misConsultas) {
-		this.misConsultas = misConsultas;
-	}
-	
 }
