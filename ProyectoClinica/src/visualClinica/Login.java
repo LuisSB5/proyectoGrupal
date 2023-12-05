@@ -29,12 +29,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUser;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -109,18 +110,17 @@ public class Login extends JDialog {
 			panel.add(txtUser);
 			txtUser.setColumns(10);
 			
-			txtPassword = new JTextField();
-			txtPassword.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-			txtPassword.setForeground(new Color(51, 153, 204));
-			txtPassword.setBackground(SystemColor.text);
-			txtPassword.setColumns(10);
-			txtPassword.setBounds(37, 294, 274, 28);
-			panel.add(txtPassword);
-			
 			JLabel lblNewLabel_2 = new JLabel("");
 			lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/imagen/loginthousendthtry.png")));
 			lblNewLabel_2.setBounds(-33, 0, 454, 385);
 			panel.add(lblNewLabel_2);
+			
+			txtPassword = new JPasswordField();
+			txtPassword.setForeground(new Color(0, 153, 204));
+			txtPassword.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
+			txtPassword.setBackground(SystemColor.text);
+			txtPassword.setBounds(37, 297, 274, 25);
+			panel.add(txtPassword);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -133,12 +133,18 @@ public class Login extends JDialog {
 				JButton okButton = new JButton("Iniciar sesion");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(Clinica.getInstance().confirmLogin(txtUser.getText(),txtPassword.getText())){
-							PrincipalVisualCli frame = new PrincipalVisualCli();
-							dispose();
-							frame.setVisible(true);
-						};
-					}
+						try {
+				            if (Clinica.getInstance().confirmLogin(txtUser.getText(), new String(txtPassword.getPassword()))) {
+				                PrincipalVisualCli frame = new PrincipalVisualCli();
+				                dispose();
+				                frame.setVisible(true);
+				            } else {
+				                JOptionPane.showMessageDialog(Login.this, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+				            }
+				        } catch (Exception ex) {
+				            JOptionPane.showMessageDialog(Login.this, "Ocurrió un error al iniciar sesión: " + ex.getMessage(), "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+				        }
+				    }
 				});
 				okButton.setForeground(new Color(0, 153, 204));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
