@@ -33,6 +33,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 public class PrincipalVisualCli extends JFrame {
 
@@ -84,19 +86,6 @@ public class PrincipalVisualCli extends JFrame {
 		mnDoctor.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
 		menuBar.add(mnDoctor);
 		
-		JMenuItem menuItem = new JMenuItem("Reg.Doctor");
-		menuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegDoctor regCo= new RegDoctor();
-				regCo.setModal(true);
-				regCo.setVisible(true);
-				
-			}
-		});
-		menuItem.setForeground(new Color(51, 102, 204));
-		menuItem.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnDoctor.add(menuItem);
-		
 		JMenuItem mntmListarCitas = new JMenuItem("Listar Citas");
 		mntmListarCitas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,18 +113,6 @@ public class PrincipalVisualCli extends JFrame {
 				cita.setVisible(true);
 			}
 		});
-		
-		JMenuItem mntmRegsecretaria = new JMenuItem("Reg.Secretaria");
-		mntmRegsecretaria.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegSecretaria secretaria= new RegSecretaria();
-				secretaria.setModal(true);
-				secretaria.setVisible(true);
-			}
-		});
-		mntmRegsecretaria.setForeground(new Color(51, 102, 204));
-		mntmRegsecretaria.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnPaciente.add(mntmRegsecretaria);
 		mntmRegvacunas.setForeground(new Color(51, 102, 204));
 		mntmRegvacunas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegvacunas);
@@ -307,17 +284,47 @@ public class PrincipalVisualCli extends JFrame {
 		mnSobreNosotros.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
 		menuBar.add(mnSobreNosotros);
 		
-		JMenuItem mntmRegadmi = new JMenuItem("Reg.Admi");
-		mntmRegadmi.addActionListener(new ActionListener() {
+		JMenu mnNewMenu = new JMenu("Registrar Personal");
+		mnNewMenu.setForeground(new Color(0, 102, 204));
+		mnNewMenu.setFont(new Font("Segoe UI Black", Font.BOLD, 15));
+		mnSobreNosotros.add(mnNewMenu);
+		
+		JMenuItem mntRegAd = new JMenuItem("Reg. Administrador");
+		mntRegAd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegAdmin regAdmin= new RegAdmin();
-				regAdmin.setModal(true);
-				regAdmin.setVisible(true);
+				RegAdmin admi= new RegAdmin();
+				admi.setModal(true);
+				admi.setVisible(true);
 			}
 		});
-		mntmRegadmi.setForeground(new Color(51, 102, 204));
-		mntmRegadmi.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnSobreNosotros.add(mntmRegadmi);
+		mntRegAd.setForeground(new Color(0, 153, 204));
+		mntRegAd.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 15));
+		mnNewMenu.add(mntRegAd);
+		
+		JMenuItem mntmRegSecretaria = new JMenuItem("Reg. Secretaria");
+		mntmRegSecretaria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegSecretaria secretaria= new RegSecretaria();
+				secretaria.setModal(true);
+				secretaria.setVisible(true);
+			}
+		});
+		mntmRegSecretaria.setForeground(new Color(0, 153, 204));
+		mntmRegSecretaria.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 15));
+		mnNewMenu.add(mntmRegSecretaria);
+		
+		JMenuItem mntmRegDoctor = new JMenuItem("Reg. Doctor");
+		mntmRegDoctor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegDoctor regCo= new RegDoctor();
+				regCo.setModal(true);
+				regCo.setVisible(true);
+				
+			}
+		});
+		mntmRegDoctor.setForeground(new Color(0, 153, 204));
+		mntmRegDoctor.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 15));
+		mnNewMenu.add(mntmRegDoctor);
 		
 		JMenu AboutUs = new JMenu("Help");
 		AboutUs.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/ICNHelp.png")));
