@@ -34,6 +34,8 @@ import java.util.Date;
 import java.util.Calendar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JSpinner.DateEditor;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
 
 public class RegPaciente extends JDialog {
 
@@ -70,7 +72,7 @@ public class RegPaciente extends JDialog {
 		setResizable(false);
 		setTitle("Registrar paciente");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegPaciente.class.getResource("/imagen/MnPa.png")));
-		setBounds(100, 100, 560, 543);
+		setBounds(100, 100, 539, 543);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,122 +84,51 @@ public class RegPaciente extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("C\u00E9dula: ");
-				lblNewLabel.setForeground(new Color(0, 153, 255));
-				lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblNewLabel.setBounds(12, 26, 56, 16);
-				panel.add(lblNewLabel);
-			}
-			{
-				txtCedula = new JTextField();
-				txtCedula.setBounds(80, 26, 85, 22);
-				panel.add(txtCedula);
-				txtCedula.setColumns(10);
-			}
-			{
 				JLabel lblFecha = new JLabel("Fecha de nacimiento:");
 				lblFecha.setForeground(new Color(0, 153, 255));
 				lblFecha.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblFecha.setBounds(12, 122, 131, 16);
+				lblFecha.setBounds(31, 214, 131, 16);
 				panel.add(lblFecha);
-			}
-			{
-				JLabel lblNombre = new JLabel("Nombre:");
-				lblNombre.setForeground(new Color(0, 153, 255));
-				lblNombre.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblNombre.setBounds(12, 73, 56, 16);
-				panel.add(lblNombre);
-			}
-			{
-				txtNombre = new JTextField();
-				txtNombre.setColumns(10);
-				txtNombre.setBounds(80, 70, 85, 22);
-				panel.add(txtNombre);
 			}
 			{
 				JLabel lblNombre_1 = new JLabel("Peso:");
 				lblNombre_1.setForeground(new Color(0, 153, 255));
 				lblNombre_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblNombre_1.setBounds(12, 173, 56, 16);
+				lblNombre_1.setBounds(31, 257, 56, 16);
 				panel.add(lblNombre_1);
 			}
 			{
 				JLabel lblAltura = new JLabel("Altura:");
 				lblAltura.setForeground(new Color(0, 153, 255));
 				lblAltura.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblAltura.setBounds(12, 232, 56, 16);
+				lblAltura.setBounds(31, 301, 56, 16);
 				panel.add(lblAltura);
 			}
 			{
 				JLabel lblTipoDeSangre = new JLabel("Tipo de sangre:");
 				lblTipoDeSangre.setForeground(new Color(0, 153, 255));
 				lblTipoDeSangre.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblTipoDeSangre.setBounds(187, 173, 113, 16);
+				lblTipoDeSangre.setBounds(31, 405, 113, 16);
 				panel.add(lblTipoDeSangre);
 			}
 			{
 				cbxTipoSangre = new JComboBox();
 				cbxTipoSangre.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "A+\t", "A-\t", "B+\t", "B-\t", "AB+\t", "AB-", "O+\t", "O-"}));
-				cbxTipoSangre.setBounds(297, 170, 117, 22);
+				cbxTipoSangre.setBounds(174, 402, 154, 22);
 				panel.add(cbxTipoSangre);
-			}
-			{
-				JLabel lblNumSegura = new JLabel("Num. Seguro:");
-				lblNumSegura.setForeground(new Color(0, 153, 255));
-				lblNumSegura.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblNumSegura.setBounds(187, 232, 113, 16);
-				panel.add(lblNumSegura);
-			}
-			{
-				txtSeguro = new JTextField();
-				txtSeguro.setColumns(10);
-				txtSeguro.setBounds(297, 229, 117, 22);
-				panel.add(txtSeguro);
 			}
 			{
 				JLabel lblCorreo = new JLabel("Correo:");
 				lblCorreo.setForeground(new Color(0, 153, 255));
 				lblCorreo.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblCorreo.setBounds(12, 286, 56, 16);
+				lblCorreo.setBounds(31, 353, 56, 16);
 				panel.add(lblCorreo);
 			}
 			{
 				txtCorreo = new JTextField();
 				txtCorreo.setColumns(10);
-				txtCorreo.setBounds(72, 286, 85, 22);
+				txtCorreo.setBounds(174, 350, 154, 22);
 				panel.add(txtCorreo);
-			}
-			{
-				JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
-				lblTelfono.setForeground(new Color(0, 153, 255));
-				lblTelfono.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblTelfono.setBounds(187, 286, 85, 16);
-				panel.add(lblTelfono);
-			}
-			{
-				txtTelefono = new JTextField();
-				txtTelefono.setColumns(10);
-				txtTelefono.setBounds(297, 286, 117, 22);
-				panel.add(txtTelefono);
-			}
-			{
-				JLabel lblNewLabel_1 = new JLabel("");
-				lblNewLabel_1.setIcon(new ImageIcon(RegPaciente.class.getResource("/imagen/icnRegPac.png")));
-				lblNewLabel_1.setBounds(424, 23, 90, 90);
-				panel.add(lblNewLabel_1);
-			}
-			{
-				JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
-				lblDireccin.setForeground(new Color(0, 153, 255));
-				lblDireccin.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblDireccin.setBounds(215, 26, 85, 16);
-				panel.add(lblDireccin);
-			}
-			{
-				txtDireccion = new JTextField();
-				txtDireccion.setColumns(10);
-				txtDireccion.setBounds(286, 23, 113, 22);
-				panel.add(txtDireccion);
 			}
 			
 			JSpinner spnFecha = new JSpinner();
@@ -207,39 +138,131 @@ public class RegPaciente extends JDialog {
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	        DateEditor dateEditor = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
 	        spnFecha.setEditor(dateEditor);
-			spnFecha.setBounds(151, 119, 121, 22);
+			spnFecha.setBounds(174, 211, 150, 22);
 			panel.add(spnFecha);
 			{
 				spnPeso = new JSpinner();
 				spnPeso.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-				spnPeso.setBounds(82, 170, 65, 22);
+				spnPeso.setBounds(174, 254, 154, 22);
 				panel.add(spnPeso);
 			}
 			
 			spnAltura = new JSpinner();
 			spnAltura.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-			spnAltura.setBounds(82, 229, 65, 22);
+			spnAltura.setBounds(174, 298, 150, 22);
 			panel.add(spnAltura);
 			
 			JLabel lblNewLabel_2 = new JLabel("Lb.");
-			lblNewLabel_2.setBounds(151, 173, 56, 16);
+			lblNewLabel_2.setBounds(336, 257, 56, 16);
 			panel.add(lblNewLabel_2);
 			
 			JLabel lblCm = new JLabel("Cm.");
-			lblCm.setBounds(151, 232, 56, 16);
+			lblCm.setBounds(336, 301, 56, 16);
 			panel.add(lblCm);
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setForeground(new Color(0, 0, 102));
+			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 102)));
+			panel_1.setBackground(SystemColor.text);
+			panel_1.setBounds(12, 13, 499, 170);
+			panel.add(panel_1);
+			panel_1.setLayout(null);
+			{
+				JLabel lblNombre = new JLabel("Nombre:");
+				lblNombre.setBounds(12, 84, 56, 16);
+				panel_1.add(lblNombre);
+				lblNombre.setForeground(new Color(0, 153, 255));
+				lblNombre.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			}
+			{
+				JLabel lblNewLabel = new JLabel("C\u00E9dula: ");
+				lblNewLabel.setBounds(12, 32, 56, 16);
+				panel_1.add(lblNewLabel);
+				lblNewLabel.setForeground(new Color(0, 153, 255));
+				lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			}
 			{
 				JLabel lblSexo = new JLabel("Sexo:");
+				lblSexo.setBounds(294, 84, 85, 16);
+				panel_1.add(lblSexo);
 				lblSexo.setForeground(new Color(0, 153, 255));
 				lblSexo.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblSexo.setBounds(215, 73, 85, 16);
-				panel.add(lblSexo);
+			}
+			{
+				JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
+				lblDireccin.setBounds(294, 32, 85, 16);
+				panel_1.add(lblDireccin);
+				lblDireccin.setForeground(new Color(0, 153, 255));
+				lblDireccin.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			}
+			{
+				JLabel lblNewLabel_1 = new JLabel("");
+				lblNewLabel_1.setBounds(200, 39, 69, 90);
+				panel_1.add(lblNewLabel_1);
+				lblNewLabel_1.setIcon(new ImageIcon(RegPaciente.class.getResource("/imagen/icnRegPac.png")));
+			}
+			{
+				txtNombre = new JTextField();
+				txtNombre.setBounds(83, 81, 85, 22);
+				panel_1.add(txtNombre);
+				txtNombre.setColumns(10);
+			}
+			{
+				txtCedula = new JTextField();
+				txtCedula.setBounds(83, 29, 85, 22);
+				panel_1.add(txtCedula);
+				txtCedula.setColumns(10);
 			}
 			{
 				cbxSexo = new JComboBox();
+				cbxSexo.setBounds(381, 81, 106, 22);
+				panel_1.add(cbxSexo);
 				cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "F", "M"}));
-				cbxSexo.setBounds(286, 70, 113, 22);
-				panel.add(cbxSexo);
+			}
+			{
+				txtDireccion = new JTextField();
+				txtDireccion.setBounds(381, 29, 106, 22);
+				panel_1.add(txtDireccion);
+				txtDireccion.setColumns(10);
+			}
+			{
+				JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
+				lblTelfono.setBounds(12, 127, 85, 16);
+				panel_1.add(lblTelfono);
+				lblTelfono.setForeground(new Color(0, 153, 255));
+				lblTelfono.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			}
+			{
+				txtSeguro = new JTextField();
+				txtSeguro.setBounds(384, 124, 103, 22);
+				panel_1.add(txtSeguro);
+				txtSeguro.setColumns(10);
+			}
+			{
+				JLabel lblNumSegura = new JLabel("Num. Seguro:");
+				lblNumSegura.setBounds(294, 127, 87, 16);
+				panel_1.add(lblNumSegura);
+				lblNumSegura.setForeground(new Color(0, 153, 255));
+				lblNumSegura.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			}
+			{
+				txtTelefono = new JTextField();
+				txtTelefono.setBounds(83, 124, 85, 22);
+				panel_1.add(txtTelefono);
+				txtTelefono.setColumns(10);
+			}
+			{
+				JPanel panel_2 = new JPanel();
+				panel_2.setBackground(SystemColor.text);
+				panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panel_2.setBounds(12, 196, 499, 248);
+				panel.add(panel_2);
+				panel_2.setLayout(null);
+				
+				JLabel lblNewLabel_3 = new JLabel("");
+				lblNewLabel_3.setIcon(new ImageIcon(RegPaciente.class.getResource("/imagen/icnPacienteDeco.png")));
+				lblNewLabel_3.setBounds(399, 13, 56, 222);
+				panel_2.add(lblNewLabel_3);
 			}
 		}
 		setLocationRelativeTo(null);
