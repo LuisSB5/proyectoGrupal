@@ -66,7 +66,7 @@ public class TextHelp extends JFrame {
             textArea.setEditable(false);
             scrollPane.setViewportView(textArea);
 
-            // Carga automáticamente el contenido del archivo al iniciar la aplicación
+            
             cargarContenidoArchivo("src/myFile.txt");
         }
 
@@ -118,7 +118,7 @@ public class TextHelp extends JFrame {
                     eof = true;
             }
         } catch (IOException e) {
-            // Muestra un mensaje de error en el área de texto
+           
             textArea.setText("Error al cargar el archivo: " + e.getMessage());
         }
     }

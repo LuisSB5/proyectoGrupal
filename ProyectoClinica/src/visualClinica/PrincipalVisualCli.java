@@ -123,6 +123,18 @@ public class PrincipalVisualCli extends JFrame {
 				cita.setVisible(true);
 			}
 		});
+		
+		JMenuItem mntmRegsecretaria = new JMenuItem("Reg.Secretaria");
+		mntmRegsecretaria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegSecretaria secretaria= new RegSecretaria();
+				secretaria.setModal(true);
+				secretaria.setVisible(true);
+			}
+		});
+		mntmRegsecretaria.setForeground(new Color(51, 102, 204));
+		mntmRegsecretaria.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnPaciente.add(mntmRegsecretaria);
 		mntmRegvacunas.setForeground(new Color(51, 102, 204));
 		mntmRegvacunas.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnPaciente.add(mntmRegvacunas);
