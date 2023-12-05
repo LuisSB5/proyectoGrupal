@@ -115,8 +115,7 @@ public class ListarVacuna extends JDialog {
 	}
 	
 	private void loadVacunas () {
-		model.setRowCount(0);
-		   
+		model.setRowCount(0);	   
 		   row= new Object[model.getColumnCount()];
 		   for (Vacuna vac: Clinica.getInstance().getMisVacunas()) {
 			   row[0]=vac.getCodVacuna();

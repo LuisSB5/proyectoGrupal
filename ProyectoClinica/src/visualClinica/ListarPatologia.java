@@ -119,7 +119,6 @@ public class ListarPatologia extends JDialog {
 	
 	private void loadPatologias () {
 		model.setRowCount(0);
-		   
 		   row= new Object[model.getColumnCount()];
 		   for (Enfermedad enf: Clinica.getInstance().getMisEnfermedades()) {
 			   row[0]=enf.getCodEnfermedad();
