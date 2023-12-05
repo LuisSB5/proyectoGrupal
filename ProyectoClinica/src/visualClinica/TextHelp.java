@@ -42,9 +42,10 @@ public class TextHelp extends JFrame {
      * Create the dialog.
      */
     public TextHelp() {
+    	setResizable(false);
         setIconImage(Toolkit.getDefaultToolkit().getImage(TextHelp.class.getResource("/imagen/imgIC2.png")));
         setTitle("Info general");
-        setBounds(100, 100, 419, 378);
+        setBounds(100, 100, 1111, 592);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);

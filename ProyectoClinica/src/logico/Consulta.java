@@ -16,11 +16,11 @@ public class Consulta implements Serializable{
 	private Paciente paciente;
 	private Doctor doctor;
 	private  Vacuna vacuna;
-	private char status;
+	private String status;
 	
 	
 	public Consulta(String codeConsulta, Date fechaConsulta, String diagnostico, Enfermedad enfermedad,
-			Paciente paciente, Doctor doctor, Vacuna vacuna, char status) {
+			Paciente paciente, Doctor doctor, Vacuna vacuna, String status) {
 		super();
 		this.codeConsulta = codeConsulta;
 		this.fechaConsulta = fechaConsulta;
@@ -73,10 +73,10 @@ public class Consulta implements Serializable{
 	public void setVacuna(Vacuna vacuna) {
 		this.vacuna = vacuna;
 	}
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

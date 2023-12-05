@@ -16,13 +16,17 @@ import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 
 import logico.Clinica;
+import logico.Consulta;
 import logico.Doctor;
+import logico.Enfermedad;
+import logico.Paciente;
 import logico.Persona;
 import logico.Vacuna;
 
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -39,9 +43,11 @@ public class GenerarConsulta extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtConsultaCode;
 	private JTextField txtIdPaciente;
-	private JTextField txtEnfermedad;
 	private JTextField txtDiagnostico;
 	private JComboBox cbxVacunas;
+	private JComboBox cbxEnf;
+	private JSpinner spnFecha;
+	private JComboBox cbxEstadoEnfermedad;
 
 	/**
 	 * Launch the application.
@@ -128,26 +134,26 @@ public class GenerarConsulta extends JDialog {
 			cbxVacunas.setBounds(12, 188, 116, 22);
 			panel_1.add(cbxVacunas);
 			
-			txtEnfermedad = new JTextField();
-			txtEnfermedad.setColumns(10);
-			txtEnfermedad.setBounds(240, 126, 116, 22);
-			panel_1.add(txtEnfermedad);
-			
-			JComboBox cbxEstadoEnfermedad = new JComboBox();
+			cbxEstadoEnfermedad = new JComboBox();
 			cbxEstadoEnfermedad.setFont(new Font("Tahoma", Font.PLAIN, 10));
 			cbxEstadoEnfermedad.setModel(new DefaultComboBoxModel(new String[] {"<Estado de la enfermedad>", "Activa", "Controlada"}));
 			cbxEstadoEnfermedad.setBounds(239, 189, 117, 22);
 			panel_1.add(cbxEstadoEnfermedad);
 			
-			JSpinner spnFecha = new JSpinner();
+			spnFecha = new JSpinner();
 			spnFecha.setModel(new SpinnerDateModel(new Date(1701662400000L), null, null, Calendar.DAY_OF_YEAR));
 
 	        // Configurar el formato del editor para mostrar solo la fecha (día, mes y año)
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	        DateEditor dateEditor = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
-	        spnFecha.setEditor(dateEditor);
+	        DateEditor de_spnFecha = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
+	        spnFecha.setEditor(de_spnFecha);
 	        spnFecha.setBounds(240, 62, 116, 22);
 			panel_1.add(spnFecha);
+			
+			cbxEnf = new JComboBox();
+			cbxEnf.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+			cbxEnf.setBounds(240, 124, 116, 22);
+			panel_1.add(cbxEnf);
 			
 			
 			
@@ -170,6 +176,17 @@ public class GenerarConsulta extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Enfermedad enf = Clinica.getInstance().buscarEnfermedadByNomb(cbxEnf.getSelectedItem().toString());
+						Paciente paciente = Clinica.getInstance().buscarPacientePorID(txtIdPaciente.getText().toString());
+						Vacuna vac = Clinica.getInstance().buscarVacunaByNomb(cbxVacunas.getSelectedItem().toString());
+						Consulta cons = new Consulta(txtConsultaCode.getText().toString(), (Date) spnFecha.getValue(), txtDiagnostico.getText().toString(), enf, paciente, doc, vac, cbxEstadoEnfermedad.getSelectedItem().toString());
+						Clinica.getInstance().agregarConsulta(cons);
+						JOptionPane.showMessageDialog(null, "Consulta Registrada", "Información", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
+					}
+				});
 				okButton.setForeground(new Color(51, 51, 102));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				okButton.setBackground(SystemColor.text);
@@ -192,6 +209,7 @@ public class GenerarConsulta extends JDialog {
 			}
 		}
 		loadVacunasToComboBox();
+		loadEnfermedadesToComboBox();
 	}
 	private void loadVacunasToComboBox() {
 		cbxVacunas.removeAllItems();
@@ -205,13 +223,13 @@ public class GenerarConsulta extends JDialog {
 	}	
 	
 	private void loadEnfermedadesToComboBox() {
-		cbxVacunas.removeAllItems();
+		cbxEnf.removeAllItems();
 		String aux = null;
-		for(Vacuna vacuna : Clinica.getInstance().getMisVacunas()) {
-				aux = ""+vacuna.getNombre();
-				cbxVacunas.addItem(aux);
+		for(Enfermedad enf : Clinica.getInstance().getMisEnfermedades()) {
+				aux = ""+enf.getNombre();
+				cbxEnf.addItem(aux);
 			}
-		cbxVacunas.insertItemAt("<Seleccione>", 0);
-		cbxVacunas.setSelectedIndex(0);
+		cbxEnf.insertItemAt("<Seleccione>", 0);
+		cbxEnf.setSelectedIndex(0);
 	}	
 }

@@ -359,5 +359,39 @@ public class Clinica implements Serializable{
 	    
 	}
 	
+	public Enfermedad buscarEnfermedadByNomb(String nombre) {
+		
+		Enfermedad enf = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		 while (!encontrado && i < misEnfermedades.size()) {
+		        if (misEnfermedades.get(i).getNombre().equals(nombre)) {
+		        		enf = misEnfermedades.get(i);
+		        		encontrado = true;
+		        }
+		        i++;
+		    }
+		
+		return enf;
+	}
+	
+	public Vacuna buscarVacunaByNomb(String nombre) {
+		
+		Vacuna vac = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		 while (!encontrado && i < misVacunas.size()) {
+		        if (misVacunas.get(i).getNombre().equals(nombre)) {
+		        		vac = misVacunas.get(i);
+		        		encontrado = true;
+		        }
+		        i++;
+		    }
+		
+		return vac;
+	}
+	
 	
 }
