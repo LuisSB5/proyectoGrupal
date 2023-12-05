@@ -117,7 +117,7 @@ public class ListarCitasxID extends JDialog {
 			   row[2]=cit.getPaciente();
 			   row[3]=cit.getDoctor();
 			   row[4]=cit.getHora();
-			   model.addRow(row);
+			   model.addRow(row);//cambio
 		   }
 	}
 
