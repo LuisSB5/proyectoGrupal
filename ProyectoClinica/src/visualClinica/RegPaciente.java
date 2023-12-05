@@ -19,19 +19,22 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
+import javax.swing.SpinnerNumberModel;
 
 public class RegPaciente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
-	private JTextField txtFecha;
+	private JTextField txtCedula;
 	private JTextField txtNombre;
-	private JTextField txtPeso;
-	private JTextField txtAltura;
 	private JTextField txtSeguro;
-	private JTextField textField;
+	private JTextField txtCorreo;
 	private JTextField txtTelefono;
-	private JTextField textField_1;
+	private JTextField txtDireccion;
+	private JSpinner spnFecha;
 
 	/**
 	 * Launch the application.
@@ -65,18 +68,17 @@ public class RegPaciente extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("C\u00F3digo:");
+				JLabel lblNewLabel = new JLabel("C\u00E9dula: ");
 				lblNewLabel.setForeground(new Color(0, 153, 255));
 				lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblNewLabel.setBounds(12, 26, 56, 16);
 				panel.add(lblNewLabel);
 			}
 			{
-				txtCodigo = new JTextField();
-				txtCodigo.setEditable(false);
-				txtCodigo.setBounds(80, 26, 85, 22);
-				panel.add(txtCodigo);
-				txtCodigo.setColumns(10);
+				txtCedula = new JTextField();
+				txtCedula.setBounds(80, 26, 85, 22);
+				panel.add(txtCedula);
+				txtCedula.setColumns(10);
 			}
 			{
 				JLabel lblFecha = new JLabel("Fecha de nacimiento:");
@@ -84,12 +86,6 @@ public class RegPaciente extends JDialog {
 				lblFecha.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblFecha.setBounds(12, 122, 131, 16);
 				panel.add(lblFecha);
-			}
-			{
-				txtFecha = new JTextField();
-				txtFecha.setBounds(147, 119, 142, 22);
-				panel.add(txtFecha);
-				txtFecha.setColumns(10);
 			}
 			{
 				JLabel lblNombre = new JLabel("Nombre:");
@@ -112,23 +108,11 @@ public class RegPaciente extends JDialog {
 				panel.add(lblNombre_1);
 			}
 			{
-				txtPeso = new JTextField();
-				txtPeso.setColumns(10);
-				txtPeso.setBounds(80, 170, 85, 22);
-				panel.add(txtPeso);
-			}
-			{
 				JLabel lblAltura = new JLabel("Altura:");
 				lblAltura.setForeground(new Color(0, 153, 255));
 				lblAltura.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblAltura.setBounds(12, 232, 56, 16);
 				panel.add(lblAltura);
-			}
-			{
-				txtAltura = new JTextField();
-				txtAltura.setColumns(10);
-				txtAltura.setBounds(80, 229, 85, 22);
-				panel.add(txtAltura);
 			}
 			{
 				JLabel lblTipoDeSangre = new JLabel("Tipo de sangre:");
@@ -164,10 +148,10 @@ public class RegPaciente extends JDialog {
 				panel.add(lblCorreo);
 			}
 			{
-				textField = new JTextField();
-				textField.setColumns(10);
-				textField.setBounds(80, 286, 85, 22);
-				panel.add(textField);
+				txtCorreo = new JTextField();
+				txtCorreo.setColumns(10);
+				txtCorreo.setBounds(72, 286, 85, 22);
+				panel.add(txtCorreo);
 			}
 			{
 				JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
@@ -196,11 +180,37 @@ public class RegPaciente extends JDialog {
 				panel.add(lblDireccin);
 			}
 			{
-				textField_1 = new JTextField();
-				textField_1.setColumns(10);
-				textField_1.setBounds(187, 44, 113, 51);
-				panel.add(textField_1);
+				txtDireccion = new JTextField();
+				txtDireccion.setColumns(10);
+				txtDireccion.setBounds(187, 44, 113, 51);
+				panel.add(txtDireccion);
 			}
+			
+			spnFecha = new JSpinner();
+			spnFecha.setModel(new SpinnerDateModel(new Date(1698206400000L), null, null, Calendar.YEAR));
+			JSpinner.DateEditor de = new JSpinner.DateEditor(spnFecha, "mm/dd/yyyy");
+			spnFecha.setEditor(de);
+			spnFecha.setBounds(151, 119, 121, 22);
+			panel.add(spnFecha);
+			{
+				JSpinner spnPeso = new JSpinner();
+				spnPeso.setModel(new SpinnerNumberModel(new Float(0), null, null, new Float(1)));
+				spnPeso.setBounds(82, 170, 65, 22);
+				panel.add(spnPeso);
+			}
+			
+			JSpinner spnAltura = new JSpinner();
+			spnAltura.setModel(new SpinnerNumberModel(new Float(0), null, null, new Float(1)));
+			spnAltura.setBounds(82, 229, 65, 22);
+			panel.add(spnAltura);
+			
+			JLabel lblNewLabel_2 = new JLabel("Lb.");
+			lblNewLabel_2.setBounds(151, 173, 56, 16);
+			panel.add(lblNewLabel_2);
+			
+			JLabel lblCm = new JLabel("Cm.");
+			lblCm.setBounds(151, 232, 56, 16);
+			panel.add(lblCm);
 		}
 		setLocationRelativeTo(null);
 		{
@@ -209,12 +219,16 @@ public class RegPaciente extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Registrar");
-				okButton.setForeground(new Color(0, 153, 255));
-				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
+				btnRegistrar.setForeground(new Color(0, 153, 255));
+				btnRegistrar.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
@@ -230,5 +244,4 @@ public class RegPaciente extends JDialog {
 			}
 		}
 	}
-
 }
