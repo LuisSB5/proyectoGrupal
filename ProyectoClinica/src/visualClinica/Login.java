@@ -29,12 +29,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.border.TitledBorder;
 
 public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUser;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -88,9 +90,10 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
+		setTitle("Login");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/imagen/MnUsu.png")));
 		setBackground(new Color(0, 153, 255));
-		setBounds(100, 100, 423, 335);
+		setBounds(100, 100, 437, 420);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -100,41 +103,51 @@ public class Login extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
-			JLabel lblNewLabel = new JLabel("Usuario:");
-			lblNewLabel.setBounds(12, 24, 56, 16);
-			panel.add(lblNewLabel);
-			
 			txtUser = new JTextField();
-			txtUser.setBounds(12, 43, 256, 22);
+			txtUser.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			txtUser.setForeground(new Color(51, 153, 204));
+			txtUser.setBackground(SystemColor.text);
+			txtUser.setBounds(37, 197, 274, 28);
 			panel.add(txtUser);
 			txtUser.setColumns(10);
 			
-			JLabel lblNewLabel_1 = new JLabel("Contrasena:");
-			lblNewLabel_1.setBounds(12, 111, 126, 16);
-			panel.add(lblNewLabel_1);
+			JLabel lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/imagen/loginthousendthtry.png")));
+			lblNewLabel_2.setBounds(-33, 0, 454, 385);
+			panel.add(lblNewLabel_2);
 			
-			txtPassword = new JTextField();
-			txtPassword.setColumns(10);
-			txtPassword.setBounds(12, 129, 256, 22);
+			txtPassword = new JPasswordField();
+			txtPassword.setForeground(new Color(0, 153, 204));
+			txtPassword.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
+			txtPassword.setBackground(SystemColor.text);
+			txtPassword.setBounds(37, 297, 274, 25);
 			panel.add(txtPassword);
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			buttonPane.setForeground(new Color(0, 153, 204));
+			buttonPane.setBackground(SystemColor.text);
+			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Iniciar sesion");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(Clinica.getInstance().confirmLogin(txtUser.getText(),txtPassword.getText())){
-							PrincipalVisualCli frame = new PrincipalVisualCli();
-							dispose();
-							frame.setVisible(true);
-						};
-					}
+						try {
+				            if (Clinica.getInstance().confirmLogin(txtUser.getText(), new String(txtPassword.getPassword()))) {
+				                PrincipalVisualCli frame = new PrincipalVisualCli();
+				                dispose();
+				                frame.setVisible(true);
+				            } else {
+				                JOptionPane.showMessageDialog(Login.this, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+				            }
+				        } catch (Exception ex) {
+				            JOptionPane.showMessageDialog(Login.this, "Ocurrió un error al iniciar sesión: " + ex.getMessage(), "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+				        }
+				    }
 				});
-				okButton.setForeground(new Color(0, 102, 204));
+				okButton.setForeground(new Color(0, 153, 204));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				okButton.setBackground(SystemColor.text);
 				okButton.setActionCommand("OK");
@@ -149,7 +162,7 @@ public class Login extends JDialog {
 						dispose();
 					}
 				});
-				cancelButton.setForeground(new Color(0, 102, 204));
+				cancelButton.setForeground(new Color(0, 153, 204));
 				cancelButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
