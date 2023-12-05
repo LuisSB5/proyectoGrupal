@@ -30,6 +30,7 @@ import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.border.TitledBorder;
 
 public class Login extends JDialog {
 
@@ -126,7 +127,7 @@ public class Login extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setForeground(new Color(0, 153, 204));
 			buttonPane.setBackground(SystemColor.text);
-			buttonPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
