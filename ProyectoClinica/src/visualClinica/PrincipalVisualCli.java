@@ -14,6 +14,7 @@ import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 
 import logico.Clinica;
+import logico.Doctor;
 
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -179,9 +180,12 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem menuItem_1 = new JMenuItem("Nueva Consulta");
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GenerarConsulta consulta= new GenerarConsulta();
-				consulta.setModal(true);
-				consulta.setVisible(true);
+				if(Clinica.getLoginUser().getTipo().equalsIgnoreCase("Doctor") ) {
+					Doctor doc = Clinica.getInstance().buscarDoctorByCedula(Clinica.getLoginUser().getPersona().getCedula());
+					GenerarConsulta consulta= new GenerarConsulta(doc);
+					consulta.setModal(true);
+					consulta.setVisible(true);
+				}
 			}
 		});
 		menuItem_1.setForeground(new Color(51, 102, 204));

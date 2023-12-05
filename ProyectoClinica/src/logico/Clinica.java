@@ -3,6 +3,7 @@ package logico;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Clinica implements Serializable{
 
 	/**
@@ -20,6 +21,9 @@ public class Clinica implements Serializable{
 	private static User loginUser;
 	private static int codPatologia;
 	private static int codVacuna;
+	private static int codConsulta;
+	private static int codCita;
+	private static int codHistorial;
 	
 	private static Clinica clinica=null;
 	
@@ -137,8 +141,39 @@ public class Clinica implements Serializable{
 	public static void setCodVacuna(int codVacuna) {
 		Clinica.codVacuna = codVacuna;
 	}
+	
+	public static int getCodConsulta() {
+		return codConsulta;
+	}
+
+	public static void setCodConsulta(int codConsulta) {
+		Clinica.codConsulta = codConsulta;
+	}
+
+	public static int getCodCita() {
+		return codCita;
+	}
+
+	public static void setCodCita(int codCita) {
+		Clinica.codCita = codCita;
+	}
+	
+	public static int getCodHistorial() {
+		return codHistorial;
+	}
+
+	public static void setCodHistorial(int codHistorial) {
+		Clinica.codHistorial = codHistorial;
+	}
 
 	
+	public static int getGeneradorCodigoCita() {
+		return codCita++;
+	}
+	
+	public static int getGeneradorCodigoConsulta() {
+		return codConsulta;
+	}
 	
 	public static int getGeneradorCodigoPatologia() {
 		return codPatologia++;
@@ -146,6 +181,9 @@ public class Clinica implements Serializable{
 	
 	public static int getGeneradorCodigoVacuna() {
 		return codVacuna++;
+	}
+	public static int getGeneradorCodigoHistorial() {
+		return codHistorial++;
 	}
 	
 	public void agregarPersona(Persona persona) {
@@ -281,6 +319,24 @@ public class Clinica implements Serializable{
 			}
 		}
 		return login;
+	}
+
+	public Doctor buscarDoctorByCedula(String cedula) {
+		Doctor aux = null;
+	    boolean encontrado = false;
+	    int i = 0;
+	    
+	    while (!encontrado && i < misPersonas.size()) {
+	        if (misPersonas.get(i) instanceof Doctor) {
+	            Doctor doctor = (Doctor) misPersonas.get(i);
+	            if (doctor.getCedula().equals(cedula)) {
+	                aux = doctor;
+	                encontrado = true;
+	            }
+	        }
+	        i++;
+	    }
+		return aux;
 	}
 	
 	

@@ -15,6 +15,9 @@ import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
+
+import logico.Clinica;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -74,6 +77,7 @@ public class GenerarCita extends JDialog {
 				txtCita.setEditable(false);
 				txtCita.setBounds(64, 34, 116, 22);
 				panel.add(txtCita);
+				txtCita.setText("CITA-"+Clinica.getInstance().getGeneradorCodigoCita());
 				txtCita.setColumns(10);
 			}
 			{

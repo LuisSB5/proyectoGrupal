@@ -7,13 +7,22 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logico.Clinica;
+import logico.HistoriaClinica;
+import logico.Paciente;
+import logico.Persona;
+
 import java.awt.Toolkit;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -24,6 +33,7 @@ import javax.swing.SpinnerDateModel;
 import java.util.Date;
 import java.util.Calendar;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JSpinner.DateEditor;
 
 public class RegPaciente extends JDialog {
 
@@ -35,6 +45,10 @@ public class RegPaciente extends JDialog {
 	private JTextField txtTelefono;
 	private JTextField txtDireccion;
 	private JSpinner spnFecha;
+	private JComboBox cbxSexo;
+	private JSpinner spnPeso;
+	private JSpinner spnAltura;
+	private JComboBox cbxTipoSangre;
 
 	/**
 	 * Launch the application.
@@ -56,7 +70,7 @@ public class RegPaciente extends JDialog {
 		setResizable(false);
 		setTitle("Registrar paciente");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegPaciente.class.getResource("/imagen/MnPa.png")));
-		setBounds(100, 100, 442, 437);
+		setBounds(100, 100, 560, 543);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,7 +136,7 @@ public class RegPaciente extends JDialog {
 				panel.add(lblTipoDeSangre);
 			}
 			{
-				JComboBox cbxTipoSangre = new JComboBox();
+				cbxTipoSangre = new JComboBox();
 				cbxTipoSangre.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "A+\t", "A-\t", "B+\t", "B-\t", "AB+\t", "AB-", "O+\t", "O-"}));
 				cbxTipoSangre.setBounds(297, 170, 117, 22);
 				panel.add(cbxTipoSangre);
@@ -169,7 +183,7 @@ public class RegPaciente extends JDialog {
 			{
 				JLabel lblNewLabel_1 = new JLabel("");
 				lblNewLabel_1.setIcon(new ImageIcon(RegPaciente.class.getResource("/imagen/icnRegPac.png")));
-				lblNewLabel_1.setBounds(324, 48, 90, 90);
+				lblNewLabel_1.setBounds(424, 23, 90, 90);
 				panel.add(lblNewLabel_1);
 			}
 			{
@@ -182,25 +196,28 @@ public class RegPaciente extends JDialog {
 			{
 				txtDireccion = new JTextField();
 				txtDireccion.setColumns(10);
-				txtDireccion.setBounds(187, 44, 113, 51);
+				txtDireccion.setBounds(286, 23, 113, 22);
 				panel.add(txtDireccion);
 			}
 			
-			spnFecha = new JSpinner();
-			spnFecha.setModel(new SpinnerDateModel(new Date(1698206400000L), null, null, Calendar.YEAR));
-			JSpinner.DateEditor de = new JSpinner.DateEditor(spnFecha, "mm/dd/yyyy");
-			spnFecha.setEditor(de);
+			JSpinner spnFecha = new JSpinner();
+			spnFecha.setModel(new SpinnerDateModel(new Date(1701662400000L), null, null, Calendar.DAY_OF_YEAR));
+
+	        // Configurar el formato del editor para mostrar solo la fecha (día, mes y año)
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	        DateEditor dateEditor = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
+	        spnFecha.setEditor(dateEditor);
 			spnFecha.setBounds(151, 119, 121, 22);
 			panel.add(spnFecha);
 			{
-				JSpinner spnPeso = new JSpinner();
-				spnPeso.setModel(new SpinnerNumberModel(new Float(0), null, null, new Float(1)));
+				spnPeso = new JSpinner();
+				spnPeso.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 				spnPeso.setBounds(82, 170, 65, 22);
 				panel.add(spnPeso);
 			}
 			
-			JSpinner spnAltura = new JSpinner();
-			spnAltura.setModel(new SpinnerNumberModel(new Float(0), null, null, new Float(1)));
+			spnAltura = new JSpinner();
+			spnAltura.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnAltura.setBounds(82, 229, 65, 22);
 			panel.add(spnAltura);
 			
@@ -211,6 +228,19 @@ public class RegPaciente extends JDialog {
 			JLabel lblCm = new JLabel("Cm.");
 			lblCm.setBounds(151, 232, 56, 16);
 			panel.add(lblCm);
+			{
+				JLabel lblSexo = new JLabel("Sexo:");
+				lblSexo.setForeground(new Color(0, 153, 255));
+				lblSexo.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				lblSexo.setBounds(215, 73, 85, 16);
+				panel.add(lblSexo);
+			}
+			{
+				cbxSexo = new JComboBox();
+				cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "F", "M"}));
+				cbxSexo.setBounds(286, 70, 113, 22);
+				panel.add(cbxSexo);
+			}
 		}
 		setLocationRelativeTo(null);
 		{
@@ -222,6 +252,11 @@ public class RegPaciente extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						HistoriaClinica hist = new HistoriaClinica (txtCedula.getText().toString());
+						Persona persona = new Paciente(txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), txtSeguro.getText().toString(), hist, new Integer(spnPeso.getValue().toString()), new Integer(spnAltura.getValue().toString()), cbxTipoSangre.getSelectedItem().toString(),((Date) spnFecha.getValue()), null);
+						Clinica.getInstance().agregarPersona(persona);
+						JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
 					}
 				});
 				btnRegistrar.setForeground(new Color(0, 153, 255));
@@ -245,3 +280,4 @@ public class RegPaciente extends JDialog {
 		}
 	}
 }
+
