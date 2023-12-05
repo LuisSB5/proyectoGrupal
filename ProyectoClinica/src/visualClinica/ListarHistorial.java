@@ -63,7 +63,7 @@ public class ListarHistorial extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String [] header = {"Cedula","Vacunas", "Enfermedades"};
+					String [] header = {"Nombre","Vacunas", "Enfermedades","Último Peso",};
 					table = new JTable();
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));

@@ -230,7 +230,7 @@ public class Clinica implements Serializable{
 		
 		return aux;
 	}
-	
+	/*
 	public Doctor buscarDoctorByUser(String codigo) {
 	    Doctor aux = null;
 	    boolean encontrado = false;
@@ -339,20 +339,25 @@ public class Clinica implements Serializable{
 		return aux;
 	}
 	
-	public Paciente buscarPacientePorID(String id) {
-	    for (Persona persona : misPersonas) {
-	        if (persona instanceof Paciente) {
-	            Paciente paciente = (Paciente) persona;
-	            if (paciente.getCedula().equals(id)) {
-	                return paciente;
+	public Paciente buscarPacientePorID(String cedula) {
+	    Paciente aux=null;
+	    boolean encontrado= false;
+	    int i = 0;
+	    
+	    while (!encontrado && i < misPersonas.size()) {
+	        if (misPersonas.get(i) instanceof Paciente) {
+	            Paciente paciente = (Paciente) misPersonas.get(i);
+	            if (paciente.getCedula().equals(cedula)) {
+	                aux = paciente;
+	                encontrado = true;
 	            }
 	        }
+	        i++;
 	    }
-	    return null; 
+		return aux;
+	     
+	    
 	}
-
 	
-	
-
 	
 }

@@ -74,21 +74,26 @@ public class ListarHistorialxID extends JDialog {
 			}
 			{
 				btnNewButton = new JButton("Buscar");
-	            btnNewButton.addActionListener(new ActionListener() {
-	                public void actionPerformed(ActionEvent e) {
-	                    String idPaciente = txtNombrePaciente.getText();
-	                    Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						 try {
+					            String idPaciente = txtNombrePaciente.getText().toString();
+					            Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
 
-	                    if (paciente != null) {
-	                        okButton.setEnabled(true);
-	                    } else {
-	                        okButton.setEnabled(false);
-	                    }
-	                }
-	            });
-	            btnNewButton.setBackground(SystemColor.activeCaption);
-	            btnNewButton.setBounds(283, 69, 97, 25);
-	            panel.add(btnNewButton);
+					            if (paciente != null) {
+					                okButton.setEnabled(true);
+					            } else {
+					                okButton.setEnabled(false);
+					                throw new IllegalArgumentException("Paciente no encontrado.");
+					            }
+					        } catch (IllegalArgumentException ex) {
+					            System.out.println(ex.getMessage());
+					        }
+					    }
+				});
+				btnNewButton.setBackground(SystemColor.activeCaption);
+				btnNewButton.setBounds(283, 69, 97, 25);
+				panel.add(btnNewButton);
 			}
 		}
 		{
