@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logico.Clinica;
+import logico.Paciente;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -21,6 +25,8 @@ public class ListarHistorialxID extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtNombrePaciente;
+	private JButton okButton;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -67,10 +73,22 @@ public class ListarHistorialxID extends JDialog {
 				txtNombrePaciente.setColumns(10);
 			}
 			{
-				JButton btnNewButton = new JButton("Buscar");
-				btnNewButton.setBackground(SystemColor.activeCaption);
-				btnNewButton.setBounds(283, 69, 97, 25);
-				panel.add(btnNewButton);
+				btnNewButton = new JButton("Buscar");
+	            btnNewButton.addActionListener(new ActionListener() {
+	                public void actionPerformed(ActionEvent e) {
+	                    String idPaciente = txtNombrePaciente.getText();
+	                    Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
+
+	                    if (paciente != null) {
+	                        okButton.setEnabled(true);
+	                    } else {
+	                        okButton.setEnabled(false);
+	                    }
+	                }
+	            });
+	            btnNewButton.setBackground(SystemColor.activeCaption);
+	            btnNewButton.setBounds(283, 69, 97, 25);
+	            panel.add(btnNewButton);
 			}
 		}
 		{
@@ -79,7 +97,8 @@ public class ListarHistorialxID extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Listar");
+				okButton = new JButton("Listar");
+				okButton.setEnabled(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ListarHistorial list= new ListarHistorial();

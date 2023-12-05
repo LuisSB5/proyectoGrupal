@@ -339,6 +339,19 @@ public class Clinica implements Serializable{
 		return aux;
 	}
 	
+	public Paciente buscarPacientePorID(String id) {
+	    for (Persona persona : misPersonas) {
+	        if (persona instanceof Paciente) {
+	            Paciente paciente = (Paciente) persona;
+	            if (paciente.getCedula().equals(id)) {
+	                return paciente;
+	            }
+	        }
+	    }
+	    return null; 
+	}
+
+	
 	
 
 	
