@@ -61,8 +61,8 @@ public class TextHelp extends JFrame {
             panel.add(scrollPane, BorderLayout.CENTER);
 
             textArea = new JTextArea();
-            textArea.setForeground(new Color(51, 153, 204));
-            textArea.setFont(new Font("Script MT Bold", Font.PLAIN, 20));
+            textArea.setForeground(new Color(0, 0, 0));
+            textArea.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
             textArea.setEditable(false);
             scrollPane.setViewportView(textArea);
 
