@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ import java.awt.Toolkit;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import java.awt.Color;
+import java.time.LocalTime;
 import javax.swing.border.TitledBorder;
 
 import logico.Cita;
@@ -42,11 +44,11 @@ public class GenerarCita extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCita;
-	private JTextField txtHora;
 	private JTextField txtPaciente;
 	private JComboBox<String> cbxDoctor;
 	private JComboBox<String> cbxEnfermedad;
 	private JSpinner spnFecha;
+	private JSpinner spnHora;
 
 	/**
 	 * Launch the application.
@@ -107,12 +109,6 @@ public class GenerarCita extends JDialog {
 				panel.add(lblHora);
 			}
 			{
-				txtHora = new JTextField();
-				txtHora.setColumns(10);
-				txtHora.setBounds(71, 169, 109, 22);
-				panel.add(txtHora);
-			}
-			{
 				JLabel lblPaciente = new JLabel("Paciente:");
 				lblPaciente.setForeground(new Color(0, 0, 128));
 				lblPaciente.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
@@ -157,8 +153,19 @@ public class GenerarCita extends JDialog {
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				DateEditor de_spnFecha = new JSpinner.DateEditor(spnFecha, dateFormat.toPattern());
 				spnFecha.setEditor(de_spnFecha);
-				spnFecha.setBounds(71, 106, 109, 20);
+				spnFecha.setBounds(71, 105, 109, 22);
 			    panel.add(spnFecha);
+			}
+			{
+				Date date = new Date();
+				SpinnerDateModel sm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
+				
+				spnHora = new JSpinner(sm);
+				JSpinner.DateEditor de = new JSpinner.DateEditor(spnHora, "hh:mm a");
+				de.getTextField().setEditable(false);
+				spnHora.setEditor(de);
+				spnHora.setBounds(71, 171, 109, 20);
+				panel.add(spnHora);
 			}
 		}
 		{
@@ -172,8 +179,10 @@ public class GenerarCita extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							Paciente paciente = Clinica.getInstance().buscarPacientePorID(txtPaciente.getText().toString());
-							Enfermedad enfermedad = Clinica.getInstance().buscarEnfermedadByNomb(cbxEnfermedad.getSelectedItem().toString());
-							//Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, secre.getDoctorAsignado(), enfermedad);
+							Enfermedad enfermedad = Clinica.getInstance().buscarEnfermedadByNomb(cbxEnfermedad.getSelectedItem().toString()); 
+							//Cita cita = new Cita(codCita, fecha, paciente, doctor, hora)
+							Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, secre.getDoctorAsignado(), (LocalTime) spnHora.getValue());
+							//Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, secre.getDoctorAsignado(), spnHora.getValue());
 							Clinica.getInstance().agregarCita(cita);
 							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
