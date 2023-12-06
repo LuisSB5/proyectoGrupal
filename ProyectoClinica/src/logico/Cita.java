@@ -25,6 +25,8 @@ public class Cita implements Serializable{
 		this.hora = hora;
 	}
 
+	
+
 	public String getCodCita() {
 		return codCita;
 	}
@@ -64,6 +66,11 @@ public class Cita implements Serializable{
 	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
+
+	
+
+	
+
 	
 	
 	
