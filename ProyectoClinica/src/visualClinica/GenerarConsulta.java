@@ -221,7 +221,7 @@ public class GenerarConsulta extends JDialog {
 		cbxVacunas.insertItemAt("<Seleccione>", 0);
 		cbxVacunas.setSelectedIndex(0);
 	}	
-	
+	//MC
 	private void loadEnfermedadesToComboBox() {
 		cbxEnf.removeAllItems();
 		String aux = null;
