@@ -26,6 +26,7 @@ import logico.Clinica;
 import logico.Consulta;
 import logico.Doctor;
 import logico.Enfermedad;
+import logico.HistoriaClinica;
 import logico.Paciente;
 import logico.Persona;
 import logico.Secretaria;
@@ -45,10 +46,10 @@ public class GenerarCita extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCita;
 	private JTextField txtPaciente;
-	private JComboBox<String> cbxDoctor;
-	private JComboBox<String> cbxEnfermedad;
+	private JComboBox<String> cbxEnf;
 	private JSpinner spnFecha;
 	private JSpinner spnHora;
+	private JComboBox cbxDoc;
 
 	/**
 	 * Launch the application.
@@ -136,16 +137,10 @@ public class GenerarCita extends JDialog {
 				panel.add(lblDoctor);
 			}
 			{
-				cbxEnfermedad = new JComboBox();
-				cbxEnfermedad.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Hipertensi\u00F3n", "Diabetes", "Neuronal", "Enfermedad Gastroinstetinal", "Enfermedad Ginecol\u00F3gica ", "Enfermedad Hestomal\u00F3gica", "Enfermedad Oncol\u00F3gica"}));
-				cbxEnfermedad.setBounds(272, 104, 111, 22);
-				panel.add(cbxEnfermedad);
-			}
-			{
-				cbxDoctor = new JComboBox();
-				cbxDoctor.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
-				cbxDoctor.setBounds(272, 170, 109, 22);
-				panel.add(cbxDoctor);
+				cbxEnf = new JComboBox();
+				cbxEnf.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Hipertensi\u00F3n", "Diabetes", "Neuronal", "Enfermedad Gastroinstetinal", "Enfermedad Ginecol\u00F3gica ", "Enfermedad Hestomal\u00F3gica", "Enfermedad Oncol\u00F3gica"}));
+				cbxEnf.setBounds(272, 104, 111, 22);
+				panel.add(cbxEnf);
 			}
 			{
 				spnFecha = new JSpinner();
@@ -167,6 +162,11 @@ public class GenerarCita extends JDialog {
 				spnHora.setBounds(71, 171, 109, 20);
 				panel.add(spnHora);
 			}
+			
+			cbxDoc = new JComboBox();
+			cbxDoc.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", ""}));
+			cbxDoc.setBounds(272, 169, 109, 22);
+			panel.add(cbxDoc);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -179,11 +179,14 @@ public class GenerarCita extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							Paciente paciente = Clinica.getInstance().buscarPacientePorID(txtPaciente.getText().toString());
-							Enfermedad enfermedad = Clinica.getInstance().buscarEnfermedadByNomb(cbxEnfermedad.getSelectedItem().toString()); 
+							Enfermedad enfermedad = Clinica.getInstance().buscarEnfermedadByNomb(cbxEnf.getSelectedItem().toString()); 
+							Doctor doc = Clinica.getInstance().buscarDoctorByNomb(cbxDoc.getSelectedItem().toString());
+							HistoriaClinica hist = Clinica.getInstance().buscarHistorialByCedulaPaciente(txtPaciente.getText().toString());
 							//Cita cita = new Cita(codCita, fecha, paciente, doctor, hora)
-							Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, secre.getDoctorAsignado(), (LocalTime) spnHora.getValue());
+							Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, doc, (LocalTime) spnHora.getValue());
 							//Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, secre.getDoctorAsignado(), spnHora.getValue());
 							Clinica.getInstance().agregarCita(cita);
+							hist.agregarEnfermedad(enfermedad);
 							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						} catch (Exception e2) {
@@ -214,5 +217,30 @@ public class GenerarCita extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadDoctoresToComboBox();
 	}
+	
+	private void loadDoctoresToComboBox() {
+		cbxDoc.removeAllItems();
+		String aux = null;
+		for(Persona persona : Clinica.getInstance().getMisPersonas()) {
+			if(persona instanceof Doctor) {
+				aux = ""+persona.getNombre();
+				cbxDoc.addItem(aux);
+			}		
+		}
+		cbxDoc.insertItemAt("<Seleccione>", 0);
+		cbxDoc.setSelectedIndex(0);
+	}
+	
+	private void loadEnfermedadesToComboBox() {
+		cbxEnf.removeAllItems();
+		String aux = null;
+		for(Enfermedad enf : Clinica.getInstance().getMisEnfermedades()) {
+				aux = ""+enf.getNombre();
+				cbxEnf.addItem(aux);
+			}
+		cbxEnf.insertItemAt("<Seleccione>", 0);
+		cbxEnf.setSelectedIndex(0);
+	}	
 }

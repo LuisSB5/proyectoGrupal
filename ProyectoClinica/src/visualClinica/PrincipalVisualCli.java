@@ -93,7 +93,7 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem mntmListarCitas = new JMenuItem("Listar Citas");
 		mntmListarCitas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarCitas list= new ListarCitas();
+				ListarCitasxID list= new ListarCitasxID();
 				list.setModal(true);
 				list.setVisible(true);
 				

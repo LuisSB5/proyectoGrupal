@@ -56,5 +56,13 @@ public class HistoriaClinica implements Serializable{
 	}
 	
 	
-
+	public void agregarVacuna(Vacuna vacuna) {
+		misVacunas.add(vacuna);
+	}
+	public void agregarEnfermedad(Enfermedad enf) {
+		misEnfermedades.add(enf);
+	}
+	public void agregarConsulta(Consulta cons) {
+		misConsultas.add(cons);
+	}
 }

@@ -27,6 +27,7 @@ import java.awt.Toolkit;
 import javax.swing.UIManager;
 import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JSpinner;
 
 public class RegSecretaria extends JDialog {
 
@@ -38,9 +39,9 @@ public class RegSecretaria extends JDialog {
 	private JTextField txtUser;
 	private JTextField txtPassword;
 	private JTextField txtPasswordC;
-	private JComboBox cbxDoc;
 	private JTextField txtCorreo;
 	private JTextField txtSexo;
+	private JSpinner spnAgno;
 
 	/**
 	 * Launch the application.
@@ -65,7 +66,7 @@ public class RegSecretaria extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegSecretaria.class.getResource("/imagen/regSecre.png")));
 		setResizable(false);
 		setBackground(SystemColor.text);
-		setBounds(100, 100, 534, 475);
+		setBounds(100, 100, 534, 435);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -80,7 +81,7 @@ public class RegSecretaria extends JDialog {
 			JPanel panel_general = new JPanel();
 			panel_general.setBackground(new Color(216, 191, 216));
 			panel_general.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion General", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_general.setBounds(12, 13, 492, 219);
+			panel_general.setBounds(12, 13, 492, 184);
 			panel.add(panel_general);
 			panel_general.setLayout(null);
 			
@@ -129,15 +130,10 @@ public class RegSecretaria extends JDialog {
 			panel_general.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
-			JLabel lblNewLabel_5 = new JLabel("Doctor a asignar:");
+			JLabel lblNewLabel_5 = new JLabel("Edad:");
 			lblNewLabel_5.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-			lblNewLabel_5.setBounds(197, 145, 117, 16);
+			lblNewLabel_5.setBounds(162, 148, 39, 16);
 			panel_general.add(lblNewLabel_5);
-			
-			cbxDoc = new JComboBox();
-			cbxDoc.setModel(new DefaultComboBoxModel(new String[] {"<Registros>"}));
-			cbxDoc.setBounds(145, 174, 201, 22);
-			panel_general.add(cbxDoc);
 			
 			JLabel lblCorreo = new JLabel("Correo Electronico:");
 			lblCorreo.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
@@ -156,10 +152,14 @@ public class RegSecretaria extends JDialog {
 			panel_general.add(txtSexo);
 			txtSexo.setColumns(10);
 			
+			spnAgno = new JSpinner();
+			spnAgno.setBounds(213, 145, 66, 22);
+			panel_general.add(spnAgno);
+			
 			JPanel panel_Usuario = new JPanel();
 			panel_Usuario.setBackground(new Color(216, 191, 216));
 			panel_Usuario.setBorder(new TitledBorder(null, "Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_Usuario.setBounds(12, 245, 492, 133);
+			panel_Usuario.setBounds(12, 210, 492, 133);
 			panel.add(panel_Usuario);
 			panel_Usuario.setLayout(null);
 			
@@ -204,8 +204,7 @@ public class RegSecretaria extends JDialog {
 						try{
 							if(checkUser() == true) {
 								if(checkPasswords()==true) {
-									Doctor doc = Clinica.getInstance().buscarDoctorByNomb(cbxDoc.getSelectedItem().toString());
-									Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), txtSexo.getText().toString().charAt(0), txtCorreo.getText().toString(), doc);
+									Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), txtSexo.getText().toString().charAt(0), txtCorreo.getText().toString(), new Integer(spnAgno.getValue().toString()));
 									Clinica.getInstance().agregarPersona(persona);
 									User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Secretaria", persona);
 									Clinica.getInstance().regUser(user);
@@ -247,21 +246,6 @@ public class RegSecretaria extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		loadDoctoresToComboBox();
-	}
-	
-	private void loadDoctoresToComboBox() {
-		cbxDoc.removeAllItems();
-		String aux = null;
-		for(Persona persona : Clinica.getInstance().getMisPersonas()) {
-			if(persona instanceof Doctor) {
-				aux = persona.getNombre();
-				cbxDoc.addItem(aux);
-			}
-		}
-		
-		cbxDoc.insertItemAt("<Registros>", 0);
-		cbxDoc.setSelectedIndex(0);
 	}
 	
 	

@@ -424,4 +424,21 @@ public class Clinica implements Serializable{
 		
 		return doc;
 	}
+	
+	public HistoriaClinica buscarHistorialByCedulaPaciente(String cedula) {
+		
+		HistoriaClinica hist = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i<misHistoriales.size()) {
+			if(misHistoriales.get(i).getCedPaciente().equalsIgnoreCase(cedula)) {
+				hist = misHistoriales.get(i);
+			}
+		}
+		
+		return hist;
+		
+		
+	}
 }
