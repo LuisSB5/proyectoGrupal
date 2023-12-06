@@ -408,6 +408,7 @@ public class Clinica implements Serializable{
 		return secre;
 	}
 	
+	//Prueba
 	public Doctor buscarDoctorByNomb (String nombre) {
 		Doctor doc = null;
 		boolean encontrado = false;

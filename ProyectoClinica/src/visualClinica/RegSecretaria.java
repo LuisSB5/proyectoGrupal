@@ -45,6 +45,8 @@ public class RegSecretaria extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+	
+	//Prueba
 	public static void main(String[] args) {
 		try {
 			RegSecretaria dialog = new RegSecretaria();
