@@ -109,7 +109,7 @@ public class GenerarCita extends JDialog {
 				panel.add(lblHora);
 			}
 			{
-				JLabel lblPaciente = new JLabel("Paciente:");
+				JLabel lblPaciente = new JLabel("Id Paciente:");
 				lblPaciente.setForeground(new Color(0, 0, 128));
 				lblPaciente.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblPaciente.setBounds(192, 37, 74, 16);

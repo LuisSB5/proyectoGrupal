@@ -21,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ListarCitasxID extends JDialog {
 
@@ -28,6 +30,7 @@ public class ListarCitasxID extends JDialog {
 	private JTable table;
 	private DefaultTableModel model;
 	private Object[] row;
+	private JTextField txtIdDoc;
 
 	/**
 	 * Launch the application.
@@ -50,7 +53,7 @@ public class ListarCitasxID extends JDialog {
 		setBackground(SystemColor.text);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarCitasxID.class.getResource("/imagen/icnListarCitas.png")));
 		setResizable(false);
-		setBounds(100, 100, 386, 321);
+		setBounds(100, 100, 413, 542);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -59,13 +62,14 @@ public class ListarCitasxID extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
+			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				panel.add(scrollPane, BorderLayout.CENTER);
+				scrollPane.setBounds(0, 90, 403, 372);
+				panel.add(scrollPane);
 				{
 					model = new DefaultTableModel();
-					String [] header = {"Paciente","Dï¿½a", "Status"};
+					String [] header = {"Paciente","Día", "Status"};
 					table = new JTable();
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -74,6 +78,28 @@ public class ListarCitasxID extends JDialog {
 					scrollPane.setViewportView(table);
 				}
 			}
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBackground(SystemColor.inactiveCaption);
+			panel_1.setBounds(0, 0, 403, 92);
+			panel.add(panel_1);
+			panel_1.setLayout(null);
+			
+			JLabel lblNewLabel = new JLabel("ID Doctor:");
+			lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			lblNewLabel.setBounds(58, 35, 83, 16);
+			panel_1.add(lblNewLabel);
+			
+			txtIdDoc = new JTextField();
+			txtIdDoc.setBounds(130, 32, 116, 22);
+			panel_1.add(txtIdDoc);
+			txtIdDoc.setColumns(10);
+			
+			JButton btnBuscar = new JButton("Buscar");
+			btnBuscar.setForeground(new Color(0, 153, 204));
+			btnBuscar.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			btnBuscar.setBounds(258, 31, 97, 25);
+			panel_1.add(btnBuscar);
 		}
 		setLocationRelativeTo(null);
 		{
@@ -120,5 +146,4 @@ public class ListarCitasxID extends JDialog {
 			   model.addRow(row);//cambio
 		   }
 	}
-
 }
