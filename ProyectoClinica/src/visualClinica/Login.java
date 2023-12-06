@@ -93,13 +93,14 @@ public class Login extends JDialog {
 		setTitle("Login");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/imagen/MnUsu.png")));
 		setBackground(new Color(0, 153, 255));
-		setBounds(100, 100, 417, 420);
+		setBounds(100, 100, 494, 470);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(SystemColor.text);
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
@@ -107,21 +108,41 @@ public class Login extends JDialog {
 			txtUser.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 			txtUser.setForeground(new Color(51, 153, 204));
 			txtUser.setBackground(SystemColor.text);
-			txtUser.setBounds(23, 201, 288, 28);
+			txtUser.setBounds(12, 157, 134, 28);
 			panel.add(txtUser);
 			txtUser.setColumns(10);
 			
 			JLabel lblNewLabel_2 = new JLabel("");
-			lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/imagen/loginthousendthtry.png")));
-			lblNewLabel_2.setBounds(-57, 0, 454, 385);
+			lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/imagen/ftLogin.jpg")));
+			lblNewLabel_2.setBounds(161, -58, 379, 494);
 			panel.add(lblNewLabel_2);
 			
 			txtPassword = new JPasswordField();
 			txtPassword.setForeground(new Color(0, 153, 204));
 			txtPassword.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
 			txtPassword.setBackground(SystemColor.text);
-			txtPassword.setBounds(23, 297, 288, 25);
+			txtPassword.setBounds(12, 257, 134, 25);
 			panel.add(txtPassword);
+			{
+				JLabel lblNewLabel = new JLabel("");
+				lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/imagen/icnLoginB.jpg")));
+				lblNewLabel.setBounds(34, 13, 85, 100);
+				panel.add(lblNewLabel);
+			}
+			{
+				JLabel lblNewLabel_1 = new JLabel("Usuario:");
+				lblNewLabel_1.setForeground(new Color(0, 51, 204));
+				lblNewLabel_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				lblNewLabel_1.setBounds(12, 128, 56, 16);
+				panel.add(lblNewLabel_1);
+			}
+			{
+				JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+				lblContrasea.setForeground(new Color(0, 51, 204));
+				lblContrasea.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+				lblContrasea.setBounds(12, 228, 75, 16);
+				panel.add(lblContrasea);
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -147,7 +168,7 @@ public class Login extends JDialog {
 				        }
 				    }
 				});
-				okButton.setForeground(new Color(0, 153, 204));
+				okButton.setForeground(new Color(0, 51, 204));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				okButton.setBackground(SystemColor.text);
 				okButton.setActionCommand("OK");
@@ -162,7 +183,7 @@ public class Login extends JDialog {
 						dispose();
 					}
 				});
-				cancelButton.setForeground(new Color(0, 153, 204));
+				cancelButton.setForeground(new Color(0, 51, 204));
 				cancelButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
