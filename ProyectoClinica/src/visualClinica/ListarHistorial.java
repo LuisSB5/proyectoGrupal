@@ -14,6 +14,9 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import logico.Paciente;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -29,20 +32,11 @@ public class ListarHistorial extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListarHistorial dialog = new ListarHistorial();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public ListarHistorial() {
+	public ListarHistorial(Paciente paciente) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarHistorial.class.getResource("/imagen/icnListarCitas.png")));
 		setTitle("Historial Paciente");
 		setBackground(SystemColor.text);
@@ -63,7 +57,7 @@ public class ListarHistorial extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String [] header = {"Nombre","Vacunas", "Enfermedades","Último Peso",};
+					String [] header = {"Nombre","Vacunas", "Enfermedades","Último Peso","Ultima altura","Fecha de registro"};
 					table = new JTable();
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -107,5 +101,6 @@ public class ListarHistorial extends JDialog {
 			}
 		}
 	}
-
+	
 }
+

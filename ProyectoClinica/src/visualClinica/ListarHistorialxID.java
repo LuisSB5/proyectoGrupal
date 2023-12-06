@@ -106,7 +106,9 @@ public class ListarHistorialxID extends JDialog {
 				okButton.setEnabled(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						ListarHistorial list= new ListarHistorial();
+						String idPaciente = txtNombrePaciente.getText().toString();
+			            Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
+						ListarHistorial list= new ListarHistorial(paciente);
 						list.setModal(true);
 						list.setVisible(true);
 					}
