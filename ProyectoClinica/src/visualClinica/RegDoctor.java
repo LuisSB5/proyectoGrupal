@@ -227,7 +227,14 @@ public class RegDoctor extends JDialog {
 						if(checkUser() == true) {
 							if(checkPasswords()==true) {
 								try {
-									Persona persona = new Doctor (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxEspecialidad.getSelectedItem().toString());
+									Persona persona = null;
+									char sexo = cbxSexo.getSelectedItem().toString().charAt(0);
+									if(sexo == 'F'){
+										persona = new Doctor (txtCedula.getText().toString(), "Dra. "+txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxEspecialidad.getSelectedItem().toString());
+									}
+									else{
+										persona = new Doctor (txtCedula.getText().toString(), "Dr. "+txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxEspecialidad.getSelectedItem().toString());
+									}
 									Clinica.getInstance().agregarPersona(persona);
 									User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Doctor", persona);
 									Clinica.getInstance().regUser(user);

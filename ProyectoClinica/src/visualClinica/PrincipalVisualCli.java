@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
 
 import logico.Clinica;
 import logico.Doctor;
+import logico.Secretaria;
 
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -155,9 +156,12 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem mntmRegvacunas = new JMenuItem("Generar Cita");
 		mntmRegvacunas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GenerarCita cita= new GenerarCita();
-				cita.setModal(true);
-				cita.setVisible(true);
+				if(Clinica.getInstance().getLoginUser().getTipo().equals("Secretaria")){
+					Secretaria secre = Clinica.getInstance().buscarSecretariaByCedula(Clinica.getInstance().getLoginUser().getPersona().getCedula());
+					GenerarCita cita= new GenerarCita(secre);
+					cita.setModal(true);
+					cita.setVisible(true);
+				}
 			}
 		});
 		mntmRegvacunas.setForeground(new Color(51, 102, 204));

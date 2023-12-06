@@ -22,8 +22,11 @@ import javax.swing.border.TitledBorder;
 import logico.Cita;
 import logico.Clinica;
 import logico.Consulta;
+import logico.Doctor;
 import logico.Enfermedad;
 import logico.Paciente;
+import logico.Persona;
+import logico.Secretaria;
 import logico.Vacuna;
 
 import javax.swing.JLabel;
@@ -48,20 +51,11 @@ public class GenerarCita extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			GenerarCita dialog = new GenerarCita();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public GenerarCita() {
+	public GenerarCita(Secretaria secre) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GenerarCita.class.getResource("/imagen/icnGeCitas.png")));
 		setTitle("Generar Cita");
 		setBackground(SystemColor.text);
@@ -177,8 +171,9 @@ public class GenerarCita extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
+							Paciente paciente = Clinica.getInstance().buscarPacientePorID(txtPaciente.getText().toString());
 							Enfermedad enfermedad = Clinica.getInstance().buscarEnfermedadByNomb(cbxEnfermedad.getSelectedItem().toString());
-							Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), (Paciente) txtPaciente.getText().toString(), (Doctor) cbxDoctor.getSelectedItem().toString(), enfermedad);
+							//Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, secre.getDoctorAsignado(), enfermedad);
 							Clinica.getInstance().agregarCita(cita);
 							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
 							dispose();

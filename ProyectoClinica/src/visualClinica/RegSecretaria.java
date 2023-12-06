@@ -202,7 +202,8 @@ public class RegSecretaria extends JDialog {
 						try{
 							if(checkUser() == true) {
 								if(checkPasswords()==true) {
-									Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), txtSexo.getText().toString().charAt(0), txtCorreo.getText().toString(), cbxDoc.getSelectedItem().toString());
+									Doctor doc = Clinica.getInstance().buscarDoctorByNomb(cbxDoc.getSelectedItem().toString());
+									Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), txtSexo.getText().toString().charAt(0), txtCorreo.getText().toString(), doc);
 									Clinica.getInstance().agregarPersona(persona);
 									User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Secretaria", persona);
 									Clinica.getInstance().regUser(user);
@@ -252,12 +253,7 @@ public class RegSecretaria extends JDialog {
 		String aux = null;
 		for(Persona persona : Clinica.getInstance().getMisPersonas()) {
 			if(persona instanceof Doctor) {
-				if(persona.getSexo()=='F') {
-					aux = "Dra. "+persona.getNombre();
-				   }
-				   else {
-					   aux = "Dr. "+persona.getNombre();
-				   }
+				aux = persona.getNombre();
 				cbxDoc.addItem(aux);
 			}
 		}

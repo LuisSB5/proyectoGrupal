@@ -393,5 +393,34 @@ public class Clinica implements Serializable{
 		return vac;
 	}
 	
+	public Secretaria buscarSecretariaByCedula(String cedula) {
+		Secretaria secre = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i<misPersonas.size()) {
+			if(misPersonas.get(i) instanceof Secretaria) {
+				if(misPersonas.get(i).getCedula().equals(cedula)) {
+					secre = (Secretaria)misPersonas.get(i);
+				}
+			}
+		}
+		return secre;
+	}
 	
+	public Doctor buscarDoctorByNomb (String nombre) {
+		Doctor doc = null;
+		boolean encontrado = false;
+		int i = 0;
+		
+		while(!encontrado && i<misPersonas.size()) {
+			if(misPersonas.get(i) instanceof Doctor) {
+				if(misPersonas.get(i).getNombre().equalsIgnoreCase(nombre)) {
+					doc = (Doctor) misPersonas.get(i);
+				}
+			}
+		}
+		
+		return doc;
+	}
 }
