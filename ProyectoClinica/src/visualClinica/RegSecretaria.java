@@ -38,9 +38,9 @@ public class RegSecretaria extends JDialog {
 	private JTextField txtUser;
 	private JTextField txtPassword;
 	private JTextField txtPasswordC;
-	private JComboBox cbxSexo;
 	private JComboBox cbxDoc;
 	private JTextField txtCorreo;
+	private JTextField txtSexo;
 
 	/**
 	 * Launch the application.
@@ -117,11 +117,6 @@ public class RegSecretaria extends JDialog {
 			lblNewLabel_3.setBounds(258, 65, 56, 16);
 			panel_general.add(lblNewLabel_3);
 			
-			cbxSexo = new JComboBox();
-			cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "F", "M"}));
-			cbxSexo.setBounds(316, 64, 164, 19);
-			panel_general.add(cbxSexo);
-			
 			JLabel lblNewLabel_4 = new JLabel("Direccion:");
 			lblNewLabel_4.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 			lblNewLabel_4.setBounds(12, 94, 81, 16);
@@ -151,6 +146,13 @@ public class RegSecretaria extends JDialog {
 			txtCorreo.setColumns(10);
 			txtCorreo.setBounds(258, 110, 222, 22);
 			panel_general.add(txtCorreo);
+			
+			txtSexo = new JTextField();
+			txtSexo.setEditable(false);
+			txtSexo.setBounds(316, 62, 164, 19);
+			txtSexo.setText("Femenino");
+			panel_general.add(txtSexo);
+			txtSexo.setColumns(10);
 			
 			JPanel panel_Usuario = new JPanel();
 			panel_Usuario.setBackground(new Color(216, 191, 216));
@@ -200,9 +202,9 @@ public class RegSecretaria extends JDialog {
 						try{
 							if(checkUser() == true) {
 								if(checkPasswords()==true) {
-									Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), cbxSexo.getSelectedItem().toString().charAt(0), txtCorreo.getText().toString(), cbxDoc.getSelectedItem().toString());
+									Persona persona = new Secretaria (txtCedula.getText().toString(), txtNombre.getText().toString(), txtDireccion.getText().toString(), txtTelefono.getText().toString(), txtSexo.getText().toString().charAt(0), txtCorreo.getText().toString(), cbxDoc.getSelectedItem().toString());
 									Clinica.getInstance().agregarPersona(persona);
-									User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Doctor", persona);
+									User user = new User (txtUser.getText().toString(), txtPassword.getText().toString(), "Secretaria", persona);
 									Clinica.getInstance().regUser(user);
 									JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 									dispose();

@@ -81,6 +81,9 @@ public class PrincipalVisualCli extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnDoctor = new JMenu("Doctor");
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Doctor")) {
+			mnDoctor.setVisible(false);
+		}
 		mnDoctor.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnDoct.png")));
 		mnDoctor.setForeground(new Color(0, 153, 255));
 		mnDoctor.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
@@ -141,6 +144,9 @@ public class PrincipalVisualCli extends JFrame {
 		mnDoctor.add(menuItem_1);
 		
 		JMenu mnPaciente = new JMenu("Paciente");
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Secretaria")) {
+			mnPaciente.setVisible(false);
+		}
 		mnPaciente.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnPa.png")));
 		mnPaciente.setForeground(new Color(0, 153, 255));
 		mnPaciente.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
@@ -171,6 +177,9 @@ public class PrincipalVisualCli extends JFrame {
 		mnPaciente.add(mntmRegpaciente);
 		
 		JMenu mnVacunas = new JMenu("Vacunas");
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+			mnVacunas.setVisible(false);
+		}
 		mnVacunas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVa.png")));
 		mnVacunas.setForeground(new Color(0, 153, 255));
 		mnVacunas.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
@@ -201,6 +210,9 @@ public class PrincipalVisualCli extends JFrame {
 		mnVacunas.add(mntmListarVacunas);
 		
 		JMenu mnPatologias = new JMenu("Patolog\u00EDas");
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+			mnPatologias.setVisible(false);
+		}
 		mnPatologias.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnEnf.png")));
 		mnPatologias.setForeground(new Color(0, 153, 255));
 		mnPatologias.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
@@ -232,6 +244,9 @@ public class PrincipalVisualCli extends JFrame {
 		mnPatologias.add(mntmListarPatologas);
 		
 		JMenu mnViviendas = new JMenu(" Viviendas aso.");
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+			mnViviendas.setVisible(false);
+		}
 		mnViviendas.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnVi.png")));
 		mnViviendas.setForeground(new Color(0, 153, 255));
 		mnViviendas.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
@@ -262,6 +277,9 @@ public class PrincipalVisualCli extends JFrame {
 		mnViviendas.add(mntmListarViviendas);
 		
 		JMenu mnUsuarios = new JMenu("Usuarios");
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+			mnUsuarios.setVisible(false);
+		}
 		mnUsuarios.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnUsu.png")));
 		mnUsuarios.setForeground(new Color(0, 153, 255));
 		mnUsuarios.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
@@ -280,6 +298,9 @@ public class PrincipalVisualCli extends JFrame {
 		mnUsuarios.add(mntmListarUsuarios);
 		
 		JMenu mnSobreNosotros = new JMenu("Administrador");
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador")){
+			mnSobreNosotros.setVisible(false);
+		}
 		mnSobreNosotros.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/ICNadmi.svg.png")));
 		mnSobreNosotros.setForeground(new Color(0, 153, 255));
 		mnSobreNosotros.setFont(new Font("Yu Gothic UI Light", Font.BOLD, 15));
