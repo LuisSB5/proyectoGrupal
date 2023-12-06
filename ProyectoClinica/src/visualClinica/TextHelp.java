@@ -63,7 +63,7 @@ public class TextHelp extends JFrame {
 
             textArea = new JTextArea();
             textArea.setForeground(new Color(0, 0, 0));
-            textArea.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
+            textArea.setFont(new Font("Times New Roman", Font.PLAIN, 20));
             textArea.setEditable(false);
             scrollPane.setViewportView(textArea);
 

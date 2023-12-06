@@ -8,15 +8,28 @@ personal medico y administrativo.
 Caracteristicas destacadas del programa:
 
 1. Control de Vacunacion
+Esta funcion permite realizar un seguimiento de las vacunas administradas a pacientes, asegurando que estén actualizados en
+ sus inmunizaciones. El Dr(a) y Admi tienen acceso a este apartado.
 
 2. Registro de Enfermedades
+Permite registrar y documentar información detallada sobre las enfermedades que afectan a los pacientes, facilitando el 
+analisis y seguimiento medico.El Dr(a) y Admi tienen acceso a este apartado.
 
 3. Listado de Enfermedades
+Proporciona una lista organizada de las enfermedades registradas, lo que puede ser util para análisis epidemiológicos y 
+estadisticas de salud.El Dr(a) y Admi tienen acceso a este apartado.
 
 4. Consultas Medicas
-
+Facilita la programacion y documentacion de consultas medicas, registrando la informacion relevante sobre el diagnostico,
+ tratamiento y recomendaciones. El Dr(a) tiene acceso a este apartado.
+ 
 5. Citas Automatizadas
+Permite la automatizacion del proceso de programacion de citas medicas, ayudando a organizar el flujo de pacientes y reducir 
+la posibilidad de conflictos de horarios. La Secretaria tiene acceso a este apartado
 
 6. Historiales de Clientes
+Mantiene un historial medico completo de cada paciente. El Dr(a) tiene acceso a este apartado.
 
 7. Informacion Automatizada y Organizada
+Garantiza que toda la informacion esté automatizada y organizada de manera eficiente, lo que facilita el acceso rapido y preciso 
+a los datos medicos cuando sea necesario. 
