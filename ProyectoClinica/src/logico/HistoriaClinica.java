@@ -54,6 +54,22 @@ public class HistoriaClinica implements Serializable{
 	public void setMisEnfermedades(ArrayList<Enfermedad> misEnfermedades) {
 		this.misEnfermedades = misEnfermedades;
 	}
+	public String getMedicalHistoryAsString() {
+	    StringBuilder result = new StringBuilder();
+	    result.append("Vacunas:\n");
+	    for (Vacuna vacuna : misVacunas) {
+	        result.append("- ").append(vacuna.toString()).append("\n");
+	    }
+	    result.append("Consultas:\n");
+	    for (Consulta consulta : misConsultas) {
+	        result.append("- ").append(consulta.toString()).append("\n");
+	    }
+	    result.append("Enfermedades:\n");
+	    for (Enfermedad enfermedad : misEnfermedades) {
+	        result.append("- ").append(enfermedad.toString()).append("\n");
+	    }
+	    return result.toString();
+	}
 	
 	
 

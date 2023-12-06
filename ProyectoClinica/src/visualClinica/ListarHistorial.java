@@ -15,12 +15,16 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+
+import logico.Clinica;
 import logico.Paciente;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ListarHistorial extends JDialog {
 
@@ -28,6 +32,7 @@ public class ListarHistorial extends JDialog {
 	private JTable table;
 	private DefaultTableModel model;
 	private Object[] row;
+	private JTextField txtPacienteId;
 
 	/**
 	 * Launch the application.
@@ -41,7 +46,7 @@ public class ListarHistorial extends JDialog {
 		setTitle("Historial Paciente");
 		setBackground(SystemColor.text);
 		setResizable(false);
-		setBounds(100, 100, 385, 324);
+		setBounds(100, 100, 549, 624);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -49,16 +54,19 @@ public class ListarHistorial extends JDialog {
 		setLocationRelativeTo(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(SystemColor.inactiveCaption);
 			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
+			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				panel.add(scrollPane, BorderLayout.CENTER);
+				scrollPane.setBounds(0, 182, 533, 353);
+				panel.add(scrollPane);
 				{
 					model = new DefaultTableModel();
-					String [] header = {"Nombre","Vacunas", "Enfermedades","Último Peso","Ultima altura","Fecha de registro"};
+					String [] header = {"Nombre","Vacunas", "Enfermedades","Estatus de la enfermedad",};
 					table = new JTable();
+					table.setEnabled(false);
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 					model.setColumnIdentifiers(header);
@@ -66,6 +74,42 @@ public class ListarHistorial extends JDialog {
 					scrollPane.setViewportView(table);
 				}
 			}
+			{
+				JLabel lblNewLabel = new JLabel("ID paciente:");
+				lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
+				lblNewLabel.setBounds(75, 47, 119, 41);
+				panel.add(lblNewLabel);
+			}
+			{
+				txtPacienteId = new JTextField();
+				txtPacienteId.setBounds(172, 57, 116, 22);
+				panel.add(txtPacienteId);
+				txtPacienteId.setColumns(10);
+			}
+			
+			JButton btnNewButton = new JButton("Buscar");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+			            String idPaciente = txtPacienteId.getText().toString();
+			            Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
+
+			            if (paciente != null) {
+			                activarTabla(true);
+			                //loadPaciente(paciente);// not finished yet 
+			            } else {
+			                activarTabla(false);
+			                throw new IllegalArgumentException("Paciente no encontrado.");
+			            }
+			        } catch (IllegalArgumentException ex) {
+			            System.out.println(ex.getMessage());
+			        }
+			    }
+					
+				
+			});
+			btnNewButton.setBounds(313, 56, 97, 25);
+			panel.add(btnNewButton);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -102,5 +146,29 @@ public class ListarHistorial extends JDialog {
 		}
 	}
 	
+	private void activarTabla(boolean status) {
+    table.setEnabled(status);
+    
 }
+	private void loadPaciente(Paciente paciente) {
+	    model.addRow(new Object[]{paciente.getNombre(), "", "", ""});
+
+	    String medicalHistory = paciente.getHist().getMedicalHistoryAsString();
+
+	    String[] lines = medicalHistory.split("\n");
+
+	    // Populate the table with medical history data
+	    for (int i = 0; i < lines.length; i++) {
+	        // Assuming that the second column is for vaccines
+	        // Assuming that the third column is for diseases
+	        // Assuming that the fourth column is for the status of diseases
+	        model.addRow(new Object[]{"", lines[i], "", ""});
+	    }
+	
+}
+
+}
+	
+
+
 
