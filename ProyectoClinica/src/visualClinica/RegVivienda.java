@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logico.Cita;
+import logico.Clinica;
+import logico.Vivienda;
 
 import java.awt.Toolkit;
 import java.awt.SystemColor;
@@ -19,18 +21,22 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class RegVivienda extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtPropietario;
 	private JTextField txtDireccion;
-	private JSpinner spnCantHab;
+	private JSpinner spnCant;
+	private JComboBox cbxEstado;
+	private JButton okButton;
 
 	/**
 	 * Launch the application.
@@ -99,31 +105,53 @@ public class RegVivienda extends JDialog {
 			
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(RegVivienda.class.getResource("/imagen/IcnRegViv.png")));
-			lblNewLabel_1.setBounds(205, 109, 123, 73);
+			lblNewLabel_1.setBounds(195, 145, 123, 73);
 			panel.add(lblNewLabel_1);
 			
-			spnCantHab = new JSpinner();
-			spnCantHab.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
-			spnCantHab.setBackground(SystemColor.inactiveCaption);
-			spnCantHab.setBounds(195, 56, 119, 22);
-			panel.add(spnCantHab);
+			spnCant = new JSpinner();
+			spnCant.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
+			spnCant.setBackground(SystemColor.inactiveCaption);
+			spnCant.setBounds(195, 56, 119, 22);
+			panel.add(spnCant);
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setBackground(SystemColor.inactiveCaption);
-			comboBox.setBounds(12, 145, 123, 22);
-			panel.add(comboBox);
+			cbxEstado = new JComboBox();
+			cbxEstado.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Due\u00F1o", "Inquilino"}));
+			cbxEstado.setBackground(SystemColor.inactiveCaption);
+			cbxEstado.setBounds(12, 145, 123, 22);
+			panel.add(cbxEstado);
+			
+			JLabel lblRolDelDue = new JLabel("Estado de la casa:");
+			lblRolDelDue.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+			lblRolDelDue.setBounds(12, 116, 155, 16);
+			panel.add(lblRolDelDue);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Registrar");
+				okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-					}
+				    public void actionPerformed(ActionEvent e) {
+				        Vivienda vivienda = new Vivienda(
+				            txtPropietario.getText().toString(),
+				            cbxEstado.getSelectedItem().toString(),
+				            (int) spnCant.getValue(),
+				            txtDireccion.getText().toString()
+				        );
+
+				        Clinica.getInstance().agregarVivienda(vivienda);
+
+				        // Mostrar mensaje de registro exitoso
+				        JOptionPane.showMessageDialog(
+				            null,
+				            "Registro de vivienda exitoso",
+				            "Información",
+				            JOptionPane.INFORMATION_MESSAGE
+				        );
+				    }
 				});
+
 				okButton.setForeground(new Color(0, 153, 255));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				okButton.setBackground(SystemColor.text);

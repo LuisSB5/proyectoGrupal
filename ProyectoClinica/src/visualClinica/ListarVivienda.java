@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Clinica;
+import logico.Enfermedad;
+import logico.Vivienda;
+
 import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
@@ -64,7 +68,7 @@ public class ListarVivienda extends JDialog {
 				{
 					model = new DefaultTableModel();
 					table = new JTable();
-					String [] header = {"Propietario","Dirección", "Cant.Hab"};
+					String [] header = {"Propietario","Dirección", "Cant.Personas"};
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 					model.setColumnIdentifiers(header);
@@ -104,6 +108,20 @@ public class ListarVivienda extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadViviendas();
+	}
+
+	private void loadViviendas() {
+		model.setRowCount(0);
+
+	    for (Vivienda viv : Clinica.getInstance().getMisViviendas()) {
+	        Object[] row = new Object[model.getColumnCount()];  
+	        row[0] = viv.getNombreDueño();
+	        row[1] = viv.getDireccion();
+	        row[2] = viv.getCantPersonas();
+	        model.addRow(row);
+	    }
+		
 	}
 
 }
