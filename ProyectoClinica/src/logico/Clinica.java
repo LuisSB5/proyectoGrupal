@@ -445,4 +445,36 @@ public class Clinica implements Serializable{
 		
 		
 	}
+
+	public void actualizarEnfermedad(Enfermedad enf) {
+	int index= buscarIndexEnfermedadByCode(enf.getCodEnfermedad());
+	misEnfermedades.set(index, enf);
+	
+		
+	}
+
+	private int buscarIndexEnfermedadByCode(String codEnfermedad) {
+		int index =-1;
+		boolean encontrado = false;
+		int i = 0;
+		
+		 while (!encontrado && i < misEnfermedades.size()) {
+		        if (misEnfermedades.get(i).getCodEnfermedad().equals(codEnfermedad)) {
+		        		index= i;
+		        		encontrado = true;
+		        }
+		        i++;
+		    }
+		
+		return index;
+	}
+	public void eliminarEnfermedad(String codEnfermedad) {
+	    int index = buscarIndexEnfermedadByCode(codEnfermedad);
+	    
+	    if (index != -1) {
+	        misEnfermedades.remove(index);
+	    }
+	}
+
+	
 }

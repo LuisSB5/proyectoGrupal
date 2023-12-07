@@ -34,22 +34,21 @@ public class RegPatologia extends JDialog {
 	private JTextField txtPatologiaEstatus;
 	private JTextField txtSintomas;
 	private JTextField txtTratamiento;
+	private Enfermedad enfermedad=null;
 	
-	public static void main(String[] args) {
-		try {
-			RegPatologia dialog = new RegPatologia();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
 	 */
-	public RegPatologia() {
+	public RegPatologia(Enfermedad patologia) {
+		enfermedad= patologia;
+		if (enfermedad==null) {
 		setTitle("Reg Patolog\u00EDa");
+		}else {
+		setTitle("Modificar Estatus");
+		}
+		
 		setBackground(SystemColor.text);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegPatologia.class.getResource("/imagen/icnPatologias.png")));
 		setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
@@ -153,22 +152,39 @@ public class RegPatologia extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				if (enfermedad != null) {
+				    okButton.setActionCommand("Modificar");
+				}
 				okButton.setBackground(SystemColor.text);
 				okButton.setForeground(new Color(51, 102, 204));
 				okButton.setFont(new Font("Segoe UI Black", Font.BOLD, 13));
 				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							Enfermedad enf = new Enfermedad(txtCodigoPatologia.getText().toString(), txtNombrePatologia.getText().toString(), txtPatologiaEstatus.getText().toString(), txtSintomas.getText().toString(), txtTratamiento.getText().toString());
-							Clinica.getInstance().agregarEnfermedad(enf);
-							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
-							dispose();
-					 	}catch (Exception ex) {
-					        ex.printStackTrace(); // o loguear el error
-					        JOptionPane.showMessageDialog(null, "Ha ocurrido un error. Por favor, verifica tus datos e intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
-					    }
-					}
+				    public void actionPerformed(ActionEvent e) {
+				        if (enfermedad == null) {
+				            try {
+				                Enfermedad enf = new Enfermedad(txtCodigoPatologia.getText().toString(), txtNombrePatologia.getText().toString(), txtPatologiaEstatus.getText().toString(), txtSintomas.getText().toString(), txtTratamiento.getText().toString());
+				                Clinica.getInstance().agregarEnfermedad(enf);
+				                JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
+				                dispose();
+				            } catch (Exception ex) {
+				                ex.printStackTrace();
+				                JOptionPane.showMessageDialog(null, "Ha ocurrido un error. Por favor, verifica tus datos e intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+				            }
+				        } else {
+				            enfermedad.setNombre(txtNombrePatologia.getText());
+				            enfermedad.setStatus(txtPatologiaEstatus.getText());
+				            enfermedad.setSintomas(txtSintomas.getText());
+				            enfermedad.setTratamiento(txtTratamiento.getText());
+				            Clinica.getInstance().actualizarEnfermedad(enfermedad);
+				            ListarPatologia.loadPatologias();
+				            dispose();
+				        }
+				    }
 				});
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -193,5 +209,21 @@ public class RegPatologia extends JDialog {
 			getContentPane().add(panel, BorderLayout.NORTH);
 			panel.setLayout(null);
 		}
+		loadPatologia();
 	}
+
+
+
+	private void loadPatologia() {
+		if (enfermedad!=null) {
+			txtCodigoPatologia.setText(enfermedad.getCodEnfermedad());
+			txtNombrePatologia.setText(enfermedad.getNombre());
+			txtPatologiaEstatus.setText(enfermedad.getStatus());
+			txtSintomas.setText(enfermedad.getSintomas());
+			txtTratamiento.setText(enfermedad.getTratamiento());
+			
+		}
+		
+	}
+	
 }

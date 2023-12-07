@@ -225,7 +225,7 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem mntmRegpatologas = new JMenuItem("Reg.Patolog\u00EDas");
 		mntmRegpatologas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegPatologia regPat= new RegPatologia();
+				RegPatologia regPat= new RegPatologia(null);
 				regPat.setModal(true);
 				regPat.setVisible(true);
 
