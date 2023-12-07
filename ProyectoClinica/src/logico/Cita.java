@@ -14,15 +14,15 @@ public class Cita implements Serializable{
 	private  Date fecha;
 	private Paciente paciente;
     private Doctor doctor;
-	private LocalTime hora;
+	//private LocalTime hora;
 	
-	public Cita(String codCita, Date fecha, Paciente paciente, Doctor doctor, LocalTime hora) {
+	public Cita(String codCita, Date fecha, Paciente paciente, Doctor doctor) {
 		super();
 		this.codCita = codCita;
 		this.fecha = fecha;
 		this.paciente = paciente;
 		this.doctor = doctor;
-		this.hora = hora;
+		//this.hora = hora;
 	}
 
 	
@@ -59,6 +59,7 @@ public class Cita implements Serializable{
 		this.doctor = doctor;
 	}
 
+	/*
 	public LocalTime getHora() {
 		return hora;
 	}
@@ -67,7 +68,7 @@ public class Cita implements Serializable{
 		this.hora = hora;
 	}
 
-	
+	*/
 
 	
 

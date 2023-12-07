@@ -354,7 +354,6 @@ public class Clinica implements Serializable{
 	        if (misPersonas.get(i) instanceof Paciente) {
 	            Paciente paciente = (Paciente) misPersonas.get(i);
 	            if (paciente.getCedula().equalsIgnoreCase(cedula)) {
-	            	JOptionPane.showMessageDialog(null, "Entro... al main");
 	                aux = paciente;
 	                encontrado = true;
 	            }

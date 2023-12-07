@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import logico.Cita;
 import logico.Clinica;
 import logico.Consulta;
+import logico.Doctor;
 
 import java.awt.Toolkit;
 import java.awt.SystemColor;
@@ -96,6 +97,12 @@ public class ListarCitasxID extends JDialog {
 			txtIdDoc.setColumns(10);
 			
 			JButton btnBuscar = new JButton("Buscar");
+			btnBuscar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Doctor doc = Clinica.getInstance().buscarDoctorByCedula(txtIdDoc.getText().toString());
+					loadCitas(doc);
+				}
+			});
 			btnBuscar.setForeground(new Color(0, 153, 204));
 			btnBuscar.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 			btnBuscar.setBounds(258, 31, 97, 25);
@@ -130,20 +137,19 @@ public class ListarCitasxID extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		loadCitas();
 	}
 
-	private void loadCitas() {
+	private void loadCitas(Doctor doc) {
 		// TODO Auto-generated method stub
 		model.setRowCount(0);	   
 		   row = new Object[model.getColumnCount()];
 		   for (Cita cit: Clinica.getInstance().getMisCitas()) {
-			   row[0]=cit.getCodCita();
-			   row[1]=cit.getFecha();
-			   row[2]=cit.getPaciente();
-			   row[3]=cit.getDoctor();
-			   row[4]=cit.getHora();
-			   model.addRow(row);//cambio
+			   if(doc.getCedula().equalsIgnoreCase(cit.getDoctor().getCedula())) {
+				   row[0]=cit.getCodCita();
+				   row[1]=cit.getPaciente().getNombre();
+				   row[2]=cit.getFecha();
+				   model.addRow(row);
+			   }
 		   }
 	}
 }

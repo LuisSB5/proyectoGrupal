@@ -58,7 +58,7 @@ public class GenerarCita extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public GenerarCita(Secretaria secre) {
+	public GenerarCita() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GenerarCita.class.getResource("/imagen/icnGeCitas.png")));
 		setTitle("Generar Cita");
 		setBackground(SystemColor.text);
@@ -177,18 +177,16 @@ public class GenerarCita extends JDialog {
 				JButton okButton = new JButton("Generar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
+						try {					
 							Paciente paciente = Clinica.getInstance().buscarPacientePorID(txtPaciente.getText().toString());
 							Enfermedad enfermedad = Clinica.getInstance().buscarEnfermedadByNomb(cbxEnf.getSelectedItem().toString()); 
 							Doctor doc = Clinica.getInstance().buscarDoctorByNomb(cbxDoc.getSelectedItem().toString());
-							HistoriaClinica hist = Clinica.getInstance().buscarHistorialByCedulaPaciente(txtPaciente.getText().toString());
-							//Cita cita = new Cita(codCita, fecha, paciente, doctor, hora)
-							Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, doc, (LocalTime) spnHora.getValue());
-							//Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, secre.getDoctorAsignado(), spnHora.getValue());
+							Cita cita = new Cita(txtCita.getText().toString(), (Date) spnFecha.getValue(), paciente, doc); //(LocalTime) spnHora.getValue());
 							Clinica.getInstance().agregarCita(cita);
-							hist.agregarEnfermedad(enfermedad);
+							paciente.getHist().agregarEnfermedad(enfermedad);
 							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
+							
 						} catch (Exception e2) {
 							// TODO: handle exception
 							e2.printStackTrace(); 

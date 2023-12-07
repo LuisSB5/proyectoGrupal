@@ -157,8 +157,7 @@ public class PrincipalVisualCli extends JFrame {
 		mntmRegvacunas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Clinica.getInstance().getLoginUser().getTipo().equals("Secretaria")){
-					Secretaria secre = Clinica.getInstance().buscarSecretariaByCedula(Clinica.getInstance().getLoginUser().getPersona().getCedula());
-					GenerarCita cita= new GenerarCita(secre);
+					GenerarCita cita= new GenerarCita();
 					cita.setModal(true);
 					cita.setVisible(true);
 				}
@@ -214,7 +213,7 @@ public class PrincipalVisualCli extends JFrame {
 		mnVacunas.add(mntmListarVacunas);
 		
 		JMenu mnPatologias = new JMenu("Patolog\u00EDas");
-		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador") || !Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Doctor")) {
 			mnPatologias.setVisible(false);
 		}
 		mnPatologias.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnEnf.png")));
