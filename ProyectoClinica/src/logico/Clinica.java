@@ -205,9 +205,16 @@ public class Clinica implements Serializable{
 	public void agregarConsulta(Consulta consulta) {
         misConsultas.add(consulta);
     }
-	public void agregarVivienda(Vivienda vivienda) {
+	/*public void agregarVivienda(Vivienda vivienda) {
         misViviendas.add(vivienda);
-    }
+    }*/
+	public void agregarVivienda(Vivienda vivienda) {
+	    if (misViviendas == null) {
+	        misViviendas = new ArrayList<>(); 
+	    }
+	    misViviendas.add(vivienda);
+	}
+
 	
 	public void agregarHistoriaClinico(HistoriaClinica historial) {
         misHistoriales.add(historial);
