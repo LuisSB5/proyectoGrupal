@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JComboBox;
 
 public class RegVivienda extends JDialog {
 
@@ -51,7 +52,7 @@ public class RegVivienda extends JDialog {
 		setTitle("Registrar Vivienda");
 		setBackground(SystemColor.text);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegVivienda.class.getResource("/imagen/MnNo.png")));
-		setBounds(100, 100, 368, 288);
+		setBounds(100, 100, 372, 375);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,11 +73,11 @@ public class RegVivienda extends JDialog {
 			{
 				JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 				lblDireccin.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblDireccin.setBounds(12, 109, 84, 16);
+				lblDireccin.setBounds(12, 193, 84, 16);
 				panel.add(lblDireccin);
 			}
 			{
-				JLabel lblNumhabitaciones = new JLabel("Num.Habitaciones:");
+				JLabel lblNumhabitaciones = new JLabel("Cant. Personas:");
 				lblNumhabitaciones.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				lblNumhabitaciones.setBounds(195, 28, 123, 16);
 				panel.add(lblNumhabitaciones);
@@ -92,13 +93,13 @@ public class RegVivienda extends JDialog {
 				txtDireccion = new JTextField();
 				txtDireccion.setColumns(10);
 				txtDireccion.setBackground(SystemColor.inactiveCaption);
-				txtDireccion.setBounds(12, 133, 123, 22);
+				txtDireccion.setBounds(12, 226, 123, 22);
 				panel.add(txtDireccion);
 			}
 			
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(RegVivienda.class.getResource("/imagen/IcnRegViv.png")));
-			lblNewLabel_1.setBounds(195, 109, 123, 73);
+			lblNewLabel_1.setBounds(205, 109, 123, 73);
 			panel.add(lblNewLabel_1);
 			
 			spnCantHab = new JSpinner();
@@ -106,6 +107,11 @@ public class RegVivienda extends JDialog {
 			spnCantHab.setBackground(SystemColor.inactiveCaption);
 			spnCantHab.setBounds(195, 56, 119, 22);
 			panel.add(spnCantHab);
+			
+			JComboBox comboBox = new JComboBox();
+			comboBox.setBackground(SystemColor.inactiveCaption);
+			comboBox.setBounds(12, 145, 123, 22);
+			panel.add(comboBox);
 		}
 		{
 			JPanel buttonPane = new JPanel();

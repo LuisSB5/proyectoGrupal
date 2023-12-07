@@ -8,42 +8,56 @@ public class Vivienda implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7303780482375372300L;
-	private String nombre;
-	private String direccion;
-    private int numeroHab;
-	private Persona propietario;
-	
-	
-	public Vivienda(String nombre, String direccion, int numeroHab, Persona propietario) {
+	private String nombreDueño;
+	private String rolDeldueño;
+    private int cantPersonas;
+    private String direccion;
+    
+	public Vivienda(String nombreDueño, String rolDeldueño, int cantPersonas, String direccion) {
 		super();
-		this.nombre = nombre;
+		this.nombreDueño = nombreDueño;
+		this.rolDeldueño = rolDeldueño;
+		this.cantPersonas = cantPersonas;
 		this.direccion = direccion;
-		this.numeroHab = numeroHab;
-		this.propietario = propietario;
 	}
-	public String getNombre() {
-		return nombre;
+
+	public String getNombreDueño() {
+		return nombreDueño;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setNombreDueño(String nombreDueño) {
+		this.nombreDueño = nombreDueño;
 	}
+
+	public String getRolDeldueño() {
+		return rolDeldueño;
+	}
+
+	public void setRolDeldueño(String rolDeldueño) {
+		this.rolDeldueño = rolDeldueño;
+	}
+
+	public int getCantPersonas() {
+		return cantPersonas;
+	}
+
+	public void setCantPersonas(int cantPersonas) {
+		this.cantPersonas = cantPersonas;
+	}
+
 	public String getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public int getNumeroHab() {
-		return numeroHab;
-	}
-	public void setNumeroHab(int numeroHab) {
-		this.numeroHab = numeroHab;
-	}
-	public Persona getPropietario() {
-		return propietario;
-	}
-	public void setPropietario(Persona propietario) {
-		this.propietario = propietario;
-	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+    
 }
+
+    
