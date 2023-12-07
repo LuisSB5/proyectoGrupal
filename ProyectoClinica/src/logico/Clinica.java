@@ -174,7 +174,7 @@ public class Clinica implements Serializable{
 	}
 	
 	public static int getGeneradorCodigoConsulta() {
-		return codConsulta;
+		return codConsulta++;
 	}
 	
 	public static int getGeneradorCodigoPatologia() {

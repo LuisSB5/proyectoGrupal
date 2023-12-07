@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class ListarConsultaxID extends JDialog {
@@ -87,7 +88,12 @@ public class ListarConsultaxID extends JDialog {
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Doctor doc = Clinica.getInstance().buscarDoctorByCedula(txtId.getText().toString());
-					loadConsultas(doc);
+					if(doc.equals(Clinica.getInstance().getLoginUser().getPersona())) {
+						loadConsultas(doc);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Esta no es su cedula, intente de nuevo");
+					}
 				}
 			});
 			btnNewButton.setBounds(273, 56, 97, 25);

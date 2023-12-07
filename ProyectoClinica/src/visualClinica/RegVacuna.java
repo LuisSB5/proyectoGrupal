@@ -17,6 +17,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
 import logico.Clinica;
+import logico.Enfermedad;
 import logico.Vacuna;
 
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 
 public class RegVacuna extends JDialog {
 
@@ -32,8 +34,8 @@ public class RegVacuna extends JDialog {
 	private JTextField txtCode;
 	private JTextField txtNombre;
 	private JTextField txtDescrip;
-	private JTextField txtEnfermedad;
 	private JSpinner spnCantDisp;
+	private JComboBox cbxEnf;
 
 	/**
 	 * Launch the application.
@@ -126,15 +128,15 @@ public class RegVacuna extends JDialog {
 			lblEnfermedad.setBounds(24, 291, 92, 26);
 			panel.add(lblEnfermedad);
 			
-			txtEnfermedad = new JTextField();
-			txtEnfermedad.setColumns(10);
-			txtEnfermedad.setBounds(142, 295, 183, 22);
-			panel.add(txtEnfermedad);
-			
 			JLabel lblNewLabel = new JLabel("");
 			lblNewLabel.setIcon(new ImageIcon(RegVacuna.class.getResource("/imagen/icnRegVa.png")));
 			lblNewLabel.setBounds(236, 25, 106, 101);
 			panel.add(lblNewLabel);
+			{
+				cbxEnf = new JComboBox();
+				cbxEnf.setBounds(140, 295, 185, 21);
+				panel.add(cbxEnf);
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -146,7 +148,7 @@ public class RegVacuna extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							Vacuna vac = new Vacuna(txtCode.getText().toString(), txtNombre.getText().toString(), txtDescrip.getText().toString(), new Integer (spnCantDisp.getValue().toString()), txtEnfermedad.getText().toString());
+							Vacuna vac = new Vacuna(txtCode.getText().toString(), txtNombre.getText().toString(), txtDescrip.getText().toString(), new Integer (spnCantDisp.getValue().toString()), cbxEnf.getSelectedItem().toString());
 							Clinica.getInstance().agregarVacuna(vac);
 							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
@@ -179,5 +181,16 @@ public class RegVacuna extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadEnfermedadesToComboBox();
 	}
+	private void loadEnfermedadesToComboBox() {
+		cbxEnf.removeAllItems();
+		String aux = null;
+		for(Enfermedad enf : Clinica.getInstance().getMisEnfermedades()) {
+				aux = ""+enf.getNombre();
+				cbxEnf.addItem(aux);
+			}
+		cbxEnf.insertItemAt("<Seleccione>", 0);
+		cbxEnf.setSelectedIndex(0);
+	}	
 }

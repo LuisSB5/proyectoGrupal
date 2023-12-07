@@ -98,24 +98,14 @@ public class ListarHistorial extends JDialog {
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						JOptionPane.showMessageDialog(null, "Entro...");
 							String idPaciente = txtPacienteId.getText().toString();
 				            Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
-				            
-				            if(paciente == null) {
-				            	JOptionPane.showMessageDialog(null, "Entro al main");
-				            }
-				            
 				            if (paciente != null) {
-				            	
-				            	JOptionPane.showMessageDialog(null, "Entro..., osea se encontro");
 				            	table.setEnabled(true);
-				                JOptionPane.showMessageDialog(null, "Se activa la tabla");
 				                loadPaciente(paciente);// not finished yet 
 				                //encontrado = true;
 				            } else {
 				                table.setEnabled(false);
-				                JOptionPane.showMessageDialog(null, "Entro..., osea no se encontro");
 				                throw new IllegalArgumentException("Paciente no encontrado.");
 				            }
 						
@@ -163,11 +153,6 @@ public class ListarHistorial extends JDialog {
 			}
 		}
 	}
-	
-	private void activarTabla(boolean status) {
-    table.setEnabled(status);
-    
-}
 	private void loadPaciente(Paciente paciente) {
 		
 		model.setRowCount(0);	
