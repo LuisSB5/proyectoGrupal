@@ -213,7 +213,7 @@ public class PrincipalVisualCli extends JFrame {
 		mnVacunas.add(mntmListarVacunas);
 		
 		JMenu mnPatologias = new JMenu("Patolog\u00EDas");
-		if(!Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrador") || !Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Doctor")) {
+		if(Clinica.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Secretaria")) {
 			mnPatologias.setVisible(false);
 		}
 		mnPatologias.setIcon(new ImageIcon(PrincipalVisualCli.class.getResource("/imagen/MnEnf.png")));
