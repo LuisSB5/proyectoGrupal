@@ -184,6 +184,8 @@ public class GenerarConsulta extends JDialog {
 						Consulta cons = new Consulta(txtConsultaCode.getText().toString(), (Date) spnFecha.getValue(), txtDiagnostico.getText().toString(), enf, paciente, doc, vac, cbxEstadoEnfermedad.getSelectedItem().toString());
 						Clinica.getInstance().agregarConsulta(cons);
 						paciente.getHist().agregarConsulta(cons);
+						paciente.getHist().agregarVacuna(vac);
+						paciente.getHist().agregarEnfermedad(enf);
 						JOptionPane.showMessageDialog(null, "Consulta Registrada", "Información", JOptionPane.INFORMATION_MESSAGE);
 						dispose();
 					}

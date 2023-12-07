@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import logico.Clinica;
 import logico.Consulta;
+import logico.Doctor;
 import logico.Vacuna;
 
 import javax.swing.JScrollPane;
@@ -83,6 +84,12 @@ public class ListarConsultaxID extends JDialog {
 			}
 			
 			JButton btnNewButton = new JButton("Buscar");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Doctor doc = Clinica.getInstance().buscarDoctorByCedula(txtId.getText().toString());
+					loadConsultas(doc);
+				}
+			});
 			btnNewButton.setBounds(273, 56, 97, 25);
 			panel.add(btnNewButton);
 			
@@ -132,19 +139,19 @@ public class ListarConsultaxID extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		loadConsultas();
 	}
-	private void loadConsultas () {
+	private void loadConsultas (Doctor doc) {
 		model.setRowCount(0);	   
 		   row = new Object[model.getColumnCount()];
 		   for (Consulta consul: Clinica.getInstance().getMisConsultas()) {
-			   row[0]=consul.getCodeConsulta();
-			   row[1]=consul.getFechaConsulta();
-			   row[2]=consul.getEnfermedad();
-			   row[3]=consul.getDiagnostico();
-			   row[4]=consul.getStatus();
-			  
-			   model.addRow(row);
+			   if(doc.getCedula().equalsIgnoreCase(consul.getDoctor().getCedula())) {
+				   row[0]=consul.getCodeConsulta();
+				   row[1]=consul.getFechaConsulta();
+				   row[2]=consul.getEnfermedad().getNombre();
+				   row[3]=consul.getDiagnostico();
+				   row[4]=consul.getStatus();
+				   model.addRow(row);
+			   }
 		   }
 	}
 }
