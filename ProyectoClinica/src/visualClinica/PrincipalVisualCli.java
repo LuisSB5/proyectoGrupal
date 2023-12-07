@@ -134,7 +134,7 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem menuItem_1 = new JMenuItem("Mostrar Consultas ant");
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarConsulta consulta= new ListarConsulta();
+				ListarConsultaxID consulta= new ListarConsultaxID();
 				consulta.setModal(true);
 			    consulta.setVisible(true);
 

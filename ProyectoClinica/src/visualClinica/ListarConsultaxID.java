@@ -22,6 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ListarConsultaxID extends JDialog {
 
@@ -29,6 +31,7 @@ public class ListarConsultaxID extends JDialog {
 	private JTable table;
 	private DefaultTableModel model;
 	private Object[] row;
+	private JTextField txtId;
 
 	/**
 	 * Launch the application.
@@ -50,7 +53,7 @@ public class ListarConsultaxID extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarConsultaxID.class.getResource("/imagen/ICNHelp.png")));
 		setTitle("Cosultas");
 		setBackground(SystemColor.text);
-		setBounds(100, 100, 523, 349);
+		setBounds(100, 100, 439, 413);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.text);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,22 +63,38 @@ public class ListarConsultaxID extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBackground(SystemColor.text);
+			panel.setBackground(SystemColor.inactiveCaption);
 			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
+			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				panel.add(scrollPane, BorderLayout.CENTER);
+				scrollPane.setBounds(0, 137, 409, 179);
+				panel.add(scrollPane);
 				{
 					model = new DefaultTableModel();
 					table = new JTable();
-					String [] header = {"C�digo","Fecha", "Enfermedad","Diagn�stico"};
+					String [] header = {"Codigo","Fecha", "Enfermedad","Diagnostico", "Status"};
 					table.setForeground(new Color(0, 153, 204));
 					table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 					model.setColumnIdentifiers(header);
 					table.setModel(model);
 					scrollPane.setViewportView(table);
 				}
+			}
+			
+			JButton btnNewButton = new JButton("Buscar");
+			btnNewButton.setBounds(273, 56, 97, 25);
+			panel.add(btnNewButton);
+			
+			JLabel lblNewLabel = new JLabel("ID Doctor");
+			lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
+			lblNewLabel.setBounds(45, 60, 70, 16);
+			panel.add(lblNewLabel);
+			{
+				txtId = new JTextField();
+				txtId.setBounds(127, 57, 116, 22);
+				panel.add(txtId);
+				txtId.setColumns(10);
 			}
 		}
 		setLocationRelativeTo(null);
@@ -121,15 +140,11 @@ public class ListarConsultaxID extends JDialog {
 		   for (Consulta consul: Clinica.getInstance().getMisConsultas()) {
 			   row[0]=consul.getCodeConsulta();
 			   row[1]=consul.getFechaConsulta();
-			   row[2]=consul.getDiagnostico();
-			   row[3]=consul.getEnfermedad();
-			   row[4]=consul.getPaciente();
-			   row[5]=consul.getDoctor();
-			   row[6]=consul.getVacuna();
-			   row[7]=consul.getStatus();
+			   row[2]=consul.getEnfermedad();
+			   row[3]=consul.getDiagnostico();
+			   row[4]=consul.getStatus();
+			  
 			   model.addRow(row);
 		   }
 	}
-
-
 }

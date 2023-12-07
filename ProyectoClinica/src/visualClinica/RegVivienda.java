@@ -142,7 +142,6 @@ public class RegVivienda extends JDialog {
 
 				        Clinica.getInstance().agregarVivienda(vivienda);
 
-				        // Mostrar mensaje de registro exitoso
 				        JOptionPane.showMessageDialog(
 				            null,
 				            "Registro de vivienda exitoso",
