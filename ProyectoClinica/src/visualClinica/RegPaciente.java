@@ -282,9 +282,8 @@ public class RegPaciente extends JDialog {
 							Clinica.getInstance().agregarPersona(persona);
 							JOptionPane.showMessageDialog(null, "Registro satisfactorio", "Información", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
-						    // Tu código actual aquí
 						} catch (NullPointerException ex) {
-						    ex.printStackTrace(); // Imprime la traza de la excepción
+						    ex.printStackTrace();
 						    JOptionPane.showMessageDialog(null, "Se ha producido un error. Consulta la consola para obtener más detalles.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}

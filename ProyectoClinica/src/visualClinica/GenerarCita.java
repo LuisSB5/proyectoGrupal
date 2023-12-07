@@ -49,7 +49,7 @@ public class GenerarCita extends JDialog {
 	private JComboBox<String> cbxEnf;
 	private JSpinner spnFecha;
 	private JSpinner spnHora;
-	private JComboBox cbxDoc;
+	private JComboBox<String>cbxDoc;
 
 	/**
 	 * Launch the application.
@@ -138,7 +138,7 @@ public class GenerarCita extends JDialog {
 			}
 			{
 				cbxEnf = new JComboBox();
-				cbxEnf.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Hipertensi\u00F3n", "Diabetes", "Neuronal", "Enfermedad Gastroinstetinal", "Enfermedad Ginecol\u00F3gica ", "Enfermedad Hestomal\u00F3gica", "Enfermedad Oncol\u00F3gica"}));
+				cbxEnf.setModel(new DefaultComboBoxModel(new String[] {""}));
 				cbxEnf.setBounds(272, 104, 111, 22);
 				panel.add(cbxEnf);
 			}
