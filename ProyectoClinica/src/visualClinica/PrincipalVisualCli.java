@@ -106,7 +106,7 @@ public class PrincipalVisualCli extends JFrame {
 		JMenuItem mntmBuscarHistorialPaciente = new JMenuItem("Buscar Historial Paciente");
 		mntmBuscarHistorialPaciente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 ListarHistorialxID historial= new ListarHistorialxID();
+				 ListarHistorial historial= new ListarHistorial();
 					historial.setModal(true);
 					historial.setVisible(true);
 			}

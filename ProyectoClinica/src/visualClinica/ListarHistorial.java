@@ -17,13 +17,19 @@ import javax.swing.table.DefaultTableModel;
 
 
 import logico.Clinica;
+import logico.Consulta;
+import logico.Enfermedad;
+import logico.HistoriaClinica;
 import logico.Paciente;
+import logico.Vacuna;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class ListarHistorial extends JDialog {
@@ -33,6 +39,7 @@ public class ListarHistorial extends JDialog {
 	private DefaultTableModel model;
 	private Object[] row;
 	private JTextField txtPacienteId;
+	//private boolean encontrado = false;
 
 	/**
 	 * Launch the application.
@@ -41,7 +48,7 @@ public class ListarHistorial extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListarHistorial(Paciente paciente) {
+	public ListarHistorial() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarHistorial.class.getResource("/imagen/icnListarCitas.png")));
 		setTitle("Historial Paciente");
 		setBackground(SystemColor.text);
@@ -91,16 +98,27 @@ public class ListarHistorial extends JDialog {
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-			            String idPaciente = txtPacienteId.getText().toString();
-			            Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
-
-			            if (paciente != null) {
-			                activarTabla(true);
-			                //loadPaciente(paciente);// not finished yet 
-			            } else {
-			                activarTabla(false);
-			                throw new IllegalArgumentException("Paciente no encontrado.");
-			            }
+						JOptionPane.showMessageDialog(null, "Entro...");
+							String idPaciente = txtPacienteId.getText().toString();
+				            Paciente paciente = Clinica.getInstance().buscarPacientePorID(idPaciente);
+				            
+				            if(paciente == null) {
+				            	JOptionPane.showMessageDialog(null, "Entro al main");
+				            }
+				            
+				            if (paciente != null) {
+				            	
+				            	JOptionPane.showMessageDialog(null, "Entro..., osea se encontro");
+				            	table.setEnabled(true);
+				                JOptionPane.showMessageDialog(null, "Se activa la tabla");
+				                loadPaciente(paciente);// not finished yet 
+				                //encontrado = true;
+				            } else {
+				                table.setEnabled(false);
+				                JOptionPane.showMessageDialog(null, "Entro..., osea no se encontro");
+				                throw new IllegalArgumentException("Paciente no encontrado.");
+				            }
+						
 			        } catch (IllegalArgumentException ex) {
 			            System.out.println(ex.getMessage());
 			        }
@@ -151,20 +169,23 @@ public class ListarHistorial extends JDialog {
     
 }
 	private void loadPaciente(Paciente paciente) {
-	    model.addRow(new Object[]{paciente.getNombre(), "", "", ""});
+		
+		model.setRowCount(0);	
+		row = new Object[model.getColumnCount()];
+		HistoriaClinica hist = paciente.getHist();
+		if(hist != null) {
+			ArrayList<Consulta> misConsultas = hist.getMisConsultas();
+			//ArrayList<Vacuna> misVacunas = hist.getMisVacunas();
+			
+			 for (Consulta consul: misConsultas) {
+				   row[0]=paciente.getNombre();
+				   row[1]=consul.getVacuna().getNombre();
+				   row[2]=consul.getEnfermedad().getNombre();
+				   row[3]=consul.getEnfermedad().getStatus();
+				   model.addRow(row);
+			   }
+		}
 
-	    String medicalHistory = paciente.getHist().getMedicalHistoryAsString();
-
-	    String[] lines = medicalHistory.split("\n");
-
-	    // Populate the table with medical history data
-	    for (int i = 0; i < lines.length; i++) {
-	        // Assuming that the second column is for vaccines
-	        // Assuming that the third column is for diseases
-	        // Assuming that the fourth column is for the status of diseases
-	        model.addRow(new Object[]{"", lines[i], "", ""});
-	    }
-	
 }
 
 }

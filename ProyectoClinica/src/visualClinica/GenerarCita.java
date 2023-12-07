@@ -218,6 +218,7 @@ public class GenerarCita extends JDialog {
 			}
 		}
 		loadDoctoresToComboBox();
+		loadEnfermedadesToComboBox();
 	}
 	
 	private void loadDoctoresToComboBox() {

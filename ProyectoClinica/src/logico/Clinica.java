@@ -3,6 +3,8 @@ package logico;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 
 public class Clinica implements Serializable{
 
@@ -351,7 +353,8 @@ public class Clinica implements Serializable{
 	    while (!encontrado && i < misPersonas.size()) {
 	        if (misPersonas.get(i) instanceof Paciente) {
 	            Paciente paciente = (Paciente) misPersonas.get(i);
-	            if (paciente.getCedula().equals(cedula)) {
+	            if (paciente.getCedula().equalsIgnoreCase(cedula)) {
+	            	JOptionPane.showMessageDialog(null, "Entro... al main");
 	                aux = paciente;
 	                encontrado = true;
 	            }
