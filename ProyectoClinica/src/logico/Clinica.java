@@ -215,13 +215,13 @@ public class Clinica implements Serializable{
 		misUsers.add(user);
 	}
 
-	/*
+	
 	public Persona buscarPersonaByCodigo(String codigoPersona) {
 		Persona aux = null;
 		boolean encontrado = false;
 		int i=0;
 		while (!encontrado && i<misPersonas.size()) {
-			if(misPersonas.get(i).getCodigo().equalsIgnoreCase(codigoPersona)){
+			if(misPersonas.get(i).getCedula().equalsIgnoreCase(codigoPersona)){
 				aux = misPersonas.get(i);
 				encontrado = true;
 			}
@@ -230,8 +230,8 @@ public class Clinica implements Serializable{
 		
 		return aux;
 	}
-	/*
-	public Doctor buscarDoctorByUser(String codigo) {
+	
+	/*public Doctor buscarDoctorByUser(String codigo) {
 	    Doctor aux = null;
 	    boolean encontrado = false;
 	    int i = 0;
@@ -251,9 +251,13 @@ public class Clinica implements Serializable{
 	}
 	*/
 	
-	public void eliminarPersona(logico.Persona selected) {
+	/*public void eliminarPersona(logico.Persona selected) {
 		misPersonas.remove(selected);
+	}*/
+	public void eliminarPersona(Persona selected) {
+	    misPersonas.remove(selected);
 	}
+
 	
 	public Cita buscarCitaByCode(String Code) {
 		Cita aux = null;

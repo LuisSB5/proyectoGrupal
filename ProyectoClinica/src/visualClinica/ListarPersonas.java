@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -87,6 +88,40 @@ public class ListarPersonas extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Eliminar");
+				okButton.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+				        int selectedRow = table.getSelectedRow();
+
+				        if (selectedRow != -1) {
+				            String cedula = (String) table.getValueAt(selectedRow, 1);
+				            Persona personaSeleccionada = Clinica.getInstance().buscarPersonaByCodigo(cedula);
+
+				            if (personaSeleccionada != null) {
+				               
+				                int confirmacion = JOptionPane.showConfirmDialog(null,
+				                        "¿Está seguro de que desea eliminar a " + personaSeleccionada.getNombre() + "?",
+				                        "Confirmación de eliminación", JOptionPane.YES_NO_OPTION);
+
+				                if (confirmacion == JOptionPane.YES_OPTION) {
+				                    
+				                    Clinica.getInstance().eliminarPersona(personaSeleccionada);
+
+				                    
+				                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+				                    model.removeRow(selectedRow);
+				                }
+				            } else {
+				                JOptionPane.showMessageDialog(null, "No se pudo encontrar la persona seleccionada para eliminar.",
+				                        "Error", JOptionPane.ERROR_MESSAGE);
+				            }
+				        } else {
+				            JOptionPane.showMessageDialog(null, "Seleccione una persona de la tabla para eliminar.",
+				                    "Error", JOptionPane.ERROR_MESSAGE);
+				        }
+				    }
+				});
+
+
 				okButton.setForeground(new Color(0, 153, 255));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				okButton.setActionCommand("OK");

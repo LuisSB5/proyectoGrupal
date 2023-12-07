@@ -7,9 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logico.Cita;
+
 import java.awt.Toolkit;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
@@ -17,13 +22,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
+import javax.swing.SpinnerNumberModel;
 
 public class RegVivienda extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtPropietario;
 	private JTextField txtDireccion;
-	private JTextField textField;
+	private JSpinner spnCantHab;
 
 	/**
 	 * Launch the application.
@@ -60,25 +66,25 @@ public class RegVivienda extends JDialog {
 			{
 				JLabel lblNewLabel = new JLabel("Propietario:");
 				lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-				lblNewLabel.setBounds(12, 45, 84, 16);
+				lblNewLabel.setBounds(12, 27, 84, 16);
 				panel.add(lblNewLabel);
 			}
 			{
 				JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 				lblDireccin.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblDireccin.setBounds(12, 121, 84, 16);
+				lblDireccin.setBounds(12, 109, 84, 16);
 				panel.add(lblDireccin);
 			}
 			{
 				JLabel lblNumhabitaciones = new JLabel("Num.Habitaciones:");
 				lblNumhabitaciones.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
-				lblNumhabitaciones.setBounds(195, 46, 123, 16);
+				lblNumhabitaciones.setBounds(195, 28, 123, 16);
 				panel.add(lblNumhabitaciones);
 			}
 			{
 				txtPropietario = new JTextField();
 				txtPropietario.setBackground(SystemColor.inactiveCaption);
-				txtPropietario.setBounds(12, 74, 116, 22);
+				txtPropietario.setBounds(12, 56, 116, 22);
 				panel.add(txtPropietario);
 				txtPropietario.setColumns(10);
 			}
@@ -86,20 +92,20 @@ public class RegVivienda extends JDialog {
 				txtDireccion = new JTextField();
 				txtDireccion.setColumns(10);
 				txtDireccion.setBackground(SystemColor.inactiveCaption);
-				txtDireccion.setBounds(12, 160, 123, 22);
+				txtDireccion.setBounds(12, 133, 123, 22);
 				panel.add(txtDireccion);
 			}
-			
-			textField = new JTextField();
-			textField.setColumns(10);
-			textField.setBackground(SystemColor.inactiveCaption);
-			textField.setBounds(195, 74, 116, 22);
-			panel.add(textField);
 			
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(RegVivienda.class.getResource("/imagen/IcnRegViv.png")));
 			lblNewLabel_1.setBounds(195, 109, 123, 73);
 			panel.add(lblNewLabel_1);
+			
+			spnCantHab = new JSpinner();
+			spnCantHab.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
+			spnCantHab.setBackground(SystemColor.inactiveCaption);
+			spnCantHab.setBounds(195, 56, 119, 22);
+			panel.add(spnCantHab);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -107,6 +113,11 @@ public class RegVivienda extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+					}
+				});
 				okButton.setForeground(new Color(0, 153, 255));
 				okButton.setFont(new Font("Segoe UI Black", Font.PLAIN, 13));
 				okButton.setBackground(SystemColor.text);
