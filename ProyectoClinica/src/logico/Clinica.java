@@ -297,21 +297,6 @@ public class Clinica implements Serializable{
 		return consult;
 	}
 	
-	public int getCantPersonasVivienda(String direccion) {
-		int i = 0;
-		int totalPersonas = 0;
-		boolean encontrado = false;
-		Vivienda vivienda = null;
-		while(!encontrado && i<misViviendas.size()) {
-			if(misViviendas.get(i).getDireccion().equalsIgnoreCase(direccion)) {
-				vivienda = misViviendas.get(i);
-				encontrado = true;
-			}
-			i++;
-		}
-		return totalPersonas;
-		
-	}
 	
 	public int getCantConsultas() {
 		int total = 0;

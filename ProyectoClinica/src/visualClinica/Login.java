@@ -43,11 +43,13 @@ public class Login extends JDialog {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
 				FileInputStream empresa;
 				FileOutputStream empresa2;
 				ObjectInputStream empresaRead;
 				ObjectOutputStream empresaWrite;
+				
 				try {
 					empresa = new FileInputStream ("clinicaPOO.dat");
 					empresaRead = new ObjectInputStream(empresa);
@@ -84,6 +86,7 @@ public class Login extends JDialog {
 					e.printStackTrace();
 				}
 			}
+			
 		});
 	}
 	/**
@@ -98,6 +101,7 @@ public class Login extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
+		setLocationRelativeTo(null);
 		{
 			JPanel panel = new JPanel();
 			panel.setBackground(SystemColor.text);

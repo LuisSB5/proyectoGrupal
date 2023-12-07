@@ -38,7 +38,7 @@ public class ListarPatologia extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void msain(String[] args) {
+	public static void main(String[] args) {
 		try {
 			ListarPatologia dialog = new ListarPatologia();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
